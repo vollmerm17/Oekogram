@@ -1,4 +1,4 @@
-#!/Users/markus/Documents/GitHub/Oekogram/SWENGS_Backend/venv/bin/python
+#!/Users/sweiland/Desktop/SWENGS/imadb/backend/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

@@ -1,0 +1,12 @@
+[
+  {
+    "model": "gram.profile",
+    "pk": 1,
+    "fields": {
+      "is_superuser": true,
+      "is_staff": true,
+      "username": "ushi",
+      "password": "lol"
+    }
+  }
+]
