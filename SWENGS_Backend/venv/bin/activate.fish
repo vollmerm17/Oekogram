@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/markus/Documents/GitHub/Oekogram/SWENGS_Backend/venv"
+set -gx VIRTUAL_ENV "/Users/sweiland/Desktop/SWENGS/imadb/backend/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

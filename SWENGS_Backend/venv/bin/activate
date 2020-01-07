@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/markus/Documents/GitHub/Oekogram/SWENGS_Backend/venv"
+VIRTUAL_ENV="/Users/sweiland/Desktop/SWENGS/imadb/backend/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

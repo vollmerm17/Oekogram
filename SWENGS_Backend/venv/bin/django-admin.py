@@ -1,4 +1,4 @@
-#!/Users/markus/Documents/GitHub/Oekogram/SWENGS_Backend/venv/bin/python
+#!/Users/sweiland/Desktop/SWENGS/imadb/backend/venv/bin/python
 from django.core import management
 
 if __name__ == "__main__":
