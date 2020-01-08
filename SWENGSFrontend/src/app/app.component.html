@@ -1,12 +1,11 @@
-<mat-grid-list cols="3" rowHeight="5%" >
-  <mat-grid-tile colspan="3">FH IMA Project -> ÖkoGram</mat-grid-tile>
-  <mat-grid-tile colspan="1">
-    <div class="icons">
-      <app-profile-icons></app-profile-icons>
-    </div></mat-grid-tile>
-  <mat-grid-tile colspan="2" rowspan="4"><app-write-posting></app-write-posting></mat-grid-tile>
-  <mat-grid-tile colspan="1" rowspan="10"><app-profile></app-profile></mat-grid-tile>
-  <mat-grid-tile colspan="2" rowspan="30" >
+<mat-grid-list [cols]="colspan" rowHeight="40" (window:resize)="onResize()">
+  <mat-grid-tile [colspan]="colspan"><h1>FH IMA Project -> ÖkoGram</h1></mat-grid-tile>
+
+    <mat-grid-tile [colspan]="colspanProfile" [rowspan]="rowhheightProfile"><app-profile></app-profile></mat-grid-tile>
+
+  <mat-grid-tile [colspan]="colspanPosts" rowspan="4"><app-write-posting></app-write-posting></mat-grid-tile>
+
+  <mat-grid-tile [colspan]="colspanPosts" [rowspan]="rowheightPost" >
     <div class="text-inside-grid">
     <mat-tab-group>
       <mat-tab label="Recent Posts"><app-posting></app-posting> </mat-tab>
