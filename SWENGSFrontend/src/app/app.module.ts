@@ -10,6 +10,7 @@ import { WritePostingComponent } from './write-posting/write-posting.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
 import { ProfileIconsComponent } from './profile-icons/profile-icons.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ProfileIconsComponent } from './profile-icons/profile-icons.component';
     ProfileComponent,
     SearchComponent,
     ProfileIconsComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
