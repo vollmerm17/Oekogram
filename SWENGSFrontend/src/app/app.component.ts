@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   rowheightPost;
   rowhheightProfile;
   panelOpenState = false;
+  isAuthenticated: boolean;
 
   ngOnInit() {
     this.calculateColSpan();
