@@ -3,11 +3,8 @@ img {
 }
 p {
   font-family: 'Merriweather', serif;
-} /*
-div.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  font-size: 20px;
 }
-*/
+.sticky {
+  position: sticky;
+  top: 30px;
+}
