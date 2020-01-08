@@ -1,4 +1,6 @@
+<router-outlet></router-outlet>
 
+<div *ngIf="this.isAuthenticated">
 <div class="header">
   <app-header></app-header>
 </div>
@@ -19,6 +21,7 @@
         </mat-tab-group>
     </div>
   </div>
+</div>
 </div>
 
 
@@ -41,4 +44,4 @@
   </mat-grid-tile>
 </mat-grid-list>
 -->
-<router-outlet></router-outlet>
+
