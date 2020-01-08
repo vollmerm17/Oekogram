@@ -72,7 +72,8 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "SWENGSFrontend:build:production"
+              "browserTarget": "SWENGSFrontend:build:production",
+              "proxyConfig": "proxy.conf.json"
             }
           }
         },
