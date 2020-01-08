@@ -1,9 +1,10 @@
 mat-grid-tile {
-  background: lightblue;
+  background: lightgray;
 }
 .text-inside-grid {
   position: absolute;
   top: 5px;
+  font-family: 'Merriweather', serif;
 }
 .icons {
   position: absolute;
@@ -12,5 +13,8 @@ mat-grid-tile {
 
 mat-tab {
   margin-top: 100px;
+  font-family: 'Merriweather', serif;
 }
+
+
 
