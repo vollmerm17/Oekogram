@@ -16,7 +16,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     url(r'^api-token-auth/', obtain_jwt_token),
-    url(r'^friendship/', include('friendship.urls')),
+    #url(r'^friendship/', include('friendship.urls')),
     path('admin/', admin.site.urls),
     path('activity/options', views.activity_option_list),
     path('activity/<int:pk>/get', views.activity_form_get),
@@ -35,8 +35,7 @@ urlpatterns = [
     path('profile/create', views.profile_form_create),
     path('profile/<int:pk>/update', views.profile_form_update),
     path('profile/<int:pk>/delete', views.profile_delete),
-
-
+    path('friendship/<slug:username>/request', views.friendship_request),
 
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

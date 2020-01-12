@@ -8,10 +8,11 @@ from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.response import Response
 from friendship.models import Friend, Block, FriendshipRequest
+from friendship.exceptions import AlreadyExistsError
 
 from gram.models import Activity, Posts, Comments, Media, Profile
 from gram.serializers import MediaSerializer, ActivityOptionSerializer, ProfileListSerializer, ProfileFormSerializer, \
-    ActivityFormSerializer, PostsSerializer, CommentsSerializer
+    ActivityFormSerializer, PostsSerializer, CommentsSerializer, FriendshipRequestSerializer
 
 
 @swagger_auto_schema(method='GET', responses={200: ActivityOptionSerializer(many=True)})
@@ -158,7 +159,7 @@ def comment_delete(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: ProfileListSerializer(many=True)})
 @api_view(['GET'])
-@permission_required('gram.view_user', raise_exception=True)
+#@permission_required('gram.view_user', raise_exception=True)
 def profile_list(request):
     users = Profile.objects.all()
     serializer = ProfileListSerializer(users, many=True)
@@ -180,7 +181,7 @@ def profile_form_get(request, pk):
 
 @swagger_auto_schema(method='POST', request_body=ProfileFormSerializer, responses={200: ProfileFormSerializer()})
 @api_view(['POST'])
-@permission_required('gram.add_profile', raise_exception=True)
+#@permission_required('gram.add_profile', raise_exception=True)
 def profile_form_create(request):
     data = JSONParser().parse(request)
     serializer = ProfileFormSerializer(data=data)
@@ -208,7 +209,7 @@ def profile_form_update(request, pk):
 
 
 @api_view(['DELETE'])
-@permission_required('gram.delete_profile', raise_exception=True)
+#@permission_required('gram.delete_profile', raise_exception=True)
 def profile_delete(request, pk):
     try:
         profile = Profile.objects.get(pk=pk)
@@ -222,7 +223,7 @@ def profile_delete(request, pk):
 @api_view(['GET'])
 @permission_required('gram.view_friendship', raise_exception=True)
 def friendships_get(request):
-    friends = Friend.objects.friends(request.user)
+    friends = Friend.view_friends
     return Response(friends, status=200)
 
 
@@ -261,18 +262,24 @@ def friendships_count_unrejected_requests(request):
 @swagger_auto_schema(method='POST', responses={200})
 @api_view(['POST'])
 @permission_required('gram.request_friendship', raise_exception=True)
-def friendship_request(request, pk):
-    other_user = Profile.objects.get(pk=pk)
-    data = Friend.objects.add_friend(
-        request.user,
-        other_user,
-        message="Hi! I would like to be your friend"
-    )
-    return Response(data, status=201)
+def friendship_request(request, username):
+    other_user = Profile.objects.get(username=username)
+    try:
+        Friend.objects.add_friend(
+            request.user,
+            other_user,
+            message="Hi! I would like to be your friend"
+        )
+    except AlreadyExistsError:
+        return Response({'error': 'Friend request already exist.'}, status=400)
+
+    else:
+        return Response(status=201)
 
 
-@swagger_auto_schema(method='PUT', responses={200})
-@api_view(['PUT'])
+
+@swagger_auto_schema(method='POST', responses={200})
+@api_view(['POST'])
 @permission_required('gram.accept_friendship', raise_exception=True)
 def friendship_accept(request, pk):
     friend_request = FriendshipRequest.objects.get(to_user=pk)
