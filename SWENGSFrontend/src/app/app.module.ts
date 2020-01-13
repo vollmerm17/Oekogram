@@ -4,12 +4,23 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatCardModule, MatGridListModule, MatTabsModule} from '@angular/material';
+import {MatCardModule, MatExpansionModule, MatFormFieldModule, MatGridListModule, MatTabsModule} from '@angular/material';
 import { PostingComponent } from './posting/posting.component';
 import { WritePostingComponent } from './write-posting/write-posting.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
 import { ProfileIconsComponent } from './profile-icons/profile-icons.component';
+import {JwtModule} from '@auth0/angular-jwt';
+import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {MatInputModule} from '@angular/material/input';
+import { HeaderComponent } from './header/header.component';
+
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 
 @NgModule({
   declarations: [
@@ -19,6 +30,9 @@ import { ProfileIconsComponent } from './profile-icons/profile-icons.component';
     ProfileComponent,
     SearchComponent,
     ProfileIconsComponent,
+    LoginComponent,
+    LogoutComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +40,18 @@ import { ProfileIconsComponent } from './profile-icons/profile-icons.component';
     BrowserAnimationsModule,
     MatGridListModule,
     MatCardModule,
-    MatTabsModule
+    MatTabsModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    HttpClientModule,
+    MatInputModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        whitelistedDomains: ['localhost:4200']
+      }
+    }),
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

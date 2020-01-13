@@ -14,6 +14,21 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
   </mat-card-actions>
+
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Comments
+      </mat-panel-title>
+      <mat-panel-description>
+        Currently I am {{panelOpenState ? 'open' : 'closed'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>This is a comment</p>
+    <p>Second comment</p>
+    <p>Comment: <input type="text" name="test" placeholder="write a comment"></p>
+  </mat-expansion-panel>
+
+
 </mat-card>

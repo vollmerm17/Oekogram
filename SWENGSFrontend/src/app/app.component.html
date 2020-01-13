@@ -1,12 +1,39 @@
-<mat-grid-list cols="3" rowHeight="5%" >
-  <mat-grid-tile colspan="3">FH IMA Project -> ÖkoGram</mat-grid-tile>
-  <mat-grid-tile colspan="1">
-    <div class="icons">
-      <app-profile-icons></app-profile-icons>
-    </div></mat-grid-tile>
-  <mat-grid-tile colspan="2" rowspan="4"><app-write-posting></app-write-posting></mat-grid-tile>
-  <mat-grid-tile colspan="1" rowspan="10"><app-profile></app-profile></mat-grid-tile>
-  <mat-grid-tile colspan="2" rowspan="30" >
+<router-outlet></router-outlet>
+
+<div *ngIf="this.isAuthenticated">
+<div class="header">
+  <app-header></app-header>
+</div>
+
+<div class="flexBox-container">
+  <div class="profile">
+    <app-profile></app-profile>
+  </div>
+  <div class="rightCol">
+    <div class="writePost">
+      <app-write-posting></app-write-posting>
+    </div>
+    <div class="content">
+      <mat-tab-group>
+          <mat-tab label="Recent Posts"><app-posting></app-posting> </mat-tab>
+          <mat-tab label="Search"> <app-search></app-search> </mat-tab>
+          <mat-tab label="Profiles"> <app-profile></app-profile> </mat-tab>
+        </mat-tab-group>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!--
+<mat-grid-list [cols]="colspan" rowHeight="fit" (window:resize)="onResize()">
+  <mat-grid-tile [colspan]="colspan"><h1>FH IMA Project -> ÖkoGram</h1></mat-grid-tile>
+
+    <mat-grid-tile [colspan]="colspanProfile" [rowspan]="rowhheightProfile"><app-profile></app-profile></mat-grid-tile>
+
+  <mat-grid-tile [colspan]="colspanPosts" rowspan="4"><app-write-posting></app-write-posting></mat-grid-tile>
+
+  <mat-grid-tile [colspan]="colspanPosts" [rowspan]="rowheightPost" >
     <div class="text-inside-grid">
     <mat-tab-group>
       <mat-tab label="Recent Posts"><app-posting></app-posting> </mat-tab>
@@ -16,5 +43,5 @@
       </div>
   </mat-grid-tile>
 </mat-grid-list>
+-->
 
-<router-outlet></router-outlet>
