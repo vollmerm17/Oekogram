@@ -36,7 +36,7 @@ class ProfileFormSerializer(serializers.ModelSerializer):
 class ProfileListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['first_name', 'last_name', 'user_name', 'greenscore']
+        fields = ['first_name', 'last_name', 'username', 'greenscore', 'password']
 
 
 class MediaSerializer(serializers.ModelSerializer):

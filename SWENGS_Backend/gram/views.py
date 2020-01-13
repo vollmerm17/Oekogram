@@ -158,7 +158,7 @@ def comment_delete(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: ProfileListSerializer(many=True)})
 @api_view(['GET'])
-@permission_required('gram.view_user', raise_exception=True)
+#@permission_required('gram.view_user', raise_exception=True)
 def profile_list(request):
     users = Profile.objects.all()
     serializer = ProfileListSerializer(users, many=True)
@@ -167,7 +167,7 @@ def profile_list(request):
 
 @swagger_auto_schema(method='GET', responses={200: ProfileFormSerializer()})
 @api_view(['GET'])
-@permission_required('gram.view_profile', raise_exception=True)
+#@permission_required('gram.view_profile', raise_exception=True)
 def profile_form_get(request, pk):
     try:
         profile = Profile.objects.get(pk=pk)
@@ -180,7 +180,7 @@ def profile_form_get(request, pk):
 
 @swagger_auto_schema(method='POST', request_body=ProfileFormSerializer, responses={200: ProfileFormSerializer()})
 @api_view(['POST'])
-@permission_required('gram.add_profile', raise_exception=True)
+#@permission_required('gram.add_profile', raise_exception=True)
 def profile_form_create(request):
     data = JSONParser().parse(request)
     serializer = ProfileFormSerializer(data=data)
@@ -192,7 +192,7 @@ def profile_form_create(request):
 
 @swagger_auto_schema(method='PUT', request_body=ProfileFormSerializer, responses={200: ProfileFormSerializer()})
 @api_view(['PUT'])
-@permission_required('gram.change_profile', raise_exception=True)
+#@permission_required('gram.change_profile', raise_exception=True)
 def profile_form_update(request, pk):
     try:
         profile = Profile.objects.get(pk=pk)
@@ -208,7 +208,7 @@ def profile_form_update(request, pk):
 
 
 @api_view(['DELETE'])
-@permission_required('gram.delete_profile', raise_exception=True)
+#@permission_required('gram.delete_profile', raise_exception=True)
 def profile_delete(request, pk):
     try:
         profile = Profile.objects.get(pk=pk)

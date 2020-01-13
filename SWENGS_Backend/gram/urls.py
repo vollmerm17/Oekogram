@@ -5,6 +5,7 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework_jwt.views import obtain_jwt_token
 
+from gram.views import friendship_request
 from . import views
 
 schema_view = get_schema_view(
@@ -17,6 +18,11 @@ schema_view = get_schema_view(
 urlpatterns = [
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^friendship/', include('friendship.urls')),
+    url(
+        regex=r"^friend/add/(?P<to_username>[\w-]+)/$",
+        view=friendship_request,
+        name="friendship_add_friend",
+    ),
     path('admin/', admin.site.urls),
     path('activity/options', views.activity_option_list),
     path('activity/<int:pk>/get', views.activity_form_get),
