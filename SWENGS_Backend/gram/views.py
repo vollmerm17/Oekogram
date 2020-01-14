@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.response import Response
 
-from gram.models import Activity, Posts, Comments, Media, Profile
+from gram.models import Activity, Post, Comment, Media, Profile
 from gram.serializers import MediaSerializer, ActivityOptionSerializer, ProfileListSerializer, ProfileFormSerializer, \
     ActivityFormSerializer, PostsSerializer, CommentsSerializer, FriendshipManager
 
@@ -79,8 +79,8 @@ def activity_delete(request, pk):
 @api_view(['GET'])
 def posts_get_all(request):
     try:
-        posts = Posts.objects.all()
-    except Posts.DoesNotExist:
+        posts = Post.objects.all()
+    except Post.DoesNotExist:
         return Response({'error': 'Post does not exist.'}, status=404)
 
     serializer = PostsSerializer(posts, many=True)
@@ -91,8 +91,8 @@ def posts_get_all(request):
 @api_view(['GET'])
 def posts_get_by_user(request, user_id):
     try:
-        posts = Posts.objects.get(user_id=user_id)
-    except Posts.DoesNotExist:
+        posts = Post.objects.get(user_id=user_id)
+    except Post.DoesNotExist:
         return Response({'error': 'Post does not exist.'}, status=404)
 
     serializer = PostsSerializer(posts, many=True)
@@ -115,7 +115,7 @@ def post_form_create(request):
 @permission_required('gram.delete_post', raise_exception=True)
 def post_delete(request, pk):
     try:
-        post = Posts.objects.get(pk=pk)
+        post = Post.objects.get(pk=pk)
     except Profile.DoesNotExist:
         return Response({'error': 'Post does not exist.'}, status=404)
     post.delete()
@@ -126,7 +126,7 @@ def post_delete(request, pk):
 @api_view(['GET'])
 def comment_form_get(request, post_id):
     try:
-        comment = Comments.objects.get(post_id=post_id)
+        comment = Comment.objects.get(post_id=post_id)
     except Activity.DoesNotExist:
         return Response({'error': 'Comment does not exist.'}, status=404)
 
@@ -150,8 +150,8 @@ def comment_form_create(request):
 @permission_required('gram.delete_comment', raise_exception=True)
 def comment_delete(request, pk):
     try:
-        comment = Comments.objects.get(pk=pk)
-    except Comments.DoesNotExist:
+        comment = Comment.objects.get(pk=pk)
+    except Comment.DoesNotExist:
         return Response({'error': 'Comment does not exist.'}, status=404)
     comment.delete()
     return Response(status=204)

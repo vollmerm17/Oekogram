@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from friendship.models import *
-from .models import Media, Activity, Posts, Comments, Profile
+from .models import Media, Activity, Profile, Post, Comment
 
 
 class ActivityOptionSerializer(serializers.ModelSerializer):
@@ -17,13 +17,13 @@ class ActivityFormSerializer(serializers.ModelSerializer):
 
 class PostsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Posts
+        model = Post
         fields = '__all__'
 
 
 class CommentsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Comments
+        model = Comment
         fields = '__all__'
 
 
