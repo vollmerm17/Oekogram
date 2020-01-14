@@ -1,10 +1,10 @@
 <router-outlet></router-outlet>
 
-<div *ngIf="this.isAuthenticated">
+
 <div class="header">
   <app-header></app-header>
 </div>
-
+<div *ngIf="this.isAuthenticated">
 <div class="flexBox-container">
   <div class="profile">
     <app-profile></app-profile>
