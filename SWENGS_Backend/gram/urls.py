@@ -36,6 +36,9 @@ urlpatterns = [
     path('profile/<int:pk>/update', views.profile_form_update),
     path('profile/<int:pk>/delete', views.profile_delete),
     path('friendship/<slug:username>/request', views.friendship_request),
+    path('friendship/get', views.friendships_get),
+    path('friendship/request/unread', views.friendships_get_unread_requests),
+    path('friendship/request/unrejected', views.friendships_get_unrejected_requests),
 
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

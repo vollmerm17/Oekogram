@@ -3,16 +3,16 @@ from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.http import HttpResponse
 from drf_yasg.utils import swagger_auto_schema
+from friendship.exceptions import AlreadyExistsError
+from friendship.models import Friend, FriendshipRequest, BlockManager
 from rest_framework import views
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.response import Response
-from friendship.models import Friend, Block, FriendshipRequest
-from friendship.exceptions import AlreadyExistsError
 
 from gram.models import Activity, Posts, Comments, Media, Profile
 from gram.serializers import MediaSerializer, ActivityOptionSerializer, ProfileListSerializer, ProfileFormSerializer, \
-    ActivityFormSerializer, PostsSerializer, CommentsSerializer, FriendshipRequestSerializer
+    ActivityFormSerializer, PostsSerializer, CommentsSerializer, FriendshipManager
 
 
 @swagger_auto_schema(method='GET', responses={200: ActivityOptionSerializer(many=True)})
@@ -159,7 +159,7 @@ def comment_delete(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: ProfileListSerializer(many=True)})
 @api_view(['GET'])
-#@permission_required('gram.view_user', raise_exception=True)
+# @permission_required('gram.view_user', raise_exception=True)
 def profile_list(request):
     users = Profile.objects.all()
     serializer = ProfileListSerializer(users, many=True)
@@ -181,7 +181,7 @@ def profile_form_get(request, pk):
 
 @swagger_auto_schema(method='POST', request_body=ProfileFormSerializer, responses={200: ProfileFormSerializer()})
 @api_view(['POST'])
-#@permission_required('gram.add_profile', raise_exception=True)
+# @permission_required('gram.add_profile', raise_exception=True)
 def profile_form_create(request):
     data = JSONParser().parse(request)
     serializer = ProfileFormSerializer(data=data)
@@ -209,7 +209,7 @@ def profile_form_update(request, pk):
 
 
 @api_view(['DELETE'])
-#@permission_required('gram.delete_profile', raise_exception=True)
+# @permission_required('gram.delete_profile', raise_exception=True)
 def profile_delete(request, pk):
     try:
         profile = Profile.objects.get(pk=pk)
@@ -231,15 +231,7 @@ def friendships_get(request):
 @api_view(['GET'])
 @permission_required('gram.view_friendship', raise_exception=True)
 def friendships_get_unread_requests(request):
-    friends = Friend.objects.unread_requests(user=request.user)
-    return Response(friends)
-
-
-@swagger_auto_schema(method='GET', responses={200})
-@api_view(['GET'])
-@permission_required('gram.view_friendship', raise_exception=True)
-def friendships_get_unread_requests(request):
-    friends = Friend.objects.unread_requests(user=request.user)
+    friends = FriendshipManager.objects.unread_requests(user=request.user)
     return Response(friends)
 
 
@@ -247,7 +239,7 @@ def friendships_get_unread_requests(request):
 @api_view(['GET'])
 @permission_required('gram.view_friendship', raise_exception=True)
 def friendships_get_unrejected_requests(request):
-    friends = Friend.objects.unrejected_requests(request.user)
+    friends = FriendshipManager.objects.unrejected_requests(request.user)
     return Response(friends)
 
 
@@ -255,7 +247,7 @@ def friendships_get_unrejected_requests(request):
 @api_view(['GET'])
 @permission_required('gram.view_friendship', raise_exception=True)
 def friendships_count_unrejected_requests(request):
-    friends = Friend.objects.unrejected_requests_count(request.user)
+    friends = FriendshipManager.objects.unrejected_requests_count(request.user)
     return Response(friends, status=201)
 
 
@@ -277,7 +269,6 @@ def friendship_request(request, username):
         return Response(status=201)
 
 
-
 @swagger_auto_schema(method='POST', responses={200})
 @api_view(['POST'])
 @permission_required('gram.accept_friendship', raise_exception=True)
@@ -290,9 +281,54 @@ def friendship_accept(request, pk):
 @api_view(['DELETE'])
 @permission_required('gram.delete_friendship', raise_exception=True)
 def friendship_delete(request, pk):
-    other_user = Profile.objects.get(pk=pk)
-    friend_remove = Friend.objects.remove_friend(request.user, other_user)
-    return Response(friend_remove, status=204)
+    try:
+        other_user = Profile.objects.get(pk=pk)
+        friend_remove = Friend.objects.remove_friend(request.user, other_user)
+
+    except Friend.DoesNotExist:
+        return Response({'error': 'Friend does not exist.'}, status=400)
+    else:
+        return Response(friend_remove, status=204)
+
+
+@swagger_auto_schema(method='POST', responses={200})
+@api_view(['POST'])
+@permission_required('gram.add_block', raise_exception=True)
+def block_add(request, username):
+    other_user = Profile.objects.get(username=username)
+    try:
+        BlockManager.objects.add_block(
+            request.user,
+            other_user
+        )
+    except AlreadyExistsError:
+        return Response({'error': 'Is already blocked'}, status=400)
+
+    else:
+        return Response(status=201)
+
+
+@swagger_auto_schema(method='GET', responses={200})
+@api_view(['GET'])
+@permission_required('gram.view_blocked', raise_exception=True)
+def blocked_get(request):
+    blocked = BlockManager.objects.blocked
+    return Response(blocked, status=200)
+
+
+@api_view(['DELETE'])
+@permission_required('gram.delete_blocked', raise_exception=True)
+def blocked_delete(request, pk):
+    try:
+        other_user = Profile.objects.get(pk=pk)
+        BlockManager.objects.remove_block(
+            request.user,
+            other_user)
+
+    except Friend.DoesNotExist:
+        return Response({'error': 'Friend does not exist.'}, status=400)
+    else:
+        return Response(status=204)
 
 
 class FileUploadView(views.APIView):
@@ -322,6 +358,7 @@ def media_download(request, pk):
     response['Content-Disposition'] = 'inline; filename=' + original_file_name
     return response
 
+
 # Eig. auch noch für Bild bei comments
 @swagger_auto_schema(method='GET', responses={200: MediaSerializer()})
 @api_view(['GET'])
@@ -333,7 +370,3 @@ def media_get(request, pk):
 
     serializer = MediaSerializer(media)
     return Response(serializer.data)
-
-
-
-
