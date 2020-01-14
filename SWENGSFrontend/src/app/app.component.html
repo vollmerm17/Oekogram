@@ -1,12 +1,11 @@
-<div class="top-container">
+<router-outlet></router-outlet>
+
+<div class="top-container"></div>
 <div class="header">
   <app-header></app-header>
 </div>
-  <div class="login">
-    <p>Platzhalter Login / Logout</p>
 </div>
-</div>
-
+<div *ngIf="this.isAuthenticated">
 <div class="flexBox-container">
 
   <div class="profile">
@@ -25,5 +24,26 @@
     </div>
   </div>
 </div>
+</div>
 
-<router-outlet></router-outlet>
+
+<!--
+<mat-grid-list [cols]="colspan" rowHeight="fit" (window:resize)="onResize()">
+  <mat-grid-tile [colspan]="colspan"><h1>FH IMA Project -> ÖkoGram</h1></mat-grid-tile>
+
+    <mat-grid-tile [colspan]="colspanProfile" [rowspan]="rowhheightProfile"><app-profile></app-profile></mat-grid-tile>
+
+  <mat-grid-tile [colspan]="colspanPosts" rowspan="4"><app-write-posting></app-write-posting></mat-grid-tile>
+
+  <mat-grid-tile [colspan]="colspanPosts" [rowspan]="rowheightPost" >
+    <div class="text-inside-grid">
+    <mat-tab-group>
+      <mat-tab label="Recent Posts"><app-posting></app-posting> </mat-tab>
+      <mat-tab label="Search"> <app-search></app-search> </mat-tab>
+      <mat-tab label="Profiles"> <app-profile></app-profile> </mat-tab>
+    </mat-tab-group>
+      </div>
+  </mat-grid-tile>
+</mat-grid-list>
+-->
+
