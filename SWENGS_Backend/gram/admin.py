@@ -22,6 +22,6 @@ class ActivityAdmin(admin.ModelAdmin): pass
 
 
 admin.site.register(Profile, ProfileAdmin)
-admin.site.register(Posts, PostsAdmin)
-admin.site.register(Comments, CommentsAdmin)
+admin.site.register(Post, PostsAdmin)
+admin.site.register(Comment, CommentsAdmin)
 admin.site.register(Activity, ActivityAdmin)

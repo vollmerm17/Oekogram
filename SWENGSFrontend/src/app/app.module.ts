@@ -4,7 +4,15 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatCardModule, MatExpansionModule, MatFormFieldModule, MatGridListModule, MatTabsModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule, MatDividerModule,
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatGridListModule,
+  MatIconModule,
+  MatTabsModule
+} from '@angular/material';
 import { PostingComponent } from './posting/posting.component';
 import { WritePostingComponent } from './write-posting/write-posting.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -43,6 +51,9 @@ export function tokenGetter() {
     MatTabsModule,
     MatExpansionModule,
     MatFormFieldModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
     HttpClientModule,
     MatInputModule,
     JwtModule.forRoot({

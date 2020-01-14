@@ -5,7 +5,6 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework_jwt.views import obtain_jwt_token
 
-from gram.views import friendship_request
 from . import views
 
 schema_view = get_schema_view(
@@ -17,12 +16,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     url(r'^api-token-auth/', obtain_jwt_token),
-    url(r'^friendship/', include('friendship.urls')),
-    url(
-        regex=r"^friend/add/(?P<to_username>[\w-]+)/$",
-        view=friendship_request,
-        name="friendship_add_friend",
-    ),
+    #url(r'^friendship/', include('friendship.urls')),
     path('admin/', admin.site.urls),
     path('activity/options', views.activity_option_list),
     path('activity/<int:pk>/get', views.activity_form_get),
@@ -41,8 +35,15 @@ urlpatterns = [
     path('profile/create', views.profile_form_create),
     path('profile/<int:pk>/update', views.profile_form_update),
     path('profile/<int:pk>/delete', views.profile_delete),
-
-
+    path('friendship/<slug:username>/request', views.friendship_request),
+    path('friendship/get', views.friendships_get),
+    path('friendship/accept', views.friendship_accept),
+    path('friendship/<int:pk>/delete', views.friendship_delete),
+    path('friendship/request/unread', views.friendships_get_unread_requests),
+    path('friendship/request/unrejected', views.friendships_get_unrejected_requests),
+    path('blocked/get', views.blocked_get),
+    path('blocked/<int:pk>/delete', views.blocked_delete),
+    path('blocked/<slug:username>/add', views.block_add),
 
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

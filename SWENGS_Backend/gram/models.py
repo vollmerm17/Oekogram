@@ -1,4 +1,3 @@
-from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models import PositiveIntegerField
@@ -9,6 +8,9 @@ class Activity(models.Model):
     description = models.TextField()
     shortcut = models.CharField(max_length=3)
     greenscrore = PositiveIntegerField()
+
+    class Meta:
+        verbose_name_plural = "Activities"
 
     def __str__(self):
         return self.name
@@ -36,7 +38,7 @@ class Profile(AbstractUser):
         return self.username
 
 
-class Posts(models.Model):
+class Post(models.Model):
     user_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
     content = models.TextField()
     pictures = models.ManyToManyField('Media', blank=True)
@@ -44,9 +46,9 @@ class Posts(models.Model):
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
 
 
-class Comments(models.Model):
+class Comment(models.Model):
     content = models.TextField()
-    posts_id = models.ForeignKey(Posts, on_delete=models.CASCADE)
+    posts_id = models.ForeignKey(Post, on_delete=models.CASCADE)
     user_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
 

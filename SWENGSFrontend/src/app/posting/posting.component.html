@@ -11,23 +11,31 @@
       A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
       bred for hunting.
     </p>
+     <mat-divider></mat-divider>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>LIKE</button>
+    <button mat-icon-button color="accent"><mat-icon>favorite</mat-icon></button>
+    <button mat-icon-button color="accent"><mat-icon>favorite_border</mat-icon></button>
+    <button mat-icon-button color="accent"><mat-icon>thumb_up</mat-icon></button>
   </mat-card-actions>
 
   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Comments
+
       </mat-panel-title>
       <mat-panel-description>
-        Currently I am {{panelOpenState ? 'open' : 'closed'}}
+        Click to {{panelOpenState ? 'close' : 'open'}} comments
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <p>This is a comment</p>
-    <p>Second comment</p>
-    <p>Comment: <input type="text" name="test" placeholder="write a comment"></p>
+    <div class="comments">
+      <img src="../../assets/img_avatar.png" height="25px" style="border-radius: 50%;">
+      <p>This is a comment</p>
+
+      <p>Second comment</p>
+      <p>Comment: <input type="text" name="test" placeholder="write a comment"></p>
+    </div>
   </mat-expansion-panel>
 
 
