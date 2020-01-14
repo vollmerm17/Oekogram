@@ -9,10 +9,9 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
-import os
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import datetime
+import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -143,6 +142,5 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=3),
     'JWT_PAYLOAD_HANDLER': custom_jwt_payload_handler,
 }
-
 
 AUTH_USER_MODEL = 'gram.Profile'

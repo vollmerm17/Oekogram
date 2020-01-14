@@ -1,10 +1,26 @@
 .example-card {
-  max-width: 90%;
-  margin-top: 10px;
+  //max-width: 90%;
+  margin-left: 50px ;
+  margin-right: 50px;
   font-family: 'Merriweather', serif;
 }
 
 .example-header-image {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
+}
+
+.comments {
+  margin: 2px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-bottom: 2px;
+  background-color: lightsteelblue;
+  border-radius: 2px;
+}
+
+img {
+  float: left;
+  vertical-align: sub;
+  padding-right: 7px;
 }
