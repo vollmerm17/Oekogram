@@ -12,6 +12,7 @@ import {UserService} from '../service/user.service';
 export class LoginComponent implements OnInit {
 
   loginFormGroup;
+  isAuthenticated;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private userService: UserService) {
   }
@@ -20,18 +21,23 @@ export class LoginComponent implements OnInit {
     this.loginFormGroup = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
+
     });
+    this.userService.isLoggedIn.subscribe((isLoggedIn) => {
+      this.isAuthenticated = isLoggedIn;});
   }
 
   login() {
-    this.userService.login(this.loginFormGroup.value);
-/*    this.http.post('/api/api-token-auth/', this.loginFormGroup.value)
+
+/*    this.userService.login(this.loginFormGroup.value);*/
+    this.http.post('/api/api-token-auth/', this.loginFormGroup.value, this.isAuthenticated)
       .subscribe((res: any) => {
         localStorage.setItem('access_token', res.token);
-        this.router.navigate(['posting']);
+        window.location.reload();
+        this.isAuthenticated = this.userService.isLoggedIn;
       }, () => {
         alert('wrong username or password');
-      });*/
+      });
   }
 
 }
