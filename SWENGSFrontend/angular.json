@@ -68,11 +68,13 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "SWENGSFrontend:build"
+            "browserTarget": "SWENGSFrontend:build",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "SWENGSFrontend:build:production"
+              "browserTarget": "SWENGSFrontend:build:production",
+
             }
           }
         },
