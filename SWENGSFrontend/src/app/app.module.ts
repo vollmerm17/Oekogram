@@ -53,7 +53,7 @@ export function tokenGetter() {
     MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
     HttpClientModule,
     MatInputModule,
     JwtModule.forRoot({
