@@ -8,9 +8,9 @@ mat-tab {
   justify-content: center;
 }
 .flexBox-container > * {
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 400px;
+  // flex-grow: 1;
+  // flex-shrink: 1;
+  // flex-basis: 400px;
 }
 /*
 .top-container {
@@ -53,7 +53,7 @@ mat-tab {
 .rightCol {
   display: flex;
   background: #CCD99C;
-  flex-basis: 400px;
+  flex-basis: 600px;
   flex-shrink: 1;
   flex-grow: 1;
   flex-direction: column;
@@ -81,13 +81,13 @@ mat-tab {
   flex-basis: 450px;
   flex-shrink: 0;
   flex-grow: 0;
-  justify-content: center;
+  /*justify-content: center;
   background-color: #CCD99C;
 
   border-radius: 30px;
   padding-top: 50px;
   margin-left: 12% ;
-  margin-right: 12%;
+  margin-right: 12%;*/
 
 }
 
