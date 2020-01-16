@@ -5,5 +5,4 @@ venv\Scripts\pip.exe install -r requirements.txt
 venv\Scripts\python.exe manage.py migrate
 
 # Load initial data to database using Django fixtures 
-venv\Scripts\python.exe manage.py loaddata initial_countries
-venv\Scripts\python.exe manage.py loaddata initial_people
+venv\Scripts\python.exe manage.py loaddata initial_data

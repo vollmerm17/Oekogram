@@ -47,7 +47,7 @@ class ProfileListSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['first_name', 'last_name', 'greenscore', 'bio', 'date_of_birth', 'pictures']
+        fields = ['first_name', 'last_name', 'username', 'greenscore', 'bio', 'date_of_birth', 'pictures']
 
 
 class MediaSerializer(serializers.ModelSerializer):

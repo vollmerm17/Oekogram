@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import permission_required
+from django.core import serializers
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.http import HttpResponse
@@ -170,7 +171,7 @@ def profile_list(request):
 @api_view(['GET'])
 @permission_required('gram.view_user', raise_exception=True)
 def profile_get(request, pk):
-    users = Profile.objects.objects.get(pk=pk)
+    users = Profile.objects.get(pk=pk)
     serializer = ProfileSerializer(users)
     return Response(serializer.data, status=200)
 
@@ -233,31 +234,35 @@ def profile_delete(request, pk):
 @permission_required('gram.view_friendship', raise_exception=True)
 def friendships_get(request):
     friends = Friend.view_friends
-    return Response(friends, status=200)
+    serialized_qs = serializers.serialize('json', friends, fields=('id', 'username'))
+    return Response(serialized_qs, status=200)
 
 
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
 @permission_required('gram.view_friendship', raise_exception=True)
 def friendships_get_unread_requests(request):
-    friends = FriendshipManager.objects.unread_requests(user=request.user)
-    return Response(friends)
+    friends = Friend.objects.unread_requests(user=request.user)
+    serialized_qs = serializers.serialize('json', friends, fields=('id', 'username'))
+    return Response(serialized_qs, status=200)
 
 
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
 @permission_required('gram.view_friendship', raise_exception=True)
 def friendships_get_unrejected_requests(request):
-    friends = FriendshipManager.objects.unrejected_requests(request.user)
-    return Response(friends)
+    friends = Friend.objects.unrejected_requests(request.user)
+    serialized_qs = serializers.serialize('json', friends, fields=('id', 'username'))
+    return Response(serialized_qs, status=200)
 
 
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
 @permission_required('gram.view_friendship', raise_exception=True)
 def friendships_count_unrejected_requests(request):
-    friends = FriendshipManager.objects.unrejected_requests_count(request.user)
-    return Response(friends, status=201)
+    friends = Friend.objects.unrejected_requests_count(request.user)
+    serialized_qs = serializers.serialize('json', friends, fields=('id', 'username'))
+    return Response(serialized_qs, status=200)
 
 
 @swagger_auto_schema(method='POST', responses={200})
@@ -322,7 +327,8 @@ def block_add(request, username):
 @permission_required('gram.view_blocked', raise_exception=True)
 def blocked_get(request):
     blocked = BlockManager.objects.blocked
-    return Response(blocked, status=200)
+    serialized_qs = serializers.serialize('json', blocked, fields=('id', 'username'))
+    return Response(serialized_qs, status=200)
 
 
 @api_view(['DELETE'])
