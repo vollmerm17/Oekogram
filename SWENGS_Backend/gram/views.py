@@ -1,10 +1,8 @@
-import simplejson as simplejson
 from django.contrib.auth.decorators import permission_required
 from django.core import serializers
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.http import HttpResponse
-from django.shortcuts import render
 from drf_yasg.utils import swagger_auto_schema
 from friendship.exceptions import AlreadyExistsError, AlreadyFriendsError
 from friendship.models import Friend, Block, FriendshipRequest
@@ -15,7 +13,7 @@ from rest_framework.response import Response
 
 from gram.models import Activity, Post, Comment, Media, Profile
 from gram.serializers import MediaSerializer, ActivityOptionSerializer, ProfileListSerializer, ProfileFormSerializer, \
-    ActivityFormSerializer, PostsSerializer, CommentsSerializer
+    ActivityFormSerializer, PostsSerializer, CommentsSerializer, ProfileSerializer
 
 
 @swagger_auto_schema(method='GET', responses={200: ActivityOptionSerializer(many=True)})
@@ -134,7 +132,7 @@ def comment_form_get(request, post_id):
         return Response({'error': 'Comment does not exist.'}, status=404)
 
     serializer = CommentsSerializer(comment, many=True)
-    return Response(serializer.data)
+    return Response(serializer.data, status=200)
 
 
 @swagger_auto_schema(method='POST', request_body=CommentsSerializer, responses={200: CommentsSerializer()})
@@ -166,7 +164,16 @@ def comment_delete(request, pk):
 def profile_list(request):
     users = Profile.objects.all()
     serializer = ProfileListSerializer(users, many=True)
-    return Response(serializer.data)
+    return Response(serializer.data, status=200)
+
+
+@swagger_auto_schema(method='GET', responses={200: ProfileSerializer()})
+@api_view(['GET'])
+@permission_required('gram.view_user', raise_exception=True)
+def profile_get(request, pk):
+    users = Profile.objects.objects.get(pk=pk)
+    serializer = ProfileSerializer(users)
+    return Response(serializer.data, status=200)
 
 
 @swagger_auto_schema(method='GET', responses={200: ProfileFormSerializer()})
@@ -179,12 +186,12 @@ def profile_form_get(request, pk):
         return Response({'error': 'Profile does not exist.'}, status=404)
 
     serializer = ProfileFormSerializer(profile)
-    return Response(serializer.data)
+    return Response(serializer.data, status=200)
 
 
 @swagger_auto_schema(method='POST', request_body=ProfileFormSerializer, responses={200: ProfileFormSerializer()})
 @api_view(['POST'])
-# @permission_required('gram.add_profile', raise_exception=True)
+@permission_required('gram.add_profile', raise_exception=True)
 def profile_form_create(request):
     data = JSONParser().parse(request)
     serializer = ProfileFormSerializer(data=data)
