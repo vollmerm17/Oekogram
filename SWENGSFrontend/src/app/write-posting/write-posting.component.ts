@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FileHandle } from './dragDrop.directive';
 
 @Component({
   selector: 'app-write-posting',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./write-posting.component.scss']
 })
 export class WritePostingComponent implements OnInit {
+  files: FileHandle[] = [];
 
-  constructor() { }
+  filesDropped(files: FileHandle[]): void {
+    this.files = files;
+  }
 
   ngOnInit() {
   }

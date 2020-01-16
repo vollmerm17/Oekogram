@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "./service/user.service";
+import {UserService} from './service/user.service';
 
 
 @Component({
@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   panelOpenState = false;
   isAuthenticated = false;
 
-    constructor(private userService: UserService){}
+    constructor(private userService: UserService) {}
 
   ngOnInit() {
      this.userService.isLoggedIn.subscribe((isLoggedIn) => {
