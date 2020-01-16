@@ -116,21 +116,21 @@ def post_form_create(request):
 def post_delete(request, pk):
     try:
         post = Post.objects.get(pk=pk)
-    except Profile.DoesNotExist:
+    except Post.DoesNotExist:
         return Response({'error': 'Post does not exist.'}, status=404)
     post.delete()
     return Response(status=204)
 
 
-@swagger_auto_schema(method='GET', responses={200: CommentsSerializer()})
+@swagger_auto_schema(method='GET', responses={200: CommentsSerializer(many=True)})
 @api_view(['GET'])
 def comment_form_get(request, post_id):
     try:
-        comment = Comment.objects.get(post_id=post_id)
-    except Activity.DoesNotExist:
+        comment = Comment.objects.all().filter(posts_id=post_id)
+    except Comment.DoesNotExist:
         return Response({'error': 'Comment does not exist.'}, status=404)
 
-    serializer = CommentsSerializer(comment)
+    serializer = CommentsSerializer(comment, many=True)
     return Response(serializer.data)
 
 

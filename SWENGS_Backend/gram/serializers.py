@@ -16,9 +16,14 @@ class ActivityFormSerializer(serializers.ModelSerializer):
 
 
 class PostsSerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField()
+
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ['id', 'name', 'content', 'pictures', 'likes', 'activity', 'date']
+
+    def get_name(self, obj):
+        return obj.user_id.username
 
 
 class CommentsSerializer(serializers.ModelSerializer):
@@ -49,7 +54,3 @@ class FriendshipRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = FriendshipRequest
         fields = '__all__'
-
-
-
-

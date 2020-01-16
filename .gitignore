@@ -57,7 +57,7 @@ SWENGS_backend/.pytest_cache/
 
 # Django stuff:
 *.log
-local_settings.py
+SWENGS_backendlocal_settings.py
 SWENGS_backend/db.sqlite3
 SWENGS_backend/db.sqlite3-journal
 
@@ -163,3 +163,4 @@ SWENGS_frontend/e2e/*.map
 SWENGS_frontend/.DS_Store/
 
 # End of https://www.gitignore.io/api/angular
+SWENGS_Backend/db.sqlite3

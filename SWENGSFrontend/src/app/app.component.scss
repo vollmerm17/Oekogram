@@ -2,6 +2,17 @@
 mat-tab {
   font-family: 'Merriweather', serif;
 }
+.flexBox-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.flexBox-container > * {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 400px;
+}
+/*
 .top-container {
   display: flex;
   //flex-direction: column;
@@ -13,9 +24,17 @@ mat-tab {
   flex-shrink: 1;
   flex-basis: 200px;
 }
+} */
+
 .header {
   display: flex;
-  justify-content: flex-end;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.header > * {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 400px;
 }
 .login {
   display: flex;
@@ -62,5 +81,19 @@ mat-tab {
   flex-basis: 450px;
   flex-shrink: 0;
   flex-grow: 0;
+  justify-content: center;
+  background-color: #CCD99C;
+
+  border-radius: 30px;
+  padding-top: 50px;
+  margin-left: 12% ;
+  margin-right: 12%;
+
 }
 
+.footer {
+  background-color: #9DBF54;
+  text-align: center;
+  padding: 20px;
+  margin-top: 10px;
+}
