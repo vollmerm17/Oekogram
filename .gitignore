@@ -57,7 +57,7 @@ SWENGS_backend/.pytest_cache/
 
 # Django stuff:
 *.log
-local_settings.py
+SWENGS_backend/local_settings.py
 SWENGS_backend/db.sqlite3
 SWENGS_backend/db.sqlite3-journal
 
