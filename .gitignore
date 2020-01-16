@@ -1,5 +1,5 @@
 # Byte-compiled / optimized / DLL files
-SWENGS_backend/__pycache__/*
+SWENGS_backend/__pycache__/
 *.py[cod]
 *$py.class
 
