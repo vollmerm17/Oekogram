@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
 
   panelOpenState = false;
   isAuthenticated = false;
+  change = true;
 
     constructor(private userService: UserService) {}
 

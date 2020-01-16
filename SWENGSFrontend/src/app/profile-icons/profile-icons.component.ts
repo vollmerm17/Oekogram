@@ -12,4 +12,7 @@ export class ProfileIconsComponent implements OnInit {
   ngOnInit() {
   }
 
+  changeProfile() {
+
+  }
 }
