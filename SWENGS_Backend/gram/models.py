@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models import PositiveIntegerField
@@ -44,6 +46,7 @@ class Post(models.Model):
     pictures = models.ManyToManyField('Media', blank=True)
     likes = models.PositiveIntegerField()
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
+    date = models.DateTimeField(default=datetime.now, blank=True)
 
 
 class Comment(models.Model):
