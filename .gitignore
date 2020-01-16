@@ -1,5 +1,5 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
+SWENGS_backend/__pycache__/
 *.py[cod]
 *$py.class
 
@@ -163,4 +163,3 @@ SWENGS_frontend/e2e/*.map
 SWENGS_frontend/.DS_Store/
 
 # End of https://www.gitignore.io/api/angular
-.idea/workspace.xml
