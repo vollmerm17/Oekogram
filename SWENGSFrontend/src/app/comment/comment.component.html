@@ -1,1 +1,4 @@
-<p>{{comments}} works!</p>
+<div *ngFor="let comment of comments; let i = index">
+  <p class="comment-even"*ngIf="i%2==0">{{comment.content}}</p>
+  <p class="comment-odd" *ngIf="i%2==1">{{comment.content}}</p>
+</div>
