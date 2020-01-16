@@ -40,11 +40,6 @@ export class UserService {
     this.router.navigate(['/login']);
   }
 
-  getUsername(id: string) {
-    this.http.get('api/profile/' + id + '/get').subscribe((response: any) => {this.user = response; });
-
-    return this.user.username;
-  }
 
 
 }

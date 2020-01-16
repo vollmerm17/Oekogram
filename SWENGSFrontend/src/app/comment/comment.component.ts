@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {CommentsService} from '../service/comments.service';
 
 @Component({
   selector: 'app-comment',
@@ -7,11 +9,19 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class CommentComponent implements OnInit {
 
-  constructor() { }
+  constructor(public commentService: CommentsService) {
+  }
+
   @Input()
-  comments: string;
+  id: string;
+
+  comments: any[];
 
   ngOnInit() {
+    this.commentService.getCommentsByPostID(this.id).subscribe((response: any) => {
+      this.comments = response;
+    });
+
   }
 
 }
