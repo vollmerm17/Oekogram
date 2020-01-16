@@ -10,9 +10,9 @@ from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.response import Response
 
-from gram.models import Activity, Post, Comment, Media, Profile
+from gram.models import Activity, Post, Comment, Media, Profile, LikedByUser
 from gram.serializers import MediaSerializer, ActivityOptionSerializer, ProfileListSerializer, ProfileFormSerializer, \
-    ActivityFormSerializer, PostsSerializer, CommentsSerializer, FriendshipManager
+    ActivityFormSerializer, PostsSerializer, CommentsSerializer, FriendshipManager, LikedByUserSerializer
 
 
 @swagger_auto_schema(method='GET', responses={200: ActivityOptionSerializer(many=True)})
@@ -86,6 +86,17 @@ def posts_get_all(request):
     serializer = PostsSerializer(posts, many=True)
     return Response(serializer.data)
 
+@swagger_auto_schema(method='GET', responses={200: LikedByUserSerializer()})
+@api_view(['GET'])
+def like_get(request, post_id):
+    try:
+        like = LikedByUser.objects.get(post_id=post_id)
+    except LikedByUser.DoesNotExist:
+        return Response({'error': 'LikedByUser does not exist.'}, status=404)
+
+    serializer = LikedByUserSerializer(like)
+    return Response(serializer.data)
+
 
 @swagger_auto_schema(method='GET', responses={200: PostsSerializer(many=True)})
 @api_view(['GET'])
@@ -127,7 +138,7 @@ def post_delete(request, pk):
 def comment_form_get(request, post_id):
     try:
         comment = Comment.objects.get(post_id=post_id)
-    except Activity.DoesNotExist:
+    except Comment.DoesNotExist:
         return Response({'error': 'Comment does not exist.'}, status=404)
 
     serializer = CommentsSerializer(comment)

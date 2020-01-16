@@ -54,6 +54,10 @@ class Comment(models.Model):
     posts_id = models.ForeignKey(Post, on_delete=models.CASCADE)
     user_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
+class LikedByUser(models.Model):
+    post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    liked = models.BooleanField()
 
 
 
