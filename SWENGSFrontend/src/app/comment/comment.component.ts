@@ -9,8 +9,6 @@ import {CommentsService} from '../service/comments.service';
 })
 export class CommentComponent implements OnInit {
 
-  i = 0;
-
   constructor(public commentService: CommentsService) {
   }
 
