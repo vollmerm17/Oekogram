@@ -25,6 +25,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -41,6 +42,7 @@ export function tokenGetter() {
     LoginComponent,
     LogoutComponent,
     HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
