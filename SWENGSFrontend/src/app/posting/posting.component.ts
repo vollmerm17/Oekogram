@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {PostService} from '../service/post.service';
-import {UserService} from '../service/user.service';
 
 
 @Component({
@@ -16,8 +15,7 @@ export class PostingComponent implements OnInit {
   posts: any[];
 
 
-
-  constructor(private postService: PostService, private userService: UserService) {
+  constructor(private postService: PostService) {
   }
 
   // panelOpenState = false;
@@ -26,10 +24,6 @@ export class PostingComponent implements OnInit {
     this.postService.getAllPosts().subscribe((response: any) => {this.posts = response; });
 
 
-  }
-
-  openComments() {
-    alert('hello');
   }
 
 

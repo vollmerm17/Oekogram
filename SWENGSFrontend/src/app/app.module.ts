@@ -25,6 +25,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
 import { HeaderComponent } from './header/header.component';
+import {DragDirective} from './write-posting/dragDrop.directive';
 import { FooterComponent } from './footer/footer.component';
 import { CommentComponent } from './comment/comment.component';
 import { ProfileFormComponent } from './profile-form/profile-form.component';
@@ -51,6 +52,7 @@ export function tokenGetter() {
     LoginComponent,
     LogoutComponent,
     HeaderComponent,
+    DragDirective,
     FooterComponent,
     CommentComponent,
     ProfileFormComponent,

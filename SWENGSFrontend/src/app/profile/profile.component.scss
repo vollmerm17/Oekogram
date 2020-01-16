@@ -1,4 +1,21 @@
+.profile{
+  position: sticky;
+  top: 30px;
+  justify-content: center;
+  height: 550px;
+  background: url("../../assets/background/Oekogram600px.png");
+  background-repeat: no-repeat;
+  background-size: auto;
+  padding-top: 50px;
+  border-style: solid;
+  border-color: #467302;
+  // border-radius: 30px;
+}
 img {
+  width: 60%;
+  height: auto;
+  margin-left: 20%;
+  margin-right: 20%;
   border-radius: 50%;
 }
 p {
@@ -7,4 +24,29 @@ p {
 .sticky {
   position: sticky;
   top: 30px;
+}
+.name {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+.scoreBox {
+  background-color: #F2F2F2;
+  border-style: solid;
+  border-color: #467302;
+  border-radius: 5%;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding: 2% 2%;
+}
+.score {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  color: #467302;
+  //display: table-cell;
+  //vertical-align: middle;
+}
+.information {
+  text-align: center;
 }
