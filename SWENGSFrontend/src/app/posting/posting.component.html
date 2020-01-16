@@ -1,25 +1,26 @@
-<mat-card class="example-card">
+
+
+<div *ngFor="let post of posts">
+<mat-card class="posting">
+
   <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>Shiba Inu</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    <div mat-card-avatar class="profile-picture"></div>
+    <mat-card-title>{{post.name}}</mat-card-title>
+    <mat-card-subtitle>{{post.date | date:'HH:mm MMM, dd yyyy'}}</mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
   <mat-card-content>
-    <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-      bred for hunting.
-    </p>
+    <p>{{post.content}}</p>
      <mat-divider></mat-divider>
   </mat-card-content>
   <mat-card-actions>
+    <p *ngIf="post.likes != 0">Likes: {{post.likes}}</p>
     <button mat-icon-button color="accent"><mat-icon>favorite</mat-icon></button>
     <button mat-icon-button color="accent"><mat-icon>favorite_border</mat-icon></button>
     <button mat-icon-button color="accent"><mat-icon>thumb_up</mat-icon></button>
   </mat-card-actions>
 
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+ <!-- <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Comments
@@ -36,7 +37,21 @@
       <p>Second comment</p>
       <p>Comment: <input type="text" name="test" placeholder="write a comment"></p>
     </div>
+  </mat-expansion-panel> -->
+  <mat-expansion-panel (opened)="openComments()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Comments
+
+      </mat-panel-title>
+      <mat-panel-description>
+        Click to show comments
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="comments">
+      <app-comment comments="Hello World" ></app-comment>
+    </div>
   </mat-expansion-panel>
-
-
 </mat-card>
+</div>
+
