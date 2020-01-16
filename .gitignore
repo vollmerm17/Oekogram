@@ -22,6 +22,7 @@ SWENGS_backend/var/
 SWENGS_backend/wheels/
 SWENGS_backend/pip-wheel-metadata/
 SWENGS_backend/share/python-wheels/
+SWENGS_backend/gram/migrations/
 *.egg-info/
 .installed.cfg
 *.egg
