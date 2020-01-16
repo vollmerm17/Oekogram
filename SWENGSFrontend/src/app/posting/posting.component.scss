@@ -1,11 +1,11 @@
-.example-card {
+.posting {
   //max-width: 90%;
-  margin-left: 50px ;
-  margin-right: 50px;
+  margin: 50px ;
   font-family: 'Merriweather', serif;
+  box-shadow: 2px 2px grey;
 }
 
-.example-header-image {
+.profile-picture {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
 }
