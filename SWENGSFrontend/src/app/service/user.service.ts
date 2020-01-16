@@ -12,6 +12,8 @@ export class UserService {
   readonly accessTokenLocalStorageKey = 'access_token';
   isLoggedIn = new BehaviorSubject(false);
 
+  user: any;
+
   constructor(private http: HttpClient, private router: Router, private jwtHelperService: JwtHelperService) {
     const token = localStorage.getItem(this.accessTokenLocalStorageKey);
     if (token) {
@@ -36,6 +38,12 @@ export class UserService {
     localStorage.removeItem(this.accessTokenLocalStorageKey);
     this.isLoggedIn.next(false);
     this.router.navigate(['/login']);
+  }
+
+  getUsername(id: string) {
+    this.http.get('api/profile/' + id + '/get').subscribe((response: any) => {this.user = response; });
+
+    return this.user.username;
   }
 
 

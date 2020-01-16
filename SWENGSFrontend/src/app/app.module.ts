@@ -22,10 +22,11 @@ import {JwtModule} from '@auth0/angular-jwt';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { CommentComponent } from './comment/comment.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -43,6 +44,7 @@ export function tokenGetter() {
     LogoutComponent,
     HeaderComponent,
     FooterComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserModule,
