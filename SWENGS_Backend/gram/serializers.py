@@ -17,6 +17,7 @@ class ActivityFormSerializer(serializers.ModelSerializer):
 
 class PostsSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
+    activity = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
@@ -25,15 +26,20 @@ class PostsSerializer(serializers.ModelSerializer):
     def get_name(self, obj):
         return obj.user_id.username
 
+    def get_activity(self, obj):
+        return obj.activity.name
+
 
 class CommentsSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
+
     class Meta:
         model = Comment
         fields = ['id', 'content', 'posts_id', 'user_id', 'date', 'name']
 
     def get_name(self, obj):
         return obj.user_id.username
+
 
 class ProfileFormSerializer(serializers.ModelSerializer):
     class Meta:
