@@ -1,4 +1,20 @@
-<div *ngFor="let comment of comments; let i = index">
-  <p class="comment-even"*ngIf="i%2==0">{{comment.content}}</p>
-  <p class="comment-odd" *ngIf="i%2==1">{{comment.content}}</p>
+
+<div *ngFor="let comment of comments; let i = index" >
+  <p class="comment-even"*ngIf="i%2==0"><u>{{comment.name}}</u><br>{{comment.content}}<br>
+    <span style="color: gray;"><i>{{comment.date | date:'HH:mm MMM, dd yyyy'}}</i></span></p>
+  <p class="comment-odd" *ngIf="i%2==1"><u>{{comment.name}}</u><br>{{comment.content}}<br>
+    <span style="color: gray;"><i>{{comment.date | date:'HH:mm MMM, dd yyyy'}}</i></span></p>
 </div>
+<p *ngIf="commentslenth== 0">No comments</p>
+
+<form [formGroup]="commentFormGroup">
+ <mat-form-field style="margin-right: 10px">
+    <input matInput type="text" placeholder="write comment" formControlName="content" required>
+  </mat-form-field>
+  <button mat-raised-button color="primary" [disabled]="!commentFormGroup.valid" (click)="writeComment()">Write Comment</button>
+
+
+</form>
+
+
+
