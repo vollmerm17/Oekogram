@@ -2,7 +2,8 @@
   position: sticky;
   top: 30px;
   justify-content: center;
-  height: 550px;
+  min-height: 500px;
+  max-height: 550px;
   background: url("../../assets/background/Oekogram600px.png");
   background-repeat: no-repeat;
   background-size: auto;
@@ -20,10 +21,6 @@ img {
 }
 p {
   font-family: 'Merriweather', serif;
-}
-.sticky {
-  position: sticky;
-  top: 30px;
 }
 .name {
   text-align: center;
@@ -46,7 +43,4 @@ p {
   color: #467302;
   //display: table-cell;
   //vertical-align: middle;
-}
-.information {
-  text-align: center;
 }

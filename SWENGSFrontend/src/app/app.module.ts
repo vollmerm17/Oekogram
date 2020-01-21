@@ -11,8 +11,8 @@ import {
   MatExpansionModule,
   MatFormFieldModule,
   MatGridListModule,
-  MatIconModule,
-  MatTabsModule
+  MatIconModule, MatMenuModule, MatSidenavModule,
+  MatTabsModule, MatToolbarModule
 } from '@angular/material';
 import {PostingComponent} from './posting/posting.component';
 import {WritePostingComponent} from './write-posting/write-posting.component';
@@ -91,8 +91,11 @@ export function tokenGetter() {
         whitelistedDomains: ['localhost:4200']
       }
     }),
+    ReactiveFormsModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatSidenavModule,
     MatSnackBarModule,
-    ReactiveFormsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   userId: number;
   fullName: string;
   greenScore: number;
+  isChanging: boolean;
   decoded: any;
   private profile: any[];
 
@@ -44,8 +45,10 @@ export class ProfileComponent implements OnInit {
     // this.profileAttributes = dalta.profileAttributes;
 
     // this.profileService.getProfile()
+  }
 
-
+  changeProfile() {
+    this.isChanging = true;
   }
 
 

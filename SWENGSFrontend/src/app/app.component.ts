@@ -10,12 +10,11 @@ import {UserService} from './service/user.service';
 
 export class AppComponent implements OnInit {
 
-
-  panelOpenState = false;
+  opened: boolean;
   isAuthenticated = false;
   change = true;
 
-    constructor(private userService: UserService) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
      this.userService.isLoggedIn.subscribe((isLoggedIn) => {

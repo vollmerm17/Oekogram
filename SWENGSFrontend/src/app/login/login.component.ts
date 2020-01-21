@@ -28,16 +28,11 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.userService.login(this.loginFormGroup.value);
+    // this.router.navigate(['posting']);
 
 /*    this.userService.login(this.loginFormGroup.value);*/
-    this.http.post('/api/api-token-auth/', this.loginFormGroup.value, this.isAuthenticated)
-      .subscribe((res: any) => {
-        localStorage.setItem('access_token', res.token);
-        window.location.reload();
-        this.isAuthenticated = this.userService.isLoggedIn;
-      }, () => {
-        alert('wrong username or password');
-      });
+
   }
 
 }

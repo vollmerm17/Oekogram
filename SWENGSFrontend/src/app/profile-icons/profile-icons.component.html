@@ -1,6 +1,16 @@
 <div class="actions">
-  <img (click)="changeProfile()" class="icon" src="../../assets/edit_icon.png" height="20px">
-  <img class="icon" src="../../assets/friendship_icon.png" height="20px">
+  <button mat-icon-button (click)="changeProfile()">
+    <i class="material-icons">
+      create
+    </i>
+  </button>
+  <button mat-icon-button (click)="friends()">
+    <i class="material-icons">
+      group
+    </i>
+  </button>
+  <!--<img (click)="changeProfile()" class="icon" src="../../assets/edit_icon.png" height="20px">-->
+<!--  <img class="icon" src="../../assets/friendship_icon.png" height="20px">-->
 </div>
 
 

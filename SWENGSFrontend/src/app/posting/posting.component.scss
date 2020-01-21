@@ -1,6 +1,6 @@
 .posting {
-  //max-width: 90%;
-  margin: 50px ;
+  // max-width: 90%;
+  // margin: 50px ;
   font-family: 'Merriweather', serif;
   box-shadow: 2px 2px grey;
 }
@@ -22,4 +22,11 @@ img {
   float: left;
   vertical-align: sub;
   padding-right: 7px;
+}
+
+.writePost {
+  display: flex;
+  /*justify-content: center;*/
+  box-shadow: 2px 2px grey;
+  margin: 50px 0;
 }

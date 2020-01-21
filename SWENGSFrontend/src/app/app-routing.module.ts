@@ -10,6 +10,7 @@ import {ProfileComponent} from './profile/profile.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
+  {path: 'logout', component: LogoutComponent},
   {path: 'posting', component: PostingComponent},
   {
     path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], resolve: {

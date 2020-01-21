@@ -1,36 +1,30 @@
-<router-outlet></router-outlet>
+<!--<div class="container">-->
+  <div class="header">
+    <div class="header-container">
+      <div class="title">
+        <h1>Ökogram | IMA Project</h1>
+      </div>
+      <div  class="menuBar" *ngIf="this.isAuthenticated">
+<!--      <button class="navButton" *ngIf="this.isAuthenticated" mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>-->
+        <mat-toolbar class="menuToolBar">
+          <button mat-button routerLink="posting">Recent Posts</button>
+          <button mat-button routerLink="posting">Search</button>
+          <!--<button mat-button routerLink="logout">Logout</button>-->
+        </mat-toolbar>
+        <app-logout></app-logout>
+      </div>
+    </div>
+  </div>
 
-<div class="header">
-  <app-header></app-header>
-</div>
-
-<div *ngIf="this.isAuthenticated" class="flexBox-container">
-<div *ngIf="this.change" class="profile">
+<div class="flexBox-container">
+  <div *ngIf="this.isAuthenticated" class="profile">
     <app-profile></app-profile>
   </div>
-<!--  <div *ngIf="this.change" class="profile">
-    <app-profile-form></app-profile-form>
-  </div>-->
-  <div class="rightCol">
-    <div class="writePost">
-      <app-write-posting></app-write-posting>
-    </div>
-    <div class="content">
-      <mat-tab-group>
-        <mat-tab label="Recent Posts">
-          <app-posting></app-posting>
-        </mat-tab>
-        <mat-tab label="Search">
-          <app-search></app-search>
-        </mat-tab>
-        <mat-tab label="Profiles">
-          <app-profile></app-profile>
-        </mat-tab>
-      </mat-tab-group>
-    </div>
+  <div class="content">
+    <router-outlet></router-outlet>
   </div>
 </div>
+
 <div class="footer">
   <app-footer></app-footer>
 </div>
-
