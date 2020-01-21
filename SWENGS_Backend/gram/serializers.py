@@ -1,3 +1,4 @@
+from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from friendship.models import *
 from .models import Media, Activity, Profile, Post, Comment
@@ -36,6 +37,12 @@ class ProfileFormSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = '__all__'
+
+    def create(self, validated_data):
+        user = super(ProfileFormSerializer, self).create(validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
 
 
 class ProfileListSerializer(serializers.ModelSerializer):
