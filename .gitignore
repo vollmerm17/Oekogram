@@ -169,3 +169,4 @@ SWENGS_Backend/gram/migrations/0001_initial.py
 SWENGS_Backend/gram/migrations/0002_post_date.py
 SWENGS_Backend/gram/migrations/0003_auto_20200116_1339.py
 SWENGS_Backend/gram/migrations/0004_comment_date.py
+SWENGS_Backend/.idea/runConfigurations/backend.xml
