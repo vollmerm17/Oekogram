@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {FileUploadModule} from 'ng2-file-upload';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
@@ -25,8 +25,17 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
 import { HeaderComponent } from './header/header.component';
+import {DragDirective} from './write-posting/dragDrop.directive';
 import { FooterComponent } from './footer/footer.component';
 import { CommentComponent } from './comment/comment.component';
+import { ProfileFormComponent } from './profile-form/profile-form.component';
+import {MediainputComponent} from './mediainput/mediainput.component';
+import {DateComponent} from './date/date.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSelectModule} from '@angular/material/select';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -43,11 +52,16 @@ export function tokenGetter() {
     LoginComponent,
     LogoutComponent,
     HeaderComponent,
+    DragDirective,
     FooterComponent,
     CommentComponent,
+    ProfileFormComponent,
+    MediainputComponent,
+    DateComponent,
   ],
   imports: [
     BrowserModule,
+    FileUploadModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatGridListModule,
@@ -58,7 +72,15 @@ export function tokenGetter() {
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCheckboxModule,
     HttpClientModule,
+    MatDatepickerModule,
     MatInputModule,
     JwtModule.forRoot({
       config: {

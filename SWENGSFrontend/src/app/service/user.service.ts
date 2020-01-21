@@ -11,8 +11,9 @@ export class UserService {
 
   readonly accessTokenLocalStorageKey = 'access_token';
   isLoggedIn = new BehaviorSubject(false);
+  user = new BehaviorSubject('');
 
-  user: any;
+  // user: any;
 
   constructor(private http: HttpClient, private router: Router, private jwtHelperService: JwtHelperService) {
     const token = localStorage.getItem(this.accessTokenLocalStorageKey);
@@ -20,6 +21,7 @@ export class UserService {
       console.log('Token expiration date: ' + this.jwtHelperService.getTokenExpirationDate(token));
       const tokenValid = !this.jwtHelperService.isTokenExpired(token);
       this.isLoggedIn.next(tokenValid);
+      this.user.next(localStorage.getItem('username'));
     }
   }
 
@@ -28,6 +30,7 @@ export class UserService {
       .subscribe((res: any) => {
         this.isLoggedIn.next(true);
         localStorage.setItem('access_token', res.token);
+        localStorage.setItem('username', userData.username);
         this.router.navigate(['posting']);
       }, () => {
         alert('wrong username or password');

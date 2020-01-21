@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
     });
     this.userService.isLoggedIn.subscribe((isLoggedIn) => {
-      this.isAuthenticated = isLoggedIn;});
+      this.isAuthenticated = isLoggedIn; });
   }
 
   login() {

@@ -4,12 +4,13 @@
     <app-header></app-header>
   </div>
 
-<div *ngIf="this.isAuthenticated">
-<div class="flexBox-container">
-
-  <div class="profile">
+<div *ngIf="this.isAuthenticated" class="flexBox-container">
+  <div *ngIf="this.change" class="profile">
     <app-profile></app-profile>
   </div>
+<!--  <div *ngIf="!this.change" class="profile">
+    <app-profile-form></app-profile-form>
+  </div>-->
   <div class="rightCol">
     <div class="writePost">
       <app-write-posting></app-write-posting>
@@ -22,7 +23,6 @@
         </mat-tab-group>
     </div>
   </div>
-</div>
 </div>
 <div class="footer">
   <app-footer></app-footer>

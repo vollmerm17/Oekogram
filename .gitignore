@@ -22,6 +22,7 @@ SWENGS_backend/var/
 SWENGS_backend/wheels/
 SWENGS_backend/pip-wheel-metadata/
 SWENGS_backend/share/python-wheels/
+SWENGS_backend/gram/migrations/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -57,7 +58,7 @@ SWENGS_backend/.pytest_cache/
 
 # Django stuff:
 *.log
-SWENGS_backendlocal_settings.py
+SWENGS_backend/local_settings.py
 SWENGS_backend/db.sqlite3
 SWENGS_backend/db.sqlite3-journal
 
@@ -164,3 +165,7 @@ SWENGS_frontend/.DS_Store/
 
 # End of https://www.gitignore.io/api/angular
 SWENGS_Backend/db.sqlite3
+SWENGS_Backend/gram/migrations/0001_initial.py
+SWENGS_Backend/gram/migrations/0002_post_date.py
+SWENGS_Backend/gram/migrations/0003_auto_20200116_1339.py
+SWENGS_Backend/gram/migrations/0004_comment_date.py
