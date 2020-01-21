@@ -6,6 +6,19 @@
     <mat-error *ngIf="profileFormGroup.controls.username.hasError('usernameAlreadyExists')"> This username already exists
     </mat-error>
   </mat-form-field>
+  <br>
+    <mat-form-field>
+    <input formControlName="first_name" matInput placeholder="First Name" required type="text">
+    <mat-hint align="end">Type in your first name</mat-hint>
+    <mat-error *ngIf="profileFormGroup.controls.first_name.hasError('required')">First name is required</mat-error>
+  </mat-form-field>
+  <br>
+      <mat-form-field>
+    <input formControlName="last_name" matInput placeholder="Last Name" required type="text">
+    <mat-hint align="end">Type in your last name</mat-hint>
+    <mat-error *ngIf="profileFormGroup.controls.last_name.hasError('required')">Last name is required</mat-error>
+  </mat-form-field>
+  <br>
   <mat-form-field>
     <input formControlName="email" matInput placeholder="E-Mail" required type="text">
     <mat-hint align="end">Type in your e-mail</mat-hint>
@@ -23,11 +36,11 @@
     <mat-hint align="end">Your biography</mat-hint>
   </mat-form-field>
   <div>
-    <app-mediainput formControlName="pictures"></app-mediainput>
+    <app-mediainput formControlName="pictures" ></app-mediainput>
   </div>
   <br/>
   <mat-card-actions align="center">
-    <button (click)="updateProfile()" [disabled]="!profileFormGroup.valid" color="primary" mat-raised-button>
+    <button (click)="updateProfile()" color="primary" mat-submit-button>
       <span *ngIf="profileFormGroup.controls.id.value">Update</span>
     </button>
   </mat-card-actions>

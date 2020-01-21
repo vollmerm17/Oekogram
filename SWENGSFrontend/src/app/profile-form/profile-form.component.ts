@@ -13,6 +13,7 @@ import {ProfileService} from '../service/profile.service';
   styleUrls: ['./profile-form.component.scss']
 })
 export class ProfileFormComponent implements OnInit {
+
   private profileFormGroup: FormGroup;
   private age;
 
@@ -21,13 +22,17 @@ export class ProfileFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    const data = this.route.snapshot.data;
+
     this.profileFormGroup = this.fb.group({
       id: [null],
+      first_name: [''],
+      last_name: [''],
       username: ['', Validators.required, this.usernameValidator()],
       email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')], this.emailValidator()],
       bio: ['Hey, I\'m new here...And I love the environment! '],
       date_of_birth: [''],
-      pictures: [],
+      pictures: [null],
     });
 
     const id = this.route.snapshot.paramMap.get('id');

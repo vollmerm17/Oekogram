@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
-import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../service/user.service';
+import {ActivatedRoute} from '@angular/router';
 import {ProfileService} from '../service/profile.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 
@@ -13,32 +12,41 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 })
 export class ProfileComponent implements OnInit {
 
+
   readonly accessTokenLocalStorageKey = 'access_token';
   userId: number;
-  userName: string;
+  fullName: string;
   greenScore: number;
   decoded: any;
+  private profile: any[];
+
 
   constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute,
               private profileService: ProfileService, public jwtHelper: JwtHelperService) {
-    const token = localStorage.getItem(this.accessTokenLocalStorageKey);
-    this.userId = this.jwtHelper.decodeToken(token).user_id;
+    // const token = localStorage.getItem(this.accessTokenLocalStorageKey);
+    // this.userId = this.jwtHelper.decodeToken(token).user_id;
   }
 
   ngOnInit() {
-    this.profileService.getProfile(this.userId).subscribe((res: any) => {
-        this.userName = res.first_name + ' ' + res.last_name; this.greenScore = res.greenscore;
-    });
+    const data = this.route.snapshot.data;
+    this.profile = data.profile;
+
+/*    this.profileService.getProfile(this.userId).subscribe((res: any) => {
+      this.fullName = res.first_name + ' ' + res.last_name;
+      this.greenScore = res.greenscore;
+
+    });*/
 
     /*this.http.post('/api/api-token-auth/', this.loginFormGroup.value, this.isAuthenticated)
       .subscribe((res: User) => {
         localStorage.setItem('access_token', res.token);
     const data = this.route.snapshot.data;*/
-    // this.profileAttributes = data.profileAttributes;
+    // this.profileAttributes = dalta.profileAttributes;
 
     // this.profileService.getProfile()
 
 
   }
+
 
 }
