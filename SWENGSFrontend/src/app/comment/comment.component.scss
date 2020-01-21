@@ -8,3 +8,11 @@
   padding: 3px;
   margin: 3px;
 }
+
+.invisible{
+    display: block;
+    visibility: hidden;
+    height: 0;
+    width: 0;
+}
+

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {CommentsService} from '../service/comments.service';
+import {FormBuilder} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-comment',
@@ -9,19 +10,40 @@ import {CommentsService} from '../service/comments.service';
 })
 export class CommentComponent implements OnInit {
 
-  constructor(public commentService: CommentsService) {
+  constructor(public commentService: CommentsService, private fb: FormBuilder, private http: HttpClient) {
   }
 
   @Input()
   id: string;
 
   comments: any[];
+  commentslenth: number;
+  commentFormGroup;
 
   ngOnInit() {
     this.commentService.getCommentsByPostID(this.id).subscribe((response: any) => {
       this.comments = response;
+      this.commentFormGroup.controls.posts_id.setValue(this.id);
+      this.commentFormGroup.controls.user_id.setValue(1);
+      this.commentslenth = response.length;
     });
 
+
+    this.commentFormGroup = this.fb.group({
+      id: [null],
+      posts_id: [''],
+      user_id: [''],
+      content: ['']
+    });
+
+  }
+
+  writeComment() {
+    const comment = this.commentFormGroup.value;
+
+    this.http.post('api/comment/create', comment).subscribe(() => {
+      window.location.reload();
+    });
   }
 
 }

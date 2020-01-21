@@ -27,10 +27,13 @@ class PostsSerializer(serializers.ModelSerializer):
 
 
 class CommentsSerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField()
     class Meta:
         model = Comment
-        fields = '__all__'
+        fields = ['id', 'content', 'posts_id', 'user_id', 'date', 'name']
 
+    def get_name(self, obj):
+        return obj.user_id.username
 
 class ProfileFormSerializer(serializers.ModelSerializer):
     class Meta:

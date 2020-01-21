@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PostService} from '../service/post.service';
 
 
+
 @Component({
   selector: 'app-posting',
   templateUrl: './posting.component.html',
@@ -13,6 +14,7 @@ import {PostService} from '../service/post.service';
 export class PostingComponent implements OnInit {
 
   posts: any[];
+
 
 
   constructor(private postService: PostService) {
