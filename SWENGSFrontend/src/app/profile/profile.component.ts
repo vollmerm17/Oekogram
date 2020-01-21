@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   userId: number;
   userName: string;
   greenScore: number;
+  isChanging: boolean;
   decoded: any;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute,
@@ -26,6 +27,10 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    const data = this.route.snapshot.data;
+
+
     this.profileService.getProfile(this.userId).subscribe((res: any) => {
         this.userName = res.first_name + ' ' + res.last_name; this.greenScore = res.greenscore;
     });
@@ -37,8 +42,10 @@ export class ProfileComponent implements OnInit {
     // this.profileAttributes = data.profileAttributes;
 
     // this.profileService.getProfile()
+  }
 
-
+  changeProfile() {
+    this.isChanging = true;
   }
 
 }

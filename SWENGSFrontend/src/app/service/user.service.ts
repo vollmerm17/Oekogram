@@ -13,8 +13,6 @@ export class UserService {
   isLoggedIn = new BehaviorSubject(false);
   user = new BehaviorSubject('');
 
-  // user: any;
-
   constructor(private http: HttpClient, private router: Router, private jwtHelperService: JwtHelperService) {
     const token = localStorage.getItem(this.accessTokenLocalStorageKey);
     if (token) {

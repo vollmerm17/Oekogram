@@ -1,12 +1,17 @@
-<div *ngIf="!files.length" class="col-12 rmpm dropzone" appDrag (files)="filesDropped($event)">
-  <div class="text-wrapper">
+<div class="header">
+  <p>Beitrag erstellen</p>
+</div>
+
+<div class="col-12 rmpm dropzone" appDrag (files)="filesDropped($event)">
+  <!--<div class="text-wrapper">
     <div class="centered">Drop your images/movies here!</div>
-  </div>
+  </div>-->
+  <textarea name="message" rows="10" cols="60">
+    ... Write Post ...
+  </textarea>
 </div>
 <!--droped image preview-->
 <div *ngFor="let file of files">
   <img *ngIf="file" [src]="file.url" width="100px" height="100px">
 </div>
-<textarea name="message" rows="10" cols="60">
-... Write Post ...
-</textarea>
+
