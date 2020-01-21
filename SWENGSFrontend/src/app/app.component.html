@@ -1,26 +1,32 @@
 <router-outlet></router-outlet>
 
-  <div class="header">
-    <app-header></app-header>
-  </div>
+<div class="header">
+  <app-header></app-header>
+</div>
 
 <div *ngIf="this.isAuthenticated" class="flexBox-container">
   <div *ngIf="this.change" class="profile">
     <app-profile></app-profile>
   </div>
-<!--  <div *ngIf="!this.change" class="profile">
+  <div *ngIf="!this.change" class="profile">
     <app-profile-form></app-profile-form>
-  </div>-->
+  </div>
   <div class="rightCol">
     <div class="writePost">
       <app-write-posting></app-write-posting>
     </div>
     <div class="content">
       <mat-tab-group>
-          <mat-tab label="Recent Posts"><app-posting></app-posting> </mat-tab>
-          <mat-tab label="Search"> <app-search></app-search> </mat-tab>
-          <mat-tab label="Profiles"> <app-profile></app-profile> </mat-tab>
-        </mat-tab-group>
+        <mat-tab label="Recent Posts">
+          <app-posting></app-posting>
+        </mat-tab>
+        <mat-tab label="Search">
+          <app-search></app-search>
+        </mat-tab>
+        <mat-tab label="Profiles">
+          <app-profile></app-profile>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
 </div>
