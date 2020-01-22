@@ -1,7 +1,8 @@
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from friendship.models import *
-from .models import Media, Activity, Profile, Post, Comment, LikedByUser
+from .models import Media, Activity, Profile, Post, Comment, LikedByUser, Email
+
 
 
 class ActivityOptionSerializer(serializers.ModelSerializer):
@@ -81,3 +82,8 @@ class LikedByUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = LikedByUser
         fields = '__all__'
+
+class EmailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Email
+        fields = ['subject', 'recipient', 'body']

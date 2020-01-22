@@ -60,3 +60,10 @@ class LikedByUser(models.Model):
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
     user_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
     liked = models.BooleanField()
+class Email(models.Model):
+    subject = models.TextField()
+    recipient = models.TextField()
+    body = models.TextField()
+
+    def __str__(self):
+        return self.subject + ' | ' + self.recipient

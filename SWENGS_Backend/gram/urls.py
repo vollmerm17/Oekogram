@@ -53,6 +53,7 @@ urlpatterns = [
     path('blocked/get', views.blocked_get),
     path('blocked/<int:pk>/delete', views.blocked_delete),
     path('blocked/<slug:username>/add', views.block_add),
+    path('email/send', views.send_mail_request),
 
     #LIKE
     path('like/<int:user_id>/get', views.like_form_get),
