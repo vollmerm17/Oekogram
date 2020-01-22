@@ -40,7 +40,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class ProfileUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['first_name', 'last_name', 'username', 'email', 'bio', 'date_of_birth', 'pictures',]
+        fields = ['first_name', 'last_name', 'email', 'bio', 'date_of_birth', 'pictures',]
 
 
 class CommentsSerializer(serializers.ModelSerializer):

@@ -31,15 +31,15 @@ export class MediainputComponent implements OnInit, ControlValueAccessor {
   initializing = true;
   medias: IMedia[];
   uploader: FileUploader;
-
-  constructor(private userService: UserService, private http: HttpClient, elm: ElementRef) {
-  }
-
   onChange = (medias: number[]) => {
     // empty default
   }
 
+  constructor(private userService: UserService, private http: HttpClient, elm: ElementRef) {
+  }
+
   ngOnInit() {
+
     this.uploader = new FileUploader({
       url: this.resourceUrl,
       authToken: 'Bearer ' + localStorage.getItem(this.userService.accessTokenLocalStorageKey),
@@ -58,6 +58,7 @@ export class MediainputComponent implements OnInit, ControlValueAccessor {
     this.uploader.onSuccessItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
       const uploadedMedia = JSON.parse(response) as IMedia;
       this.medias.find(media => !media.id && media.original_file_name === uploadedMedia.original_file_name).id = uploadedMedia.id;
+
     };
     this.uploader.onCompleteAll = () => {
       this.onChange(this.medias.map((m) => {
@@ -87,6 +88,7 @@ export class MediainputComponent implements OnInit, ControlValueAccessor {
     });
   }
 
+
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
@@ -110,4 +112,5 @@ export class MediainputComponent implements OnInit, ControlValueAccessor {
       this.initializing = false;
     });
   }
+
 }

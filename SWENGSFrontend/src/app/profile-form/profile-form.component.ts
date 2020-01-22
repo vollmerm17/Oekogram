@@ -28,11 +28,10 @@ export class ProfileFormComponent implements OnInit {
       id: [null],
       first_name: [''],
       last_name: [''],
-      username: ['', Validators.required, this.usernameValidator()],
       email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')], this.emailValidator()],
       bio: ['Hey, I\'m new here...And I love the environment! '],
       date_of_birth: [''],
-      pictures: [null],
+      pictures: [[]],
     });
 
     const id = this.route.snapshot.paramMap.get('id');
@@ -83,27 +82,6 @@ export class ProfileFormComponent implements OnInit {
     };
   }
 
-  usernameValidator(): AsyncValidatorFn {
-    return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
-      return this.profileService.getProfiles()
-        .pipe(
-          map((profiles: any[]) => {
-            const currentId = this.profileFormGroup.controls.id.value;
-            const currentUsername = this.profileFormGroup.controls.username.value;
-            const profileWithSameUsername = profiles.find((p) => {
-              return p.id !== currentId && p.username === currentUsername;
-            });
-            if (profileWithSameUsername) {
-              return {
-                usernameAlreadyExists: true
-              };
-            } else {
-              return null;
-            }
-          })
-        );
-    };
-  }
 
   calculateAge(date) {
     const ageDifMs = Date.now() - date;

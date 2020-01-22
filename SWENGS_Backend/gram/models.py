@@ -31,7 +31,7 @@ class Profile(AbstractUser):
     bio = models.TextField()
     date_of_birth = models.DateField(null=True)
     greenscore = models.PositiveIntegerField(default=0, editable=True)
-    pictures = models.ForeignKey('Media', blank=True, on_delete=models.CASCADE, default=1)
+    pictures = models.ManyToManyField('Media', blank=True)
 
     USERNAME_FIELD = 'username'
 
