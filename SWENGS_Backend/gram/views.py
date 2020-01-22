@@ -11,9 +11,9 @@ from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.response import Response
 
-from gram.models import Activity, Post, Comment, Media, Profile
+from gram.models import Activity, Post, Comment, Media, Profile, LikedByUser
 from gram.serializers import MediaSerializer, ActivityOptionSerializer, ProfileListSerializer, ProfileFormSerializer, \
-    ActivityFormSerializer, PostsSerializer, CommentsSerializer, ProfileSerializer
+    ActivityFormSerializer, PostsSerializer, CommentsSerializer, ProfileSerializer, LikedByUserSerializer
 
 
 @swagger_auto_schema(method='GET', responses={200: ActivityOptionSerializer(many=True)})
@@ -100,6 +100,18 @@ def posts_get_by_user(request, user_id):
     return Response(serializer.data)
 
 
+@swagger_auto_schema(method='GET', responses={200: PostsSerializer()})
+@api_view(['GET'])
+def posts_get_by_id(request, pk):
+    try:
+        posts = Post.objects.get(pk=pk)
+    except Post.DoesNotExist:
+        return Response({'error': 'Post does not exist.'}, status=404)
+
+    serializer = PostsSerializer(posts)
+    return Response(serializer.data)
+
+
 @swagger_auto_schema(method='POST', request_body=PostsSerializer, responses={200: PostsSerializer()})
 @api_view(['POST'])
 @permission_required('gram.add_post', raise_exception=True)
@@ -112,6 +124,23 @@ def post_form_create(request):
     return Response(serializer.errors, status=400)
 
 
+@swagger_auto_schema(method='PUT', request_body=PostsSerializer, responses={200: PostsSerializer()})
+@api_view(['PUT'])
+@permission_required('gram.update_post', raise_exception=True)
+def post_update(request,pk):
+        try:
+            post = Post.objects.get(pk=pk)
+        except Post.DoesNotExist:
+            return Response({'error': 'Post does not exist.'}, status=404)
+
+        data = JSONParser().parse(request)
+        serializer = PostsSerializer(post, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+
+
 @api_view(['DELETE'])
 @permission_required('gram.delete_post', raise_exception=True)
 def post_delete(request, pk):
@@ -120,6 +149,41 @@ def post_delete(request, pk):
     except Post.DoesNotExist:
         return Response({'error': 'Post does not exist.'}, status=404)
     post.delete()
+    return Response(status=204)
+
+
+@swagger_auto_schema(method='GET', responses={200: LikedByUserSerializer(many=True)})
+@api_view(['GET'])
+def like_form_get(request, user_id):
+    try:
+        like = LikedByUser.objects.all().filter(user_id=user_id)
+    except LikedByUser.DoesNotExist:
+        return Response({'error': 'Like does not exist.'}, status=404)
+
+    serializer = LikedByUserSerializer(like, many=True)
+    return Response(serializer.data, status=200)
+
+
+@swagger_auto_schema(method='POST', request_body=LikedByUserSerializer, responses={200: LikedByUserSerializer()})
+@api_view(['POST'])
+@permission_required('gram.add_like', raise_exception=True)
+def like_form_create(request):
+    data = JSONParser().parse(request)
+    serializer = LikedByUserSerializer(data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=201)
+    return Response(serializer.errors, status=400)
+
+
+@api_view(['DELETE'])
+@permission_required('gram.like_delete', raise_exception=True)
+def like_delete(request, postId, userId):
+    try:
+        like = LikedByUser.objects.get(post_id=postId, user_id=userId)
+    except LikedByUser.DoesNotExist:
+        return Response({'error': 'Like does not exist.'}, status=404)
+    like.delete()
     return Response(status=204)
 
 
