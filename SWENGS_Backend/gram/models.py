@@ -8,7 +8,7 @@ class Activity(models.Model):
     name = models.TextField(unique=True)
     description = models.TextField()
     shortcut = models.CharField(max_length=3)
-    greenscrore = PositiveIntegerField()
+    greenscore = PositiveIntegerField()
 
     class Meta:
         verbose_name_plural = "Activities"
