@@ -54,12 +54,11 @@ export class ProfileFormComponent implements OnInit {
 
   updateProfile() {
     const profile = this.profileFormGroup.value;
-    if (profile.id) {
-      this.http.put('/api/profile/' + profile.id + 'update', profile)
-        .subscribe(() => {
-          alert('updated sucessfully');
-        });
-    }
+    const id = this.route.snapshot.paramMap.get('id');
+    this.http.put('/api/profile/' + id + '/update', profile)
+      .subscribe(() => {
+        alert('updated sucessfully');
+      });
   }
 
   emailValidator(): AsyncValidatorFn {
@@ -90,7 +89,7 @@ export class ProfileFormComponent implements OnInit {
         .pipe(
           map((profiles: any[]) => {
             const currentId = this.profileFormGroup.controls.id.value;
-            const currentUsername = this.profileFormGroup.controls.email.value;
+            const currentUsername = this.profileFormGroup.controls.username.value;
             const profileWithSameUsername = profiles.find((p) => {
               return p.id !== currentId && p.username === currentUsername;
             });

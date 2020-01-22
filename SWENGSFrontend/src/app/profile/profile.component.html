@@ -1,9 +1,22 @@
 <div class="profile">
-  <app-profile-icons></app-profile-icons>
-    <img src="/api/media/1" height="100px">
-  <p class="username">{{profile.username}}</p>
+<div class="actions">
+  <button mat-icon-button [routerLink]="'/profile-form/'+ userId">
+    <i class="material-icons">
+      create
+    </i>
+  </button>
+  <button mat-icon-button (click)="friends()">
+    <i class="material-icons">
+      group
+    </i>
+  </button>
+  <!--<img (click)="changeProfile()" class="icon" src="../../assets/edit_icon.png" height="20px">-->
+<!--  <img class="icon" src="../../assets/friendship_icon.png" height="20px">-->
+</div>
+    <img src="api/media/{{pictures}}" height="100px">
+  <p class="username">{{username}}</p>
   <div class="scoreBox">
-    <p class="score">{{profile.greenScore}}</p>
+    <p class="score">{{greenScore}}</p>
   </div>
   <!--<p class="information">last Activity</p>-->
 </div>

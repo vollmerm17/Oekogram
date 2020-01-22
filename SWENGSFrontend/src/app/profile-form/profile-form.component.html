@@ -40,8 +40,8 @@
   </div>
   <br/>
   <mat-card-actions align="center">
-    <button (click)="updateProfile()" color="primary" mat-submit-button>
-      <span *ngIf="profileFormGroup.controls.id.value">Update</span>
+    <button mat-raised-button (click)="updateProfile()" [disabled]="!profileFormGroup.valid" color="primary">
+      Update
     </button>
   </mat-card-actions>
 </form>

@@ -13,7 +13,7 @@ from rest_framework.response import Response
 
 from gram.models import Activity, Post, Comment, Media, Profile
 from gram.serializers import MediaSerializer, ActivityOptionSerializer, ProfileListSerializer, ProfileFormSerializer, \
-    ActivityFormSerializer, PostsSerializer, CommentsSerializer, ProfileSerializer
+    ActivityFormSerializer, PostsSerializer, CommentsSerializer, ProfileSerializer, ProfileUpdateSerializer
 
 
 @swagger_auto_schema(method='GET', responses={200: ActivityOptionSerializer(many=True)})
@@ -160,7 +160,6 @@ def comment_delete(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: ProfileListSerializer(many=True)})
 @api_view(['GET'])
-@permission_required('gram.view_user', raise_exception=True)
 def profile_list(request):
     users = Profile.objects.all()
     serializer = ProfileListSerializer(users, many=True)
@@ -169,22 +168,9 @@ def profile_list(request):
 
 @swagger_auto_schema(method='GET', responses={200: ProfileSerializer()})
 @api_view(['GET'])
-@permission_required('gram.view_user', raise_exception=True)
 def profile_get(request, pk):
     users = Profile.objects.get(pk=pk)
     serializer = ProfileSerializer(users)
-    return Response(serializer.data, status=200)
-
-
-@swagger_auto_schema(method='GET', responses={200: ProfileFormSerializer()})
-@api_view(['GET'])
-def profile_form_get(request, pk):
-    try:
-        profile = Profile.objects.get(pk=pk)
-    except Profile.DoesNotExist:
-        return Response({'error': 'Profile does not exist.'}, status=404)
-
-    serializer = ProfileFormSerializer(profile)
     return Response(serializer.data, status=200)
 
 
@@ -199,9 +185,8 @@ def profile_form_create(request):
     return Response(serializer.errors, status=400)
 
 
-@swagger_auto_schema(method='PUT', request_body=ProfileFormSerializer, responses={200: ProfileFormSerializer()})
+@swagger_auto_schema(method='PUT', request_body=ProfileUpdateSerializer, responses={200: ProfileUpdateSerializer()})
 @api_view(['PUT'])
-@permission_required('gram.change_profile', raise_exception=True)
 def profile_form_update(request, pk):
     try:
         profile = Profile.objects.get(pk=pk)
@@ -209,7 +194,7 @@ def profile_form_update(request, pk):
         return Response({'error': 'Profile does not exist.'}, status=404)
 
     data = JSONParser().parse(request)
-    serializer = ProfileFormSerializer(profile, data=data)
+    serializer = ProfileUpdateSerializer(profile, data=data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
@@ -217,7 +202,6 @@ def profile_form_update(request, pk):
 
 
 @api_view(['DELETE'])
-@permission_required('gram.delete_profile', raise_exception=True)
 def profile_delete(request, pk):
     try:
         profile = Profile.objects.get(pk=pk)
@@ -370,6 +354,7 @@ def media_download(request, pk):
     original_file_name = media.original_file_name
     response['Content-Disposition'] = 'inline; filename=' + original_file_name
     return response
+
 
 @swagger_auto_schema(method='GET', responses={200: MediaSerializer()})
 @api_view(['GET'])

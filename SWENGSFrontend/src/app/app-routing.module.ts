@@ -6,6 +6,9 @@ import {ProfileFormComponent} from './profile-form/profile-form.component';
 import {AuthGuard} from './auth.guard';
 import {ProfileResolver} from './resolver/profile.resolver';
 import {ProfileComponent} from './profile/profile.component';
+import {LogoutComponent} from './logout/logout.component';
+import {MediainputComponent} from './mediainput/mediainput.component';
+import {MediaResolver} from './resolver/media.resolver';
 
 
 const routes: Routes = [
@@ -18,8 +21,15 @@ const routes: Routes = [
     },
   },
   {
-    path: 'profile-form', component: ProfileFormComponent, canActivate: [AuthGuard],
-  }
+    path: 'profile-form/:id', component: ProfileFormComponent, canActivate: [AuthGuard], resolve: {
+      profile: ProfileResolver, picture: MediaResolver
+    }
+  },
+    {
+    path: 'media/:id/get', component: MediainputComponent, canActivate: [AuthGuard], resolve: {
+      profile: MediaResolver
+    },
+  },
 ];
 
 @NgModule({

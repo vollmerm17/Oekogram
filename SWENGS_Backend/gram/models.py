@@ -30,8 +30,8 @@ class Profile(AbstractUser):
     password = models.TextField()
     bio = models.TextField()
     date_of_birth = models.DateField(null=True)
-    greenscore = models.PositiveIntegerField(default=0)
-    pictures = models.ForeignKey('Media', blank=True, on_delete=models.CASCADE, null=True)
+    greenscore = models.PositiveIntegerField(default=0, editable=True)
+    pictures = models.ForeignKey('Media', blank=True, on_delete=models.CASCADE, default=1)
 
     USERNAME_FIELD = 'username'
 

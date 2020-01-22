@@ -15,28 +15,29 @@ export class ProfileComponent implements OnInit {
 
   readonly accessTokenLocalStorageKey = 'access_token';
   userId: number;
-  fullName: string;
+  username: string;
   greenScore: number;
   isChanging: boolean;
   decoded: any;
-  private profile: any[];
+  private profile;
+  private pictures;
 
 
   constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute,
               private profileService: ProfileService, public jwtHelper: JwtHelperService) {
-    // const token = localStorage.getItem(this.accessTokenLocalStorageKey);
-    // this.userId = this.jwtHelper.decodeToken(token).user_id;
+    const token = localStorage.getItem(this.accessTokenLocalStorageKey);
+    this.userId = this.jwtHelper.decodeToken(token).user_id;
   }
 
   ngOnInit() {
-    const data = this.route.snapshot.data;
-    this.profile = data.profile;
+   /* const data = this.route.snapshot.data;
+    this.pictures = data.pictures;*/
 
-/*    this.profileService.getProfile(this.userId).subscribe((res: any) => {
-      this.fullName = res.first_name + ' ' + res.last_name;
+    this.profileService.getProfile(this.userId).subscribe((res: any) => {
+      this.username = res.username;
       this.greenScore = res.greenscore;
-
-    });*/
+      this.pictures = res.pictures;
+    });
 
     /*this.http.post('/api/api-token-auth/', this.loginFormGroup.value, this.isAuthenticated)
       .subscribe((res: User) => {
@@ -48,8 +49,11 @@ export class ProfileComponent implements OnInit {
   }
 
   changeProfile() {
-    this.isChanging = true;
+
   }
 
 
+  friends() {
+
+  }
 }

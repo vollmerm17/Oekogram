@@ -17,11 +17,11 @@ export class ProfileService {
   }
 
   createProfile(profile: any) {
-    return this.http.post('/api/ticket/create', profile);
+    return this.http.post('/api/profile/create', profile);
   }
 
   updateProfile(profile: any) {
-    return this.http.put('/api/ticket/' + profile.Id + '/update', profile);
+    return this.http.put('/api/profile/' + profile.Id + '/change', profile);
   }
 
   deleteProfile(profileId: any) {

@@ -33,7 +33,6 @@ urlpatterns = [
     path('comment/<int:pk>/delete', views.comment_delete),
     path('profile/list', views.profile_list),
     path('profile/<int:pk>/get', views.profile_get),
-    path('profile/<int:pk>/change', views.profile_form_get),
     path('profile/create', views.profile_form_create),
     path('profile/<int:pk>/update', views.profile_form_update),
     path('profile/<int:pk>/delete', views.profile_delete),

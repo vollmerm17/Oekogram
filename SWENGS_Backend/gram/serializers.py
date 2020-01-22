@@ -31,6 +31,18 @@ class PostsSerializer(serializers.ModelSerializer):
         return obj.activity.name
 
 
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['first_name', 'last_name', 'username', 'greenscore', 'email', 'bio', 'date_of_birth', 'pictures',]
+
+
+class ProfileUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['first_name', 'last_name', 'username', 'email', 'bio', 'date_of_birth', 'pictures',]
+
+
 class CommentsSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
 
@@ -57,13 +69,7 @@ class ProfileFormSerializer(serializers.ModelSerializer):
 class ProfileListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['first_name', 'last_name', 'username', 'greenscore', 'pictures']
-
-
-class ProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
-        fields = ['first_name', 'last_name', 'username', 'greenscore', 'bio', 'date_of_birth', 'pictures',]
+        fields = ['first_name', 'last_name', 'email', 'username', 'greenscore', 'pictures']
 
 
 class MediaSerializer(serializers.ModelSerializer):
