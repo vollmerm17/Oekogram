@@ -38,6 +38,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {HttperrorInterceptor} from './httperror.interceptor';
+import { RegisterComponent } from './register/register.component';
 
 
 export function tokenGetter() {
@@ -61,6 +62,7 @@ export function tokenGetter() {
     ProfileFormComponent,
     MediainputComponent,
     DateComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

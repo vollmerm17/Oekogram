@@ -15,6 +15,10 @@
       </div>
     </div>
   </div>
+<div class="flexBox-container">
+  <div *ngIf="!this.isAuthenticated" class="profile">
+    <app-register></app-register>
+  </div>
 
 <div class="flexBox-container">
   <div *ngIf="this.isAuthenticated" class="profile">
