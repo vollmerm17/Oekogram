@@ -56,8 +56,10 @@ export class ProfileFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.http.put('/api/profile/' + id + '/update', profile)
       .subscribe(() => {
+        this.router.navigate(['posting']);
         alert('updated sucessfully');
       });
+
   }
 
   emailValidator(): AsyncValidatorFn {

@@ -45,6 +45,9 @@ export class MediainputComponent implements OnInit, ControlValueAccessor {
       authToken: 'Bearer ' + localStorage.getItem(this.userService.accessTokenLocalStorageKey),
       autoUpload: true,
     });
+    if (this.uploader.queue.length > 1) {
+      this.uploader.queue.splice(0, 1); // clear old file & replace it with the new one
+    }
     this.uploader.onBeforeUploadItem = (item: FileItem) => {
       if (!this.medias) {
         this.medias = [];
@@ -58,7 +61,6 @@ export class MediainputComponent implements OnInit, ControlValueAccessor {
     this.uploader.onSuccessItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
       const uploadedMedia = JSON.parse(response) as IMedia;
       this.medias.find(media => !media.id && media.original_file_name === uploadedMedia.original_file_name).id = uploadedMedia.id;
-
     };
     this.uploader.onCompleteAll = () => {
       this.onChange(this.medias.map((m) => {
