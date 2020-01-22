@@ -1,20 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-
 import {AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
 import {ProfileService} from '../service/profile.service';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-profile-form',
-  templateUrl: './profile-form.component.html',
-  styleUrls: ['./profile-form.component.scss']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
-export class ProfileFormComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
-  private profileFormGroup: FormGroup;
+  private registerFormGroup: FormGroup;
   private age;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute,
@@ -22,9 +21,8 @@ export class ProfileFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    const data = this.route.snapshot.data;
 
-    this.profileFormGroup = this.fb.group({
+    this.registerFormGroup = this.fb.group({
       id: [null],
       first_name: [''],
       last_name: [''],
@@ -35,16 +33,8 @@ export class ProfileFormComponent implements OnInit {
       pictures: [null],
     });
 
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.http.get('api/profile/' + id + '/get')
-        .subscribe((response) => {
-          this.profileFormGroup.patchValue(response);
-
-        });
-    }
-    this.profileFormGroup.controls.date_of_birth.valueChanges.subscribe(() => {
-      const birthDate = this.profileFormGroup.controls.date_of_birth.value;
+    this.registerFormGroup.controls.date_of_birth.valueChanges.subscribe(() => {
+      const birthDate = this.registerFormGroup.controls.date_of_birth.value;
       this.age = undefined;
       if (birthDate) {
         this.age = this.calculateAge(new Date(birthDate));
@@ -52,13 +42,11 @@ export class ProfileFormComponent implements OnInit {
     });
   }
 
-  updateProfile() {
-    const profile = this.profileFormGroup.value;
-    const id = this.route.snapshot.paramMap.get('id');
-    this.http.put('/api/profile/' + id + '/update', profile)
-      .subscribe(() => {
-        alert('updated sucessfully');
-      });
+  createProfile() {
+    const profile = this.registerFormGroup.value;
+    this.profileService.createProfile(profile).subscribe((response: any) => {
+      this.router.navigate(['login/']);
+    });
   }
 
   emailValidator(): AsyncValidatorFn {
@@ -66,8 +54,8 @@ export class ProfileFormComponent implements OnInit {
       return this.profileService.getProfiles()
         .pipe(
           map((profiles: any[]) => {
-            const currentId = this.profileFormGroup.controls.id.value;
-            const currentEmail = this.profileFormGroup.controls.email.value;
+            const currentId = this.registerFormGroup.controls.id.value;
+            const currentEmail = this.registerFormGroup.controls.email.value;
             const profileWithSameEmail = profiles.find((p) => {
               return p.id !== currentId && p.email === currentEmail;
             });
@@ -83,13 +71,14 @@ export class ProfileFormComponent implements OnInit {
     };
   }
 
+
   usernameValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
       return this.profileService.getProfiles()
         .pipe(
           map((profiles: any[]) => {
-            const currentId = this.profileFormGroup.controls.id.value;
-            const currentUsername = this.profileFormGroup.controls.username.value;
+            const currentId = this.registerFormGroup.controls.id.value;
+            const currentUsername = this.registerFormGroup.controls.username.value;
             const profileWithSameUsername = profiles.find((p) => {
               return p.id !== currentId && p.username === currentUsername;
             });
@@ -115,3 +104,6 @@ export class ProfileFormComponent implements OnInit {
     }
   }
 }
+
+
+

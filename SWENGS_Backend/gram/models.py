@@ -1,12 +1,11 @@
 from datetime import datetime
-
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models import PositiveIntegerField
 
 
 class Activity(models.Model):
-    name = models.TextField()
+    name = models.TextField(unique=True)
     description = models.TextField()
     shortcut = models.CharField(max_length=3)
     greenscrore = PositiveIntegerField()
@@ -31,8 +30,8 @@ class Profile(AbstractUser):
     password = models.TextField()
     bio = models.TextField()
     date_of_birth = models.DateField(null=True)
-    greenscore = models.PositiveIntegerField(default=0)
-    pictures = models.ManyToManyField('Media', blank=True)
+    greenscore = models.PositiveIntegerField(default=0, editable=True)
+    pictures = models.ForeignKey('Media', blank=True, on_delete=models.CASCADE, default=1)
 
     USERNAME_FIELD = 'username'
 

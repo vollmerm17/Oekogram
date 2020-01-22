@@ -1,7 +1,6 @@
-from django.contrib import auth
 from django.test import TestCase
 
-from gram.models import Profile
+from gram import Profile
 
 
 class AuthTestCase(TestCase):

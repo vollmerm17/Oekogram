@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
-import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../service/user.service';
+import {ActivatedRoute} from '@angular/router';
 import {ProfileService} from '../service/profile.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 
@@ -13,12 +12,17 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 })
 export class ProfileComponent implements OnInit {
 
+
   readonly accessTokenLocalStorageKey = 'access_token';
   userId: number;
+  username: string;
   fullName: string;
   greenScore: number;
   isChanging: boolean;
-  picture: number;
+  decoded: any;
+  private profile;
+  private pictures;
+
 
   constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute,
               private profileService: ProfileService, public jwtHelper: JwtHelperService) {
@@ -27,26 +31,31 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    // const data = this.route.snapshot.data;
-
+   /* const data = this.route.snapshot.data;
+    this.pictures = data.pictures;*/
 
     this.profileService.getProfile(this.userId).subscribe((res: any) => {
-        this.fullName = res.username + ' ' + res.username;
-        this.greenScore = res.greenscore;
+      this.username = res.username;
+      this.fullName = res.username + ' ' + res.username;
+      this.greenScore = res.greenscore;
+      this.pictures = res.pictures;
     });
 
     /*this.http.post('/api/api-token-auth/', this.loginFormGroup.value, this.isAuthenticated)
       .subscribe((res: User) => {
         localStorage.setItem('access_token', res.token);
     const data = this.route.snapshot.data;*/
-    // this.profileAttributes = data.profileAttributes;
+    // this.profileAttributes = dalta.profileAttributes;
 
     // this.profileService.getProfile()
   }
 
   changeProfile() {
-    this.isChanging = true;
+
   }
 
+
+  friends() {
+
+  }
 }
