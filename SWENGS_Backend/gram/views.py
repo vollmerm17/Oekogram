@@ -38,7 +38,6 @@ def activity_form_get(request, pk):
 
 @swagger_auto_schema(method='POST', request_body=ActivityFormSerializer, responses={200: ActivityFormSerializer()})
 @api_view(['POST'])
-@permission_required('gram.add_activity', raise_exception=True)
 def activity_form_create(request):
     data = JSONParser().parse(request)
     serializer = ActivityFormSerializer(data=data)
@@ -50,7 +49,6 @@ def activity_form_create(request):
 
 @swagger_auto_schema(method='PUT', request_body=ActivityFormSerializer, responses={200: ActivityFormSerializer()})
 @api_view(['PUT'])
-@permission_required('gram.change_activity', raise_exception=True)
 def activity_form_update(request, pk):
     try:
         activity = Activity.objects.get(pk=pk)
@@ -66,7 +64,6 @@ def activity_form_update(request, pk):
 
 
 @api_view(['DELETE'])
-@permission_required('gram.delete_activity', raise_exception=True)
 def activity_delete(request, pk):
     try:
         activity = Activity.objects.get(pk=pk)
@@ -102,7 +99,6 @@ def posts_get_by_user(request, user_id):
 
 @swagger_auto_schema(method='POST', request_body=PostsSerializer, responses={200: PostsSerializer()})
 @api_view(['POST'])
-@permission_required('gram.add_post', raise_exception=True)
 def post_form_create(request):
     data = JSONParser().parse(request)
     serializer = PostsSerializer(data=data)
@@ -113,7 +109,6 @@ def post_form_create(request):
 
 
 @api_view(['DELETE'])
-@permission_required('gram.delete_post', raise_exception=True)
 def post_delete(request, pk):
     try:
         post = Post.objects.get(pk=pk)
@@ -148,7 +143,6 @@ def comment_form_create(request):
 
 
 @api_view(['DELETE'])
-@permission_required('gram.delete_comment', raise_exception=True)
 def comment_delete(request, pk):
     try:
         comment = Comment.objects.get(pk=pk)
@@ -213,7 +207,6 @@ def profile_delete(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
-@permission_required('gram.view_friendship', raise_exception=True)
 def friendships_get(request):
     friends = Friend.view_friends
     serialized_qs = serializers.serialize('json', friends, fields=('id', 'username'))
@@ -222,7 +215,6 @@ def friendships_get(request):
 
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
-@permission_required('gram.view_friendship', raise_exception=True)
 def friendships_get_unread_requests(request):
     friends = Friend.objects.unread_requests(user=request.user)
     serialized_qs = serializers.serialize('json', friends, fields=('id', 'username'))
@@ -231,7 +223,6 @@ def friendships_get_unread_requests(request):
 
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
-@permission_required('gram.view_friendship', raise_exception=True)
 def friendships_get_unrejected_requests(request):
     friends = Friend.objects.unrejected_requests(request.user)
     serialized_qs = serializers.serialize('json', friends, fields=('id', 'username'))
@@ -240,7 +231,6 @@ def friendships_get_unrejected_requests(request):
 
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
-@permission_required('gram.view_friendship', raise_exception=True)
 def friendships_count_unrejected_requests(request):
     friends = Friend.objects.unrejected_requests_count(request.user)
     serialized_qs = serializers.serialize('json', friends, fields=('id', 'username'))
@@ -249,7 +239,6 @@ def friendships_count_unrejected_requests(request):
 
 @swagger_auto_schema(method='POST', responses={200})
 @api_view(['POST'])
-@permission_required('gram.request_friendship', raise_exception=True)
 def friendship_request(request, username):
     other_user = Profile.objects.get(username=username)
     try:
@@ -267,7 +256,6 @@ def friendship_request(request, username):
 
 @swagger_auto_schema(method='POST', responses={200})
 @api_view(['POST'])
-@permission_required('gram.accept_friendship', raise_exception=True)
 def friendship_accept(request, pk):
     friend_request = FriendshipRequest.objects.get(to_user=pk)
     friend_request.accept()
@@ -275,7 +263,6 @@ def friendship_accept(request, pk):
 
 
 @api_view(['DELETE'])
-@permission_required('gram.delete_friendship', raise_exception=True)
 def friendship_delete(request, pk):
     try:
         other_user = Profile.objects.get(pk=pk)
@@ -289,7 +276,6 @@ def friendship_delete(request, pk):
 
 @swagger_auto_schema(method='POST', responses={200})
 @api_view(['POST'])
-@permission_required('gram.add_block', raise_exception=True)
 def block_add(request, username):
     other_user = Profile.objects.get(username=username)
     try:
@@ -306,7 +292,6 @@ def block_add(request, username):
 
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
-@permission_required('gram.view_blocked', raise_exception=True)
 def blocked_get(request):
     blocked = BlockManager.objects.blocked
     serialized_qs = serializers.serialize('json', blocked, fields=('id', 'username'))
@@ -314,7 +299,6 @@ def blocked_get(request):
 
 
 @api_view(['DELETE'])
-@permission_required('gram.delete_blocked', raise_exception=True)
 def blocked_delete(request, pk):
     try:
         other_user = Profile.objects.get(pk=pk)
