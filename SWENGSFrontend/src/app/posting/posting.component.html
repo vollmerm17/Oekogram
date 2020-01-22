@@ -1,8 +1,7 @@
 
 
-<div *ngFor="let post of posts">
+<div *ngFor="let post of posts" >
 <mat-card class="posting">
-
   <mat-card-header>
     <div mat-card-avatar class="profile-picture"></div>
     <mat-card-title>{{post.name}}</mat-card-title>
@@ -15,10 +14,17 @@
   </mat-card-content>
   <mat-card-actions>
     <p *ngIf="post.likes != 0">Likes: {{post.likes}}</p>
-    <p><i class="material-icons">sports_kabaddi</i> {{post.activity}}</p>
-    <button mat-icon-button color="accent"><mat-icon>favorite</mat-icon></button>
-    <button mat-icon-button color="accent"><mat-icon>favorite_border</mat-icon></button>
-    <button mat-icon-button color="accent"><mat-icon>thumb_up</mat-icon></button>
+<p><i class="material-icons">sports_kabaddi</i> {{post.activity}}</p>
+<div *ngIf="finished">
+<button mat-icon-button color="accent" *ngIf="checkPostId(post.id)" (click)="removeLike(userId, post.id); updateLikes(post.id,post,-1) " ><mat-icon>favorite</mat-icon></button>
+<button mat-icon-button color="accent" *ngIf="!checkPostId(post.id)" (click)="likePost(post.id); updateLikes(post.id,post,1)"><mat-icon>favorite_border</mat-icon></button>
+<div *ngFor="let like of likes">
+<p>{{like.post_id}}</p>
+</div>
+</div>
+
+<p>This is Post_id: {{post.id}}</p>
+
   </mat-card-actions>
 
 
