@@ -46,6 +46,7 @@ urlpatterns = [
     path('blocked/get', views.blocked_get),
     path('blocked/<int:pk>/delete', views.blocked_delete),
     path('blocked/<slug:username>/add', views.block_add),
+    path('email/send', views.send_mail_request),
 
 
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),

@@ -54,3 +54,12 @@ class Comment(models.Model):
     posts_id = models.ForeignKey(Post, on_delete=models.CASCADE)
     user_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
     date = models.DateTimeField(default=datetime.now, blank=True)
+
+
+class Email(models.Model):
+    subject = models.TextField()
+    recipient = models.TextField()
+    body = models.TextField()
+
+    def __str__(self):
+        return self.subject + ' | ' + self.recipient

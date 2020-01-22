@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import permission_required
 from django.core import serializers
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
+from django.core.mail import send_mail
 from django.http import HttpResponse
 from drf_yasg.utils import swagger_auto_schema
 from friendship.exceptions import AlreadyExistsError
@@ -13,7 +14,7 @@ from rest_framework.response import Response
 
 from gram.models import Activity, Post, Comment, Media, Profile
 from gram.serializers import MediaSerializer, ActivityOptionSerializer, ProfileListSerializer, ProfileFormSerializer, \
-    ActivityFormSerializer, PostsSerializer, CommentsSerializer, ProfileSerializer
+    ActivityFormSerializer, PostsSerializer, CommentsSerializer, ProfileSerializer, EmailSerializer
 
 
 @swagger_auto_schema(method='GET', responses={200: ActivityOptionSerializer(many=True)})
@@ -373,6 +374,7 @@ def media_download(request, pk):
     response['Content-Disposition'] = 'inline; filename=' + original_file_name
     return response
 
+
 @swagger_auto_schema(method='GET', responses={200: MediaSerializer()})
 @api_view(['GET'])
 def media_get(request, pk):
@@ -383,3 +385,25 @@ def media_get(request, pk):
 
     serializer = MediaSerializer(media)
     return Response(serializer.data)
+
+
+@swagger_auto_schema(method='POST', request_body=EmailSerializer, responses={200: EmailSerializer()})
+@api_view(['POST'])
+# @permission_required('gram.add_comment', raise_exception=True)
+def send_mail_request(request):
+    data = JSONParser().parse(request)
+    serializer = EmailSerializer(data=data)
+    if serializer.is_valid():
+        serializer.save()
+        mail = serializer.initial_data
+
+        send_mail(
+            mail['subject'],
+            mail['body'],
+            'FHJoanneum_IMA@ifb.co.at',
+            [mail['recipient']],
+            fail_silently=False,
+        )
+
+        return Response(serializer.data, status=201)
+    return Response(serializer.errors, status=400)
