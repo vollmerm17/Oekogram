@@ -1,17 +1,20 @@
-<div class="header">
-  <p>Beitrag erstellen</p>
-</div>
-
-<div class="col-12 rmpm dropzone" appDrag (files)="filesDropped($event)">
-  <!--<div class="text-wrapper">
-    <div class="centered">Drop your images/movies here!</div>
-  </div>-->
-  <textarea name="message" rows="10" cols="60">
-    ... Write Post ...
-  </textarea>
+<div *ngIf="!files.length" class="col-12 rmpm dropzone" appDrag (files)="filesDropped($event)">
+  <div class="text-wrapper">
+    <div class="centered">Drop your images here!</div>
+  </div>
 </div>
 <!--droped image preview-->
 <div *ngFor="let file of files">
   <img *ngIf="file" [src]="file.url" width="100px" height="100px">
 </div>
+<textarea name="message" rows="10" cols="60">
+... Write Post ...
+</textarea><br><br>
+ <button mat-raised-button color="primary" (click)="showWebcam = !showWebcam">Show Webcam</button>
+<div class="centered" *ngIf="showWebcam">
+  <webcam  [trigger]="triggerObservable" (imageCapture)="handleImage($event)" height="200" width="200"></webcam>
+  <br>
+  <button mat-raised-button color="primary" (click)="takePicture()">Take Picture!</button>
 
+   <img [src]="webcamImage.imageAsDataUrl" *ngIf="webcamImage" height="200" width="200"/>
+</div>
