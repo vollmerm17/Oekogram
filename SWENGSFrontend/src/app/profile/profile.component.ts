@@ -15,10 +15,10 @@ export class ProfileComponent implements OnInit {
 
   readonly accessTokenLocalStorageKey = 'access_token';
   userId: number;
-  userName: string;
+  fullName: string;
   greenScore: number;
   isChanging: boolean;
-  decoded: any;
+  picture: number;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute,
               private profileService: ProfileService, public jwtHelper: JwtHelperService) {
@@ -28,11 +28,12 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
 
-    const data = this.route.snapshot.data;
+    // const data = this.route.snapshot.data;
 
 
     this.profileService.getProfile(this.userId).subscribe((res: any) => {
-        this.userName = res.first_name + ' ' + res.last_name; this.greenScore = res.greenscore;
+        this.fullName = res.username + ' ' + res.username;
+        this.greenScore = res.greenscore;
     });
 
     /*this.http.post('/api/api-token-auth/', this.loginFormGroup.value, this.isAuthenticated)
