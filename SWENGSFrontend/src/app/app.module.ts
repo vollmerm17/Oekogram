@@ -35,6 +35,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {WebcamModule} from 'ngx-webcam';
 
 
 export function tokenGetter() {
@@ -88,7 +89,8 @@ export function tokenGetter() {
         whitelistedDomains: ['localhost:4200']
       }
     }),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    WebcamModule
   ],
   providers: [],
   bootstrap: [AppComponent]
