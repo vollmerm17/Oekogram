@@ -31,7 +31,7 @@ class Profile(AbstractUser):
     bio = models.TextField()
     date_of_birth = models.DateField(null=True)
     greenscore = models.PositiveIntegerField(default=0, editable=True)
-    pictures = models.ForeignKey('Media', blank=True, on_delete=models.CASCADE, default=1)
+    pictures = models.ManyToManyField('Media', blank=True)
 
     USERNAME_FIELD = 'username'
 
@@ -53,3 +53,16 @@ class Comment(models.Model):
     posts_id = models.ForeignKey(Post, on_delete=models.CASCADE)
     user_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
     date = models.DateTimeField(default=datetime.now, blank=True)
+
+
+class LikedByUser(models.Model):
+    post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    liked = models.BooleanField()
+class Email(models.Model):
+    subject = models.TextField()
+    recipient = models.TextField()
+    body = models.TextField()
+
+    def __str__(self):
+        return self.subject + ' | ' + self.recipient

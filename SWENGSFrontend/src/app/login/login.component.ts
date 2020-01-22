@@ -24,14 +24,19 @@ export class LoginComponent implements OnInit {
 
     });
     this.userService.isLoggedIn.subscribe((isLoggedIn) => {
-      this.isAuthenticated = isLoggedIn; });
+      this.isAuthenticated = isLoggedIn;
+    });
+
+    if (this.isAuthenticated) {
+      this.router.navigate(['posting']);
+    }
   }
 
   login() {
     this.userService.login(this.loginFormGroup.value);
     // this.router.navigate(['posting']);
 
-/*    this.userService.login(this.loginFormGroup.value);*/
+    /*    this.userService.login(this.loginFormGroup.value);*/
 
   }
 

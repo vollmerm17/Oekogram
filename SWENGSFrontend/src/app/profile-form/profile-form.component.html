@@ -1,19 +1,11 @@
 <form [formGroup]="profileFormGroup" class="profile-form">
   <mat-form-field>
-    <input formControlName="username" matInput placeholder="Username" required type="text">
-    <mat-hint align="end">Type in your username</mat-hint>
-    <mat-error *ngIf="profileFormGroup.controls.username.hasError('required')">Username is required</mat-error>
-    <mat-error *ngIf="profileFormGroup.controls.username.hasError('usernameAlreadyExists')"> This username already exists
-    </mat-error>
-  </mat-form-field>
-  <br>
-    <mat-form-field>
     <input formControlName="first_name" matInput placeholder="First Name" required type="text">
     <mat-hint align="end">Type in your first name</mat-hint>
     <mat-error *ngIf="profileFormGroup.controls.first_name.hasError('required')">First name is required</mat-error>
   </mat-form-field>
   <br>
-      <mat-form-field>
+  <mat-form-field>
     <input formControlName="last_name" matInput placeholder="Last Name" required type="text">
     <mat-hint align="end">Type in your last name</mat-hint>
     <mat-error *ngIf="profileFormGroup.controls.last_name.hasError('required')">Last name is required</mat-error>
@@ -36,7 +28,7 @@
     <mat-hint align="end">Your biography</mat-hint>
   </mat-form-field>
   <div>
-    <app-mediainput formControlName="pictures" ></app-mediainput>
+    <app-mediainput formControlName="pictures"></app-mediainput>
   </div>
   <br/>
   <mat-card-actions align="center">

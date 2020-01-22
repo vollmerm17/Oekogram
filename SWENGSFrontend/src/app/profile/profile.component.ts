@@ -12,7 +12,6 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 })
 export class ProfileComponent implements OnInit {
 
-
   readonly accessTokenLocalStorageKey = 'access_token';
   userId: number;
   username: string;
@@ -31,14 +30,14 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-   /* const data = this.route.snapshot.data;
-    this.pictures = data.pictures;*/
+    /* const data = this.route.snapshot.data;
+     this.pictures = data.pictures;*/
 
     this.profileService.getProfile(this.userId).subscribe((res: any) => {
       this.username = res.username;
       this.fullName = res.username + ' ' + res.username;
       this.greenScore = res.greenscore;
-      this.pictures = res.pictures;
+      this.pictures = res.pictures[0];
     });
 
     /*this.http.post('/api/api-token-auth/', this.loginFormGroup.value, this.isAuthenticated)
@@ -48,10 +47,6 @@ export class ProfileComponent implements OnInit {
     // this.profileAttributes = dalta.profileAttributes;
 
     // this.profileService.getProfile()
-  }
-
-  changeProfile() {
-
   }
 
 

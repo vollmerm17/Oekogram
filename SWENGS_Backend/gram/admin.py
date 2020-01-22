@@ -20,8 +20,11 @@ class CommentsAdmin(admin.ModelAdmin): pass
 
 class ActivityAdmin(admin.ModelAdmin): pass
 
+class LikedByUserAdmin(admin.ModelAdmin): pass
+
 
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Post, PostsAdmin)
 admin.site.register(Comment, CommentsAdmin)
 admin.site.register(Activity, ActivityAdmin)
+admin.site.register(LikedByUser, LikedByUserAdmin)

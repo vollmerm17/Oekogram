@@ -36,10 +36,11 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {WebcamModule} from 'ngx-webcam';
+import { WriteMailComponent } from './write-mail/write-mail.component';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {HttperrorInterceptor} from './httperror.interceptor';
 import { RegisterComponent } from './register/register.component';
-
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -63,6 +64,7 @@ export function tokenGetter() {
     MediainputComponent,
     DateComponent,
     RegisterComponent,
+    WriteMailComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,6 +100,7 @@ export function tokenGetter() {
     MatMenuModule,
     MatSidenavModule,
     MatSnackBarModule,
+    WebcamModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

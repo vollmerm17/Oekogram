@@ -13,8 +13,9 @@
   <!--<img (click)="changeProfile()" class="icon" src="../../assets/edit_icon.png" height="20px">-->
 <!--  <img class="icon" src="../../assets/friendship_icon.png" height="20px">-->
 </div>
-    <img src="api/media/{{pictures}}" height="100px">
-  <p class="username">{{fullName}}</p>
+  <img *ngIf="!pictures" src="../../assets/img_avatar.png" height="100px">
+  <img *ngIf="pictures" src="api/media/{{pictures}}" height="100px">
+  <p class="name">{{fullName}}</p>
   <div class="scoreBox">
     <p class="score">{{greenScore}}</p>
   </div>

@@ -11,4 +11,10 @@ export class PostService {
   getAllPosts() {
     return this.http.get('/api/post/get');
   }
+
+  updatePost(id: string, post: any) {
+    return this.http.put('/api/post/' + id + '/update', post);
+  }
+
+
 }

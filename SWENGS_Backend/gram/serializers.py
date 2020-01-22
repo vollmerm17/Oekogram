@@ -1,7 +1,8 @@
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from friendship.models import *
-from .models import Media, Activity, Profile, Post, Comment
+from .models import Media, Activity, Profile, Post, Comment, LikedByUser, Email
+
 
 
 class ActivityOptionSerializer(serializers.ModelSerializer):
@@ -40,7 +41,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class ProfileUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['first_name', 'last_name', 'username', 'email', 'bio', 'date_of_birth', 'pictures',]
+        fields = ['first_name', 'last_name', 'email', 'bio', 'date_of_birth', 'pictures',]
 
 
 class CommentsSerializer(serializers.ModelSerializer):
@@ -82,3 +83,13 @@ class FriendshipRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = FriendshipRequest
         fields = '__all__'
+
+class LikedByUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LikedByUser
+        fields = '__all__'
+
+class EmailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Email
+        fields = ['subject', 'recipient', 'body']
