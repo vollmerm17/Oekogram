@@ -36,6 +36,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {WebcamModule} from 'ngx-webcam';
+import { WriteMailComponent } from './write-mail/write-mail.component';
 
 
 export function tokenGetter() {
@@ -59,6 +60,7 @@ export function tokenGetter() {
     ProfileFormComponent,
     MediainputComponent,
     DateComponent,
+    WriteMailComponent,
   ],
   imports: [
     BrowserModule,
