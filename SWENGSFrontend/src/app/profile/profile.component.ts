@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
   readonly accessTokenLocalStorageKey = 'access_token';
   userId: number;
   username: string;
+  fullName: string;
   greenScore: number;
   isChanging: boolean;
   decoded: any;
@@ -34,6 +35,7 @@ export class ProfileComponent implements OnInit {
 
     this.profileService.getProfile(this.userId).subscribe((res: any) => {
       this.username = res.username;
+      this.fullName = res.username + ' ' + res.username;
       this.greenScore = res.greenscore;
       this.pictures = res.pictures[0];
     });

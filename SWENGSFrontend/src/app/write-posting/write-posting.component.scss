@@ -1,14 +1,35 @@
-.header {
-  background-color: #9DBF54;
+.card {
+  // font-family: 'Merriweather', serif;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  // flex-basis: 700px;
+  // flex-grow: 0;
+  // flex-shrink: 0;
+  box-shadow: 2px 2px grey;
+  width: 100%;
 }
-.dropzone {
+.cardHeader {
+  // display: flex;
+}
+.cardForm {
+  // display: flex;
+}
+.textArea {
+  width: 100%;
+}
+.options {
+  width: 50%;
+}
+/*.dropzone {
   width: 100%;
   border: dotted 1px #aaa;
 }
 .text-wrapper {
   display: table-cell;
   vertical-align: middle;
-}
+}*/
 .centered {
   font-family: sans-serif;
   font-size: 1em;

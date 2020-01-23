@@ -32,6 +32,13 @@ class PostsSerializer(serializers.ModelSerializer):
         return obj.activity.name
 
 
+class WritePostSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Post
+        fields = ['id', 'user_id', 'content', 'pictures', 'activity', 'date']
+
+
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile

@@ -1,8 +1,11 @@
 .posting {
   // max-width: 90%;
   // margin: 50px ;
+  justify-content: center;
   font-family: 'Merriweather', serif;
   box-shadow: 2px 2px grey;
+  margin-top: 50px;
+  width: 100%;
 }
 
 .profile-picture {
@@ -24,9 +27,11 @@ img {
   padding-right: 7px;
 }
 
+/*
 .writePost {
   display: flex;
-  /*justify-content: center;*/
+  justify-content: center;
   box-shadow: 2px 2px grey;
-  margin: 50px 0;
+  // margin: 50px 0;
 }
+*/

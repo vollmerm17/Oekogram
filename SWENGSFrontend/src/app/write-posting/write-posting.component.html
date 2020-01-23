@@ -1,20 +1,67 @@
-<div *ngIf="!files.length" class="col-12 rmpm dropzone" appDrag (files)="filesDropped($event)">
+<mat-card class="card">
+  <mat-card-header class="cardHeader">
+    <mat-card-title>Beitrag erstellen</mat-card-title>
+  </mat-card-header>
+  <form class="cardForm" [formGroup]="writePostFormGroup">
+
+    <mat-form-field class="textArea">
+      <div class="textArea">
+        <button mat-button *ngIf="contentValue" matSuffix mat-icon-button aria-label="Clear" (click)="contentValue=''">
+          <mat-icon>close</mat-icon>
+        </button>
+        <textarea class="textArea" matInput rows="6" name="message" formControlName="content"
+                  [(ngModel)]="contentValue" placeholder="Was hast du zu sagen?" required>
+        </textarea>
+      </div>
+      <mat-hint align="end"></mat-hint>
+    </mat-form-field>
+    <br/>
+
+    <mat-form-field class="options">
+      <mat-select placeholder="Activity" formControlName="activity" required>
+        <mat-option [value]="activityOption.id" *ngFor="let activityOption of activityOptions">{{activityOption.name}}</mat-option>
+      </mat-select>
+      <mat-hint align="end">Choose the type of your activity</mat-hint>
+    </mat-form-field>
+
+  <div>
+    <app-mediainput formControlName="pictures"></app-mediainput>
+  </div>
+  </form>
+
+  <br/>
+  <mat-card-actions align="center">
+    <button mat-raised-button color="primary" (click)="showWebcam = !showWebcam">Show Webcam</button>
+    <button mat-raised-button color="primary" [disabled]="!writePostFormGroup.valid" (click)="createPosting()">
+      <span>Create</span>
+    </button>
+  </mat-card-actions>
+
+
+  <div class="centered" *ngIf="showWebcam">
+    <webcam  [trigger]="triggerObservable" (imageCapture)="handleImage($event)" height="200" width="200"></webcam>
+    <br>
+    <button mat-raised-button color="primary" (click)="takePicture()">Take Picture!</button>
+
+    <img [src]="webcamImage.imageAsDataUrl" *ngIf="webcamImage" height="200" width="200"/>
+  </div>
+
+</mat-card>
+  <!--<textarea name="message" rows="10" cols="60">
+  ... Write Post ...
+  </textarea>-->
+
+
+
+
+<!--<div *ngIf="!files.length" class="col-12 rmpm dropzone" appDrag (files)="filesDropped($event)">
   <div class="text-wrapper">
     <div class="centered">Drop your images here!</div>
   </div>
-</div>
+</div>-->
 <!--droped image preview-->
-<div *ngFor="let file of files">
+<!--<div *ngFor="let file of files">
   <img *ngIf="file" [src]="file.url" width="100px" height="100px">
-</div>
-<textarea name="message" rows="10" cols="60">
-... Write Post ...
-</textarea><br><br>
- <button mat-raised-button color="primary" (click)="showWebcam = !showWebcam">Show Webcam</button>
-<div class="centered" *ngIf="showWebcam">
-  <webcam  [trigger]="triggerObservable" (imageCapture)="handleImage($event)" height="200" width="200"></webcam>
-  <br>
-  <button mat-raised-button color="primary" (click)="takePicture()">Take Picture!</button>
+</div>-->
 
-   <img [src]="webcamImage.imageAsDataUrl" *ngIf="webcamImage" height="200" width="200"/>
-</div>
+
