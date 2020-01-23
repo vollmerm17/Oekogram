@@ -7,21 +7,37 @@ import {AuthGuard} from './auth.guard';
 import {ProfileResolver} from './resolver/profile.resolver';
 import {ProfileComponent} from './profile/profile.component';
 import {LogoutComponent} from './logout/logout.component';
-
+import {ActivityOptionsResolver} from './resolver/activity-options.resolver';
+import {WritePostingComponent} from './write-posting/write-posting.component';
 
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent},
-  {path: 'posting', component: PostingComponent},
   {
-    path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], resolve: {
+    path: 'posting',
+    component: PostingComponent,
+    resolve: {activityOptions: ActivityOptionsResolver}
+  },
+  {
+    path: 'posting/write',
+    component: WritePostingComponent,
+    resolve: {activityOptions: ActivityOptionsResolver}
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard],
+    resolve: {
       profile: ProfileResolver
     },
   },
   {
-    path: 'profile-form/:id', component: ProfileFormComponent, canActivate: [AuthGuard], resolve: {
+    path: 'profile-form/:id',
+    component: ProfileFormComponent,
+    canActivate: [AuthGuard],
+    resolve: {
       profile: ProfileResolver
     }
   },

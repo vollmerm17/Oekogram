@@ -8,7 +8,7 @@ class Activity(models.Model):
     name = models.TextField(unique=True)
     description = models.TextField()
     shortcut = models.CharField(max_length=3)
-    greenscrore = PositiveIntegerField()
+    greenscore = PositiveIntegerField()
 
     class Meta:
         verbose_name_plural = "Activities"
@@ -43,7 +43,7 @@ class Post(models.Model):
     user_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
     content = models.TextField()
     pictures = models.ManyToManyField('Media', blank=True)
-    likes = models.PositiveIntegerField()
+    likes = models.PositiveIntegerField(default=0)
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
     date = models.DateTimeField(default=datetime.now, blank=True)
 

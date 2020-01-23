@@ -1,18 +1,18 @@
 <div class="profile">
-<div class="actions">
-  <button mat-icon-button [routerLink]="'/profile-form/'+ userId">
-    <i class="material-icons">
-      create
-    </i>
-  </button>
-  <button mat-icon-button (click)="friends()">
-    <i class="material-icons">
-      group
-    </i>
-  </button>
-  <!--<img (click)="changeProfile()" class="icon" src="../../assets/edit_icon.png" height="20px">-->
-<!--  <img class="icon" src="../../assets/friendship_icon.png" height="20px">-->
-</div>
+  <div class="actions">
+    <button mat-icon-button [routerLink]="'/profile-form/'+ userId">
+      <i class="material-icons">
+        create
+      </i>
+    </button>
+    <button mat-icon-button (click)="friends()">
+      <i class="material-icons">
+        group
+      </i>
+    </button>
+    <!--<img (click)="changeProfile()" class="icon" src="../../assets/edit_icon.png" height="20px">-->
+  <!--  <img class="icon" src="../../assets/friendship_icon.png" height="20px">-->
+  </div>
   <img *ngIf="!pictures" src="../../assets/img_avatar.png" height="100px">
   <img *ngIf="pictures" src="api/media/{{pictures}}" height="100px">
   <p class="name">{{fullName}}</p>

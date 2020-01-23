@@ -1,13 +1,15 @@
 .profile{
   position: sticky;
-  top: 30px;
+  top: 65px;
+  bottom: auto;
   justify-content: center;
-  min-height: 500px;
-  max-height: 550px;
+  min-height: 400px;
+  //max-height: 550px;
   background: url("../../assets/background/Oekogram600px.png");
   background-repeat: no-repeat;
   background-size: auto;
-  padding-top: 50px;
+  //background-color: #F2F2F2;
+  //padding-top: 50px;
   border-style: solid;
   border-color: #467302;
   // border-radius: 30px;

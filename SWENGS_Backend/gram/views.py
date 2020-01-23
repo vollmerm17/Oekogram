@@ -14,7 +14,8 @@ from rest_framework.response import Response
 
 from gram.models import Activity, Post, Comment, Media, Profile, LikedByUser
 from gram.serializers import MediaSerializer, ActivityOptionSerializer, ProfileListSerializer, ProfileFormSerializer, \
-    ActivityFormSerializer, PostsSerializer, CommentsSerializer, ProfileSerializer, LikedByUserSerializer, EmailSerializer, ProfileUpdateSerializer
+    ActivityFormSerializer, PostsSerializer, CommentsSerializer, ProfileSerializer, LikedByUserSerializer, \
+    EmailSerializer, ProfileUpdateSerializer, WritePostSerializer
 
 
 @swagger_auto_schema(method='GET', responses={200: ActivityOptionSerializer(many=True)})
@@ -110,11 +111,11 @@ def posts_get_by_id(request, pk):
     return Response(serializer.data)
 
 
-@swagger_auto_schema(method='POST', request_body=PostsSerializer, responses={200: PostsSerializer()})
+@swagger_auto_schema(method='POST', request_body=WritePostSerializer, responses={200: WritePostSerializer()})
 @api_view(['POST'])
 def post_form_create(request):
     data = JSONParser().parse(request)
-    serializer = PostsSerializer(data=data)
+    serializer = WritePostSerializer(data=data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=201)
