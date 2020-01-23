@@ -9,6 +9,8 @@ import {ProfileComponent} from './profile/profile.component';
 import {LogoutComponent} from './logout/logout.component';
 import {ActivityOptionsResolver} from './resolver/activity-options.resolver';
 import {WritePostingComponent} from './write-posting/write-posting.component';
+import {CommunityComponent} from './community/community.component';
+import {ProfilesResolver} from './resolver/profiles.resolver';
 
 
 const routes: Routes = [
@@ -40,6 +42,14 @@ const routes: Routes = [
     resolve: {
       profile: ProfileResolver
     }
+  },
+    {
+    path: 'community',
+    component: CommunityComponent,
+    canActivate: [AuthGuard],
+    resolve: {
+      profiles: ProfilesResolver
+    },
   },
 
 ];

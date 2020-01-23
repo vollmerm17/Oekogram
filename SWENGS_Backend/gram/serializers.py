@@ -4,7 +4,7 @@ from friendship.models import *
 from .models import Media, Activity, Profile, Post, Comment, LikedByUser, Email
 
 
-
+# Activities
 class ActivityOptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Activity
@@ -17,6 +17,7 @@ class ActivityFormSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+# Posts
 class PostsSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     activity = serializers.SerializerMethodField()
@@ -39,18 +40,7 @@ class WritePostSerializer(serializers.ModelSerializer):
         fields = ['id', 'user_id', 'content', 'pictures', 'activity', 'date']
 
 
-class ProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
-        fields = ['first_name', 'last_name', 'username', 'greenscore', 'email', 'bio', 'date_of_birth', 'pictures',]
-
-
-class ProfileUpdateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
-        fields = ['first_name', 'last_name', 'email', 'bio', 'date_of_birth', 'pictures',]
-
-
+# Comments
 class CommentsSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
 
@@ -60,6 +50,19 @@ class CommentsSerializer(serializers.ModelSerializer):
 
     def get_name(self, obj):
         return obj.user_id.username
+
+
+# Profile
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['id', 'first_name', 'last_name', 'username', 'greenscore', 'email', 'bio', 'date_of_birth', 'pictures',]
+
+
+class ProfileUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['id','first_name', 'last_name', 'email', 'bio', 'date_of_birth', 'pictures', 'greenscore',]
 
 
 class ProfileFormSerializer(serializers.ModelSerializer):
@@ -77,7 +80,7 @@ class ProfileFormSerializer(serializers.ModelSerializer):
 class ProfileListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['first_name', 'last_name', 'email', 'username', 'greenscore', 'pictures']
+        fields = ['id', 'first_name', 'last_name', 'username', 'greenscore', 'pictures']
 
 
 class MediaSerializer(serializers.ModelSerializer):
@@ -91,10 +94,12 @@ class FriendshipRequestSerializer(serializers.ModelSerializer):
         model = FriendshipRequest
         fields = '__all__'
 
+
 class LikedByUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = LikedByUser
         fields = '__all__'
+
 
 class EmailSerializer(serializers.ModelSerializer):
     class Meta:

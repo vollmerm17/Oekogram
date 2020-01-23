@@ -6,7 +6,7 @@ from django.core.mail import send_mail
 from django.http import HttpResponse
 from drf_yasg.utils import swagger_auto_schema
 from friendship.exceptions import AlreadyExistsError
-from friendship.models import Friend, FriendshipRequest, BlockManager
+from friendship.models import Friend, FriendshipRequest, BlockManager, FriendshipManager
 from rest_framework import views
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser, MultiPartParser
@@ -18,6 +18,7 @@ from gram.serializers import MediaSerializer, ActivityOptionSerializer, ProfileL
     EmailSerializer, ProfileUpdateSerializer, WritePostSerializer
 
 
+# ACTIVITY
 @swagger_auto_schema(method='GET', responses={200: ActivityOptionSerializer(many=True)})
 @api_view(['GET'])
 def activity_option_list(request):
@@ -75,6 +76,7 @@ def activity_delete(request, pk):
     return Response(status=204)
 
 
+# POST
 @swagger_auto_schema(method='GET', responses={200: PostsSerializer(many=True)})
 @api_view(['GET'])
 def posts_get_all(request):
@@ -149,6 +151,7 @@ def post_delete(request, pk):
     return Response(status=204)
 
 
+# LIKE
 @swagger_auto_schema(method='GET', responses={200: LikedByUserSerializer(many=True)})
 @api_view(['GET'])
 def like_form_get(request, user_id):
@@ -184,6 +187,7 @@ def like_delete(request, postId, userId):
     return Response(status=204)
 
 
+# COMMENT
 @swagger_auto_schema(method='GET', responses={200: CommentsSerializer(many=True)})
 @api_view(['GET'])
 def comment_form_get(request, post_id):
@@ -218,6 +222,7 @@ def comment_delete(request, pk):
     return Response(status=204)
 
 
+# PROFILE
 @swagger_auto_schema(method='GET', responses={200: ProfileListSerializer(many=True)})
 @api_view(['GET'])
 def profile_list(request):
@@ -271,10 +276,11 @@ def profile_delete(request, pk):
     return Response(status=204)
 
 
+# FRIENDSHIP
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
 def friendships_get(request):
-    friends = Friend.view_friends
+    friends = Friend.objects.friends(user=request.user)
     serialized_qs = serializers.serialize('json', friends, fields=('id', 'username'))
     return Response(serialized_qs, status=200)
 
@@ -283,14 +289,14 @@ def friendships_get(request):
 @api_view(['GET'])
 def friendships_get_unread_requests(request):
     friends = Friend.objects.unread_requests(user=request.user)
-    serialized_qs = serializers.serialize('json', friends, fields=('id', 'username'))
+    serialized_qs = serializers.serialize('json', friends)
     return Response(serialized_qs, status=200)
 
 
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
-def friendships_get_unrejected_requests(request):
-    friends = Friend.objects.unrejected_requests(request.user)
+def friendships_get_requests(request):
+    friends = Friend.objects.requests(request.user)
     serialized_qs = serializers.serialize('json', friends, fields=('id', 'username'))
     return Response(serialized_qs, status=200)
 
@@ -298,9 +304,8 @@ def friendships_get_unrejected_requests(request):
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
 def friendships_count_unrejected_requests(request):
-    friends = Friend.objects.unrejected_requests_count(request.user)
-    serialized_qs = serializers.serialize('json', friends, fields=('id', 'username'))
-    return Response(serialized_qs, status=200)
+    count = Friend.objects.unrejected_request_count(request.user)
+    return Response(count, status=200)
 
 
 @swagger_auto_schema(method='POST', responses={200})
@@ -323,9 +328,29 @@ def friendship_request(request, username):
 @swagger_auto_schema(method='POST', responses={200})
 @api_view(['POST'])
 def friendship_accept(request, pk):
-    friend_request = FriendshipRequest.objects.get(to_user=pk)
-    friend_request.accept()
-    return Response(status=200)
+    try:
+        friend_request = FriendshipRequest.objects.get(to_user=pk)
+        friend_request.accept()
+
+    except FriendshipRequest.DoesNotExist:
+        return Response({'error': 'No request is here to accept'}, status=400)
+
+    else:
+        return Response(status=200)
+
+
+@swagger_auto_schema(method='POST', responses={200})
+@api_view(['POST'])
+@permission_required('gram.reject_friendship', raise_exception=True)
+def friendship_reject(request, pk):
+    try:
+        friend_request = FriendshipRequest.objects.get(to_user=pk)
+        friend_request.reject()
+    except FriendshipRequest.DoesNotExist:
+        return Response({'error': 'No request is here to reject'}, status=400)
+
+    else:
+        return Response(status=200)
 
 
 @api_view(['DELETE'])
@@ -340,6 +365,7 @@ def friendship_delete(request, pk):
         return Response(friend_remove, status=204)
 
 
+# BLOCK
 @swagger_auto_schema(method='POST', responses={200})
 @api_view(['POST'])
 def block_add(request, username):
@@ -378,6 +404,7 @@ def blocked_delete(request, pk):
         return Response(status=204)
 
 
+# MEDIA
 class FileUploadView(views.APIView):
     parser_classes = [MultiPartParser]
 

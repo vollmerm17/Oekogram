@@ -19,12 +19,15 @@ urlpatterns = [
     url(r'^api-token-auth/', obtain_jwt_token),
     #url(r'^friendship/', include('friendship.urls')),
     path('admin/', admin.site.urls),
+
+    # ACTIVITY
     path('activity/options', views.activity_option_list),
     path('activity/<int:pk>/get', views.activity_form_get),
     path('activity/create', views.activity_form_create),
     path('activity/<int:pk>/update', views.activity_form_update),
     path('activity/<int:pk>/delete', views.activity_delete),
 
+    # POST
     path('post/get', views.posts_get_all),
     path('post/<int:user_id>/get', views.posts_get_by_user),
     path('posts/<int:pk>/get', views.posts_get_by_id),
@@ -32,29 +35,37 @@ urlpatterns = [
     path('post/<int:pk>/update', views.post_update),
     path('post/<int:pk>/delete', views.post_delete),
 
+    # COMMENT
     path('comment/<int:post_id>/get', views.comment_form_get),
     path('comment/create', views.comment_form_create),
     path('comment/<int:pk>/delete', views.comment_delete),
 
+    # PROFILE
     path('profile/list', views.profile_list),
     path('profile/<int:pk>/get', views.profile_get),
     path('profile/create', views.profile_form_create),
     path('profile/<int:pk>/update', views.profile_form_update),
     path('profile/<int:pk>/delete', views.profile_delete),
 
+    # FRIENDSHIP
     path('friendship/<slug:username>/request', views.friendship_request),
     path('friendship/get', views.friendships_get),
-    path('friendship/accept', views.friendship_accept),
+    path('friendship/<int:pk>/accept', views.friendship_accept),
+    path('friendship/<int:pk>/reject', views.friendship_reject),
     path('friendship/<int:pk>/delete', views.friendship_delete),
     path('friendship/request/unread', views.friendships_get_unread_requests),
-    path('friendship/request/unrejected', views.friendships_get_unrejected_requests),
+    path('friendship/request', views.friendships_get_requests),
+    path('friendship/request/count', views.friendships_count_unrejected_requests),
 
+    # BLOCKED
     path('blocked/get', views.blocked_get),
     path('blocked/<int:pk>/delete', views.blocked_delete),
     path('blocked/<slug:username>/add', views.block_add),
+
+    # E-MAIL
     path('email/send', views.send_mail_request),
 
-    #LIKE
+    # LIKE
     path('like/<int:user_id>/get', views.like_form_get),
     path('like/create', views.like_form_create),
     path('like/<int:userId>/<int:postId>/delete', views.like_delete),

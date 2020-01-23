@@ -41,6 +41,9 @@ import { WriteMailComponent } from './write-mail/write-mail.component';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {HttperrorInterceptor} from './httperror.interceptor';
 import { RegisterComponent } from './register/register.component';
+import { CommunityComponent } from './community/community.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -65,6 +68,7 @@ export function tokenGetter() {
     DateComponent,
     RegisterComponent,
     WriteMailComponent,
+    CommunityComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +82,7 @@ export function tokenGetter() {
     MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
+    MatSortModule,
     MatDividerModule,
     MatFormFieldModule,
     MatSelectModule,
@@ -101,6 +106,7 @@ export function tokenGetter() {
     MatSidenavModule,
     MatSnackBarModule,
     WebcamModule,
+    MatTableModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
@@ -111,4 +117,7 @@ export function tokenGetter() {
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  exports: [
+    MatSortModule
+  ];
 }
