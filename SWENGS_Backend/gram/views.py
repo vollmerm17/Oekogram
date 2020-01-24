@@ -6,7 +6,7 @@ from django.core.mail import send_mail
 from django.http import HttpResponse
 from drf_yasg.utils import swagger_auto_schema
 from friendship.exceptions import AlreadyExistsError
-from friendship.models import Friend, FriendshipRequest, BlockManager, FriendshipManager
+from friendship.models import Friend, BlockManager, Follow, FollowingManager
 from rest_framework import views
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser, MultiPartParser
@@ -127,18 +127,18 @@ def post_form_create(request):
 @swagger_auto_schema(method='PUT', request_body=PostsSerializer, responses={200: PostsSerializer()})
 @api_view(['PUT'])
 @permission_required('gram.update_post', raise_exception=True)
-def post_update(request,pk):
-        try:
-            post = Post.objects.get(pk=pk)
-        except Post.DoesNotExist:
-            return Response({'error': 'Post does not exist.'}, status=404)
+def post_update(request, pk):
+    try:
+        post = Post.objects.get(pk=pk)
+    except Post.DoesNotExist:
+        return Response({'error': 'Post does not exist.'}, status=404)
 
-        data = JSONParser().parse(request)
-        serializer = PostsSerializer(post, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=400)
+    data = JSONParser().parse(request)
+    serializer = PostsSerializer(post, data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=400)
 
 
 @api_view(['DELETE'])
@@ -276,93 +276,60 @@ def profile_delete(request, pk):
     return Response(status=204)
 
 
-# FRIENDSHIP
+# FOLLOW
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
-def friendships_get(request):
-    friends = Friend.objects.friends(user=request.user)
-    serialized_qs = serializers.serialize('json', friends, fields=('id', 'username'))
+def followers_get(request):
+    followers = Follow.objects.followers(request.user)
+    serialized_qs = serializers.serialize('json', followers, fields=('id', 'username'))
     return Response(serialized_qs, status=200)
 
 
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
-def friendships_get_unread_requests(request):
-    friends = Friend.objects.unread_requests(user=request.user)
-    serialized_qs = serializers.serialize('json', friends)
+def follows_get(request):
+    follows = Follow.objects.following(request.user)
+    serialized_qs = serializers.serialize('json', follows, fields=('id', 'username'))
     return Response(serialized_qs, status=200)
 
 
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
-def friendships_get_requests(request):
-    friends = Friend.objects.requests(request.user)
-    serialized_qs = serializers.serialize('json', friends, fields=('id', 'username'))
+def follows_boolean_get(request, pk):
+    foll = Profile.objects.get(pk=pk)
+    follows = Follow.objects.follows(follwer=request.user, followee=foll)
+    serialized_qs = serializers.serialize('json', follows, fields=('id', 'username'))
     return Response(serialized_qs, status=200)
-
-
-@swagger_auto_schema(method='GET', responses={200})
-@api_view(['GET'])
-def friendships_count_unrejected_requests(request):
-    count = Friend.objects.unrejected_request_count(request.user)
-    return Response(count, status=200)
 
 
 @swagger_auto_schema(method='POST', responses={200})
 @api_view(['POST'])
-def friendship_request(request, username):
+def follow_add(request, username):
     other_user = Profile.objects.get(username=username)
     try:
-        Friend.objects.add_friend(
+        Follow.objects.add_follower(
             request.user,
-            other_user,
-            message="Hi! I would like to be your friend"
+            other_user
         )
     except AlreadyExistsError:
-        return Response({'error': 'Friend request already exist.'}, status=400)
+        return Response({'error': 'Is already follow'}, status=400)
 
     else:
         return Response(status=201)
 
 
-@swagger_auto_schema(method='POST', responses={200})
-@api_view(['POST'])
-def friendship_accept(request, pk):
-    try:
-        friend_request = FriendshipRequest.objects.get(to_user=pk)
-        friend_request.accept()
-
-    except FriendshipRequest.DoesNotExist:
-        return Response({'error': 'No request is here to accept'}, status=400)
-
-    else:
-        return Response(status=200)
-
-
-@swagger_auto_schema(method='POST', responses={200})
-@api_view(['POST'])
-@permission_required('gram.reject_friendship', raise_exception=True)
-def friendship_reject(request, pk):
-    try:
-        friend_request = FriendshipRequest.objects.get(to_user=pk)
-        friend_request.reject()
-    except FriendshipRequest.DoesNotExist:
-        return Response({'error': 'No request is here to reject'}, status=400)
-
-    else:
-        return Response(status=200)
-
-
 @api_view(['DELETE'])
-def friendship_delete(request, pk):
+def follow_delete(request, pk):
     try:
         other_user = Profile.objects.get(pk=pk)
-        friend_remove = Friend.objects.remove_friend(request.user, other_user)
+        FollowingManager.objects.remove_follower(
+            request.user,
+            other_user)
 
-    except Friend.DoesNotExist:
+    except Follow.DoesNotExist:
         return Response({'error': 'Friend does not exist.'}, status=400)
     else:
-        return Response(friend_remove, status=204)
+        return Response(status=204)
 
 
 # BLOCK
@@ -398,7 +365,7 @@ def blocked_delete(request, pk):
             request.user,
             other_user)
 
-    except Friend.DoesNotExist:
+    except Follow.DoesNotExist:
         return Response({'error': 'Friend does not exist.'}, status=400)
     else:
         return Response(status=204)
