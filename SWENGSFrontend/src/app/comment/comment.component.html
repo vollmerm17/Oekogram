@@ -1,6 +1,7 @@
 
 <div *ngFor="let comment of comments; let i = index" >
-  <p class="comment-even"*ngIf="i%2==0"><u>{{comment.name}}</u><br>{{comment.content}}<br>
+
+  <p class="comment-even"*ngIf="i%2==0"><img src="/api/media/{{comment.picture[0]}}" height="20px"><u>{{comment.name}}</u><br>{{comment.content}}<br>
     <span style="color: gray;"><i>{{comment.date | date:'HH:mm MMM, dd yyyy'}}</i></span></p>
   <p class="comment-odd" *ngIf="i%2==1"><u>{{comment.name}}</u><br>{{comment.content}}<br>
     <span style="color: gray;"><i>{{comment.date | date:'HH:mm MMM, dd yyyy'}}</i></span></p>

@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
 
     this.profileService.getProfile(this.userId).subscribe((res: any) => {
       this.username = res.username;
-      this.fullName = res.username + ' ' + res.username;
+      this.fullName = res.first_name + ' ' + res.last_name;
       this.greenScore = res.greenscore;
       this.pictures = res.pictures[0];
     });
