@@ -22,12 +22,14 @@
     "@angular/platform-browser-dynamic": "~8.2.13",
     "@angular/router": "~8.2.13",
     "@auth0/angular-jwt": "^3.0.1",
+    "angular-password-strength-meter": "^1.0.2",
     "hammerjs": "^2.0.8",
     "ng2-file-upload": "^1.4.0",
     "ngx-webcam": "^0.2.6",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.22",

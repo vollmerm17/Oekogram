@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
 
   private registerFormGroup: FormGroup;
   private age;
+  password;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute,
               private router: Router, private profileService: ProfileService) {
@@ -29,9 +30,10 @@ export class RegisterComponent implements OnInit {
       username: ['', Validators.required, this.usernameValidator()],
       email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')], this.emailValidator()],
       bio: ['Hey, I\'m new here...And I love the environment! '],
-      date_of_birth: [''],
-      password: ['', Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]
+      date_of_birth: [null],
+      password: ['', Validators.required]
     });
+    this.registerFormGroup.valueChanges.subscribe(form => this.password = form.password);
 
     this.registerFormGroup.controls.date_of_birth.valueChanges.subscribe(() => {
       const birthDate = this.registerFormGroup.controls.date_of_birth.value;

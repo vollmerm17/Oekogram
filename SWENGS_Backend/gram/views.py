@@ -8,10 +8,10 @@ from drf_yasg.utils import swagger_auto_schema
 from friendship.exceptions import AlreadyExistsError
 from friendship.models import Friend, FriendshipRequest, BlockManager, FriendshipManager
 from rest_framework import views
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.parsers import JSONParser, MultiPartParser
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-
 from gram.models import Activity, Post, Comment, Media, Profile, LikedByUser
 from gram.serializers import MediaSerializer, ActivityOptionSerializer, ProfileListSerializer, ProfileFormSerializer, \
     ActivityFormSerializer, PostsSerializer, CommentsSerializer, ProfileSerializer, LikedByUserSerializer, \
@@ -241,6 +241,7 @@ def profile_get(request, pk):
 
 @swagger_auto_schema(method='POST', request_body=ProfileFormSerializer, responses={200: ProfileFormSerializer()})
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def profile_form_create(request):
     data = JSONParser().parse(request)
     serializer = ProfileFormSerializer(data=data)

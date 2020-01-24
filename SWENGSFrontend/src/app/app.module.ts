@@ -44,6 +44,7 @@ import { RegisterComponent } from './register/register.component';
 import { CommunityComponent } from './community/community.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
+import {PasswordStrengthMeterModule} from 'angular-password-strength-meter';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -107,6 +108,7 @@ export function tokenGetter() {
     MatSnackBarModule,
     WebcamModule,
     MatTableModule,
+    PasswordStrengthMeterModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
