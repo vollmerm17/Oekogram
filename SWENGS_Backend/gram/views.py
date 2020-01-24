@@ -4,10 +4,10 @@ from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.core.mail import send_mail
 from django.forms import model_to_dict
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from drf_yasg.utils import swagger_auto_schema
 from friendship.exceptions import AlreadyExistsError
-from friendship.models import Friend, BlockManager, Follow, FollowingManager
+from friendship.models import Friend, BlockManager, Follow, FollowingManager, Block
 from rest_framework import views
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser, MultiPartParser
@@ -284,18 +284,16 @@ def profile_delete(request, pk):
 def followers_get(request):
     followers = Follow.objects.followers(request.user)
     serialized_qs = serializers.serialize('json', followers, fields=('id', 'username'))
-    return Response(serialized_qs, status=200)
+    return Response(json.loads(serialized_qs), status=200, content_type='json')
+
 
 
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
 def follows_get(request):
-    follows = Follow.objects.following(request.user)
+    follows = list(Follow.objects.following(request.user))
     serialized_qs = serializers.serialize('json', follows, fields=('id', 'username'))
-    hu = model_to_dict(follows)
-    serialized = json.dumps(hu)
-    return Response(follows, status=200)
-
+    return Response(json.loads(serialized_qs), status=200, content_type='json')
 
 # @swagger_auto_schema(method='GET', responses={200})
 # @api_view(['GET'])
@@ -342,7 +340,7 @@ def follow_delete(request, pk):
 def block_add(request, username):
     other_user = Profile.objects.get(username=username)
     try:
-        BlockManager.objects.add_block(
+        Block.objects.add_block(
             request.user,
             other_user
         )
@@ -356,21 +354,29 @@ def block_add(request, username):
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
 def blocked_get(request):
-    blocked = BlockManager.objects.blocked
+    blocked = Block.objects.blocked(request.user)
     serialized_qs = serializers.serialize('json', blocked, fields=('id', 'username'))
-    return Response(serialized_qs, status=200)
+    return Response(json.loads(serialized_qs), status=200, content_type='json')
+
+
+@swagger_auto_schema(method='GET', responses={200})
+@api_view(['GET'])
+def blocking_get(request):
+    blocking = Block.objects.blocking(request.user)
+    serialized_qs = serializers.serialize('json', blocking, fields=('id', 'username'))
+    return Response(json.loads(serialized_qs), status=200, content_type='json')
 
 
 @api_view(['DELETE'])
 def blocked_delete(request, pk):
     try:
         other_user = Profile.objects.get(pk=pk)
-        BlockManager.objects.remove_block(
+        Block.objects.remove_block(
             request.user,
             other_user)
 
-    except Follow.DoesNotExist:
-        return Response({'error': 'Friend does not exist.'}, status=400)
+    except Block.DoesNotExist:
+        return Response({'error': 'Block does not exist.'}, status=400)
     else:
         return Response(status=204)
 

@@ -56,6 +56,7 @@ urlpatterns = [
 
     # BLOCKED
     path('blocked/get', views.blocked_get),
+    path('blocking/get', views.blocking_get),
     path('blocked/<int:pk>/delete', views.blocked_delete),
     path('blocked/<slug:username>/add', views.block_add),
 

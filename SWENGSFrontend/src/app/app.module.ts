@@ -22,7 +22,7 @@ import {ProfileIconsComponent} from './profile-icons/profile-icons.component';
 import {JwtModule} from '@auth0/angular-jwt';
 import {LoginComponent} from './login/login.component';
 import {LogoutComponent} from './logout/logout.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
 import {HeaderComponent} from './header/header.component';
@@ -44,6 +44,7 @@ import { RegisterComponent } from './register/register.component';
 import { CommunityComponent } from './community/community.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
+import { FilterPipe } from './community/filter.pipe';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -69,6 +70,7 @@ export function tokenGetter() {
     RegisterComponent,
     WriteMailComponent,
     CommunityComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -107,6 +109,7 @@ export function tokenGetter() {
     MatSnackBarModule,
     WebcamModule,
     MatTableModule,
+    FormsModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

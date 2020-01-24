@@ -35,9 +35,6 @@ class Profile(AbstractUser):
 
     USERNAME_FIELD = 'username'
 
-    class Meta:
-        verbose_name_plural = "Profiles"
-        
     def __str__(self):
         return self.username
 

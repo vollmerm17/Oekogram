@@ -26,12 +26,20 @@ export class RelationshipService {
     return this.http.post('api/blocked/' + username + '/add', null);
   }
 
+  getBlockings() {
+    return this.http.get('api/blocking/get');
+  }
+
   getBlocks() {
     return this.http.get('api/blocked/get');
   }
 
-  countRequests() {
-    return this.http.get('api/friendship/request/count');
+  removeBlock(id: any) {
+    return this.http.delete('api/blocked/' + id + '/delete');
+  }
+
+  removeFollow(id: any) {
+    return this.http.delete('api/follow/' + id + '/delete');
   }
 }
 
