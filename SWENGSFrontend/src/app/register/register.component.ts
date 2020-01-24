@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ProfileService} from '../service/profile.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {EmailService} from "../service/email.service";
 
 @Component({
   selector: 'app-register',
@@ -15,9 +16,12 @@ export class RegisterComponent implements OnInit {
 
   private registerFormGroup: FormGroup;
   private age;
+  password;
+  mailFormGroup;
+  mail;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute,
-              private router: Router, private profileService: ProfileService) {
+              private router: Router, private profileService: ProfileService, private emailService: EmailService) {
   }
 
   ngOnInit() {
@@ -26,12 +30,13 @@ export class RegisterComponent implements OnInit {
       id: [null],
       first_name: [''],
       last_name: [''],
-      username: ['', Validators.required, this.usernameValidator()],
-      email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')], this.emailValidator()],
+      username: ['', Validators.required ],
+      email: ['', Validators.required],
       bio: ['Hey, I\'m new here...And I love the environment! '],
-      date_of_birth: [''],
-      password: ['', Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]
+      date_of_birth: [null],
+      password: ['', Validators.required]
     });
+    this.registerFormGroup.valueChanges.subscribe(form => this.password = form.password);
 
     this.registerFormGroup.controls.date_of_birth.valueChanges.subscribe(() => {
       const birthDate = this.registerFormGroup.controls.date_of_birth.value;
@@ -40,13 +45,28 @@ export class RegisterComponent implements OnInit {
         this.age = this.calculateAge(new Date(birthDate));
       }
     });
+
+
+    this.mailFormGroup = this.fb.group({
+      id: [null],
+      recipient: ['', Validators.required],
+      subject: ['', Validators.required],
+      body: [''],
+    });
+
+    this.mailFormGroup.controls.body.setValue('Thank you for your registration on Ökogram!');
+    this.mailFormGroup.controls.subject.setValue('Registration on Ökogram');
   }
 
   createProfile() {
-    const profile = this.registerFormGroup.value;
+     const profile = this.registerFormGroup.value;
+    this.mailFormGroup.controls.recipient.setValue(profile.email);
+    this.mail = this.mailFormGroup.value;
+
     this.profileService.createProfile(profile).subscribe((response: any) => {
       this.router.navigate(['login/']);
     });
+    this.emailService.sendMail(this.mail).subscribe(() => alert('Registration sent to: ' + this.mail.recipient));
   }
 
   emailValidator(): AsyncValidatorFn {

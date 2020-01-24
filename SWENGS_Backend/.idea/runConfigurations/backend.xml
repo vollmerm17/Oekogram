@@ -7,9 +7,9 @@
       <env name="PYTHONUNBUFFERED" value="1" />
       <env name="DJANGO_SETTINGS_MODULE" value="config.settings" />
     </envs>
-    <option name="SDK_HOME" value="C:\Users\queen\AppData\Local\Programs\Python\Python37-32\python.exe" />
+    <option name="SDK_HOME" value="C:\Users\david\Documents\GitHub\Oekogram\SWENGS_Backend\venv\Scripts\python.exe" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-    <option name="IS_MODULE_SDK" value="true" />
+    <option name="IS_MODULE_SDK" value="false" />
     <option name="ADD_CONTENT_ROOTS" value="true" />
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <option name="launchJavascriptDebuger" value="false" />

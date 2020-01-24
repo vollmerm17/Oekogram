@@ -9,8 +9,9 @@ from drf_yasg.utils import swagger_auto_schema
 from friendship.exceptions import AlreadyExistsError
 from friendship.models import Friend, BlockManager, Follow, FollowingManager, Block
 from rest_framework import views
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.parsers import JSONParser, MultiPartParser
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.utils import json
 
@@ -95,7 +96,7 @@ def posts_get_all(request):
 @api_view(['GET'])
 def posts_get_by_user(request, user_id):
     try:
-        posts = Post.objects.get(user_id=user_id)
+        posts = Post.objects.all().filter(user_id=user_id)
     except Post.DoesNotExist:
         return Response({'error': 'Post does not exist.'}, status=404)
 
@@ -243,6 +244,7 @@ def profile_get(request, pk):
 
 @swagger_auto_schema(method='POST', request_body=ProfileFormSerializer, responses={200: ProfileFormSerializer()})
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def profile_form_create(request):
     data = JSONParser().parse(request)
     serializer = ProfileFormSerializer(data=data)
@@ -415,8 +417,8 @@ def media_download(request, pk):
 def media_get(request, pk):
     try:
         media = Media.objects.get(pk=pk)
-    except Profile.DoesNotExist:
-        return Response({'error': 'Profile does not exist.'}, status=404)
+    except Media.DoesNotExist:
+        return Response({'error': 'Media does not exist.'}, status=404)
 
     serializer = MediaSerializer(media)
     return Response(serializer.data)
@@ -424,6 +426,7 @@ def media_get(request, pk):
 
 @swagger_auto_schema(method='POST', request_body=EmailSerializer, responses={200: EmailSerializer()})
 @api_view(['POST'])
+@permission_classes([AllowAny])
 # @permission_required('gram.add_comment', raise_exception=True)
 def send_mail_request(request):
     data = JSONParser().parse(request)

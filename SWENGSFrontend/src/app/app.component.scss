@@ -25,10 +25,24 @@
   //padding: 30px;
   background-color: #9DBF54;
 }
-.header-container > * {
+/*.header-container > * {
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 200px;
+}*/
+.profileSmall {
+   display: flex;
+   flex-basis: 300px;
+   flex-shrink: 1;
+   flex-grow: 0;
+   align-items: center;
+   justify-content: center;
+   color: #467302;
+   height: 65px;
+ }
+.profileSmall > * {
+  // display: flex;
+  align-items: center;
 }
 .title {
   display: flex;
@@ -101,8 +115,8 @@
   flex-shrink: 1;
   flex-basis: 600px;
   flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 40px;
+  justify-content: center; //funktioniert nur, wenn display: flex
+  margin-top: 35px;
 }
 
 .footer {

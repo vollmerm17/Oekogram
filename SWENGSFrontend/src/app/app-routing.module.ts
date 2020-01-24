@@ -11,6 +11,9 @@ import {ActivityOptionsResolver} from './resolver/activity-options.resolver';
 import {WritePostingComponent} from './write-posting/write-posting.component';
 import {CommunityComponent} from './community/community.component';
 import {ProfilesResolver} from './resolver/profiles.resolver';
+import {WriteMailComponent} from './write-mail/write-mail.component';
+import {ProfileSmallComponent} from './profile-small/profile-small.component';
+import {ProfileDetailComponent} from './profile-detail/profile-detail.component';
 
 
 const routes: Routes = [
@@ -18,6 +21,11 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent},
   {
+    path: 'posting/:id',
+    component: PostingComponent,
+    resolve: {activityOptions: ActivityOptionsResolver}
+  },
+   {
     path: 'posting',
     component: PostingComponent,
     resolve: {activityOptions: ActivityOptionsResolver}
@@ -28,8 +36,8 @@ const routes: Routes = [
     resolve: {activityOptions: ActivityOptionsResolver}
   },
   {
-    path: 'profile',
-    component: ProfileComponent,
+    path: 'profile/:id',
+    component: ProfileDetailComponent,
     canActivate: [AuthGuard],
     resolve: {
       profile: ProfileResolver
@@ -49,8 +57,16 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     resolve: {
       profiles: ProfilesResolver
+    }
     },
-  },
+  {
+    path: 'mail',
+    component: WriteMailComponent,
+    canActivate: [AuthGuard],
+    resolve: {
+      profiles: ProfilesResolver
+    },
+  }
 
 ];
 

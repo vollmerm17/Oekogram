@@ -1,6 +1,12 @@
-<!--<div class="container">-->
 <div class="header">
   <div class="header-container">
+    <div class="profileSmall">
+      <button mat-icon-button (click)="profileSmall()">
+        <i *ngIf="this.opened" class="material-icons"> arrow_drop_down </i>
+        <i *ngIf="!this.opened" class="material-icons"> arrow_right </i>
+      </button>
+      <app-profile-small *ngIf="!this.opened"></app-profile-small>
+    </div>
     <div class="title">
       <h2>Ökogram | IMA Project</h2>
     </div>
@@ -18,13 +24,9 @@
 </div>
 <div class="contentBody">
   <div class="flexBox-container">
-    <div *ngIf="!this.isAuthenticated" class="profile">
-      <app-register></app-register>
-    </div>
-    <div class="flexBox-container">
-      <div *ngIf="this.isAuthenticated" class="profile">
-        <app-profile></app-profile>
-      </div>
+    <div class="profile">
+      <app-register *ngIf="!this.isAuthenticated"></app-register>
+      <app-profile *ngIf="this.isAuthenticated && this.opened"></app-profile>
     </div>
     <div class="content">
       <router-outlet></router-outlet>
@@ -33,6 +35,5 @@
 
   <div class="footer">
     <app-write-mail></app-write-mail>
-    <!--<app-footer></app-footer>-->
   </div>
 </div>

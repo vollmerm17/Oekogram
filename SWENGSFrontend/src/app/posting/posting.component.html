@@ -1,4 +1,3 @@
-
 <app-write-posting></app-write-posting>
 
 <div *ngFor="let post of posts" >
@@ -8,7 +7,8 @@
     <mat-card-title>{{post.name}}</mat-card-title>
     <mat-card-subtitle>{{post.date | date:'HH:mm MMM, dd yyyy'}}</mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <img *ngIf="post.pictures[0]" src="api/media/{{post.pictures[0]}}" height="100px">
+  <img mat-card-image *ngIf="!post.pictures[0]" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
   <mat-card-content>
     <p>{{post.content}}</p>
      <mat-divider></mat-divider>
@@ -19,30 +19,25 @@
 <div *ngIf="finished">
 <button mat-icon-button color="accent" *ngIf="checkPostId(post.id)" (click)="removeLike(userId, post.id); updateLikes(post.id,post,-1) " ><mat-icon>favorite</mat-icon></button>
 <button mat-icon-button color="accent" *ngIf="!checkPostId(post.id)" (click)="likePost(post.id); updateLikes(post.id,post,1)"><mat-icon>favorite_border</mat-icon></button>
-<div *ngFor="let like of likes">
-<p>{{like.post_id}}</p>
 </div>
-</div>
-
-<p>This is Post_id: {{post.id}}</p>
 
   </mat-card-actions>
 
 
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Comments
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Comments
 
-      </mat-panel-title>
-      <mat-panel-description>
-        Click to show comments
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <div class="comments">
-      <app-comment [id]="post.id"></app-comment>
-    </div>
-  </mat-expansion-panel>
-</mat-card>
+        </mat-panel-title>
+        <mat-panel-description>
+          Click to show comments
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="comments">
+        <app-comment [id]="post.id" [userId]=userId></app-comment>
+      </div>
+    </mat-expansion-panel>
+  </mat-card>
 </div>
 

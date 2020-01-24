@@ -1,0 +1,27 @@
+<div class="profileDetail">
+  <div class="horizontal">
+    <div class="profileInfo">
+      <img *ngIf="!picture" src="../../assets/img_avatar.png">
+      <img *ngIf="picture" src="api/media/{{picture}}">
+      <div class="name">
+        <p class="username">{{profile.username}}</p>
+        <p class="fullname">{{profile.first_name + ' ' + profile.last_name}}</p>
+      </div>
+    </div>
+    <div class="friendshipButtons">
+      <button mat-button (click)="changeFollowingState()">
+        <i *ngIf="!following" class="material-icons">
+          emoji_nature
+        </i>
+        <i *ngIf="following" class="material-icons">
+          local_florist
+        </i>
+      </button>
+    </div>
+  </div>
+  <div class="profileBar">
+
+  </div>
+</div>
+
+
