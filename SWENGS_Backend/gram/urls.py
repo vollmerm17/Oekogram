@@ -47,19 +47,16 @@ urlpatterns = [
     path('profile/<int:pk>/update', views.profile_form_update),
     path('profile/<int:pk>/delete', views.profile_delete),
 
-    # FRIENDSHIP
-    path('friendship/<slug:username>/request', views.friendship_request),
-    path('friendship/get', views.friendships_get),
-    path('friendship/<int:pk>/accept', views.friendship_accept),
-    path('friendship/<int:pk>/reject', views.friendship_reject),
-    path('friendship/<int:pk>/delete', views.friendship_delete),
-    path('friendship/request/unread', views.friendships_get_unread_requests),
-    path('friendship/request', views.friendships_get_requests),
-    path('friendship/request/count', views.friendships_count_unrejected_requests),
+    # FOLLOW
+    path('followers/get', views.followers_get),
+    path('follows/get', views.follows_get),
+    # path('follows/<int:pk>/bool', views.follows_boolean_get),
+    path('follow/<slug:username>/delete', views.follow_delete),
+    path('follow/<slug:username>/add', views.follow_add),
 
     # BLOCKED
     path('blocked/get', views.blocked_get),
-    path('blocked/<int:pk>/delete', views.blocked_delete),
+    path('blocked/<slug:username>/delete', views.blocked_delete),
     path('blocked/<slug:username>/add', views.block_add),
 
     # E-MAIL

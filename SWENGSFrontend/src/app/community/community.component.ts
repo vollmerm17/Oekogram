@@ -14,6 +14,7 @@ import {MatTableDataSource} from '@angular/material/table';
 export class CommunityComponent implements OnInit {
   displayedColumns = ['pictures', 'username', 'greenscore', 'first_name', 'id'];
   private profilesAll: any[];
+  followingsAll: any[];
 
   constructor(private http: HttpClient, private profileService: ProfileService, private relService: RelationshipService) {
   }
@@ -22,10 +23,10 @@ export class CommunityComponent implements OnInit {
     this.profileService.getProfiles().subscribe((response: any[]) => {
       this.profilesAll = response;
     });
-  }
-
-  sendRequest(profile: any) {
-    this.relService.sendRequest(profile.username);
+    this.relService.getFollowings().subscribe((res: any[]) => {
+        this.followingsAll = res;
+      }
+    );
   }
 
 /*  doFilter = (value: string) => {
@@ -34,5 +35,13 @@ export class CommunityComponent implements OnInit {
 
   sendBlock(profile: any) {
     this.relService.sendBlock(profile.username);
+  }
+
+  followsAlready(profile: any) {
+    for (const p of this.followingsAll) {
+      if (p.fields.username === profile.username) {
+        return true;
+      }
+    }
   }
 }

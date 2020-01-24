@@ -27,8 +27,8 @@
   <ng-container matColumnDef="first_name">
     <th mat-header-cell *matHeaderCellDef>Add</th>
     <td mat-cell *matCellDef="let profile">
-      <button (click)="sendRequest(profile)">
-        <i (click)="sendRequest(profile)" class="material-icons" >person_add</i>
+      <button mat-button [disabled]="followsAlready(profile)">
+        <i class="material-icons" >person_add</i>
       </button>
     </td>
   </ng-container>
