@@ -1,31 +1,27 @@
 <app-write-posting></app-write-posting>
 
-<div *ngFor="let post of posts">
-  <mat-card class="posting">
-    <mat-card-header>
-      <div mat-card-avatar class="profile-picture"></div>
-      <mat-card-title>{{post.name}}</mat-card-title>
-      <mat-card-subtitle>{{post.date | date:'HH:mm MMM, dd yyyy'}}</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-    <mat-card-content>
-      <p>{{post.content}}</p>
-      <mat-divider></mat-divider>
-    </mat-card-content>
-    <mat-card-actions>
-      <p *ngIf="post.likes != 0">Likes: {{post.likes}}</p>
-      <p><i class="material-icons">sports_kabaddi</i> {{post.activity}}</p>
-      <div *ngIf="finished">
-        <button mat-icon-button color="accent" *ngIf="checkPostId(post.id)"
-                (click)="removeLike(userId, post.id); updateLikes(post.id,post,-1) ">
-          <mat-icon>favorite</mat-icon>
-        </button>
-        <button mat-icon-button color="accent" *ngIf="!checkPostId(post.id)"
-                (click)="likePost(post.id); updateLikes(post.id,post,1)">
-          <mat-icon>favorite_border</mat-icon>
-        </button>
-      </div>
-    </mat-card-actions>
+<div *ngFor="let post of posts" >
+<mat-card class="posting">
+  <mat-card-header>
+    <div mat-card-avatar class="profile-picture"></div>
+    <mat-card-title>{{post.name}}</mat-card-title>
+    <mat-card-subtitle>{{post.date | date:'HH:mm MMM, dd yyyy'}}</mat-card-subtitle>
+  </mat-card-header>
+  <img *ngIf="pictures" src="api/media/{{pictures}}" height="100px">
+  <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+  <mat-card-content>
+    <p>{{post.content}}</p>
+     <mat-divider></mat-divider>
+  </mat-card-content>
+  <mat-card-actions>
+    <p *ngIf="post.likes != 0">Likes: {{post.likes}}</p>
+<p><i class="material-icons">sports_kabaddi</i> {{post.activity}}</p>
+<div *ngIf="finished">
+<button mat-icon-button color="accent" *ngIf="checkPostId(post.id)" (click)="removeLike(userId, post.id); updateLikes(post.id,post,-1) " ><mat-icon>favorite</mat-icon></button>
+<button mat-icon-button color="accent" *ngIf="!checkPostId(post.id)" (click)="likePost(post.id); updateLikes(post.id,post,1)"><mat-icon>favorite_border</mat-icon></button>
+</div>
+
+  </mat-card-actions>
 
 
     <mat-expansion-panel>

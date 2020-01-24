@@ -439,8 +439,8 @@ def media_download(request, pk):
 def media_get(request, pk):
     try:
         media = Media.objects.get(pk=pk)
-    except Profile.DoesNotExist:
-        return Response({'error': 'Profile does not exist.'}, status=404)
+    except Media.DoesNotExist:
+        return Response({'error': 'Media does not exist.'}, status=404)
 
     serializer = MediaSerializer(media)
     return Response(serializer.data)
