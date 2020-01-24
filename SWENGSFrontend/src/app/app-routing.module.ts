@@ -11,6 +11,7 @@ import {ActivityOptionsResolver} from './resolver/activity-options.resolver';
 import {WritePostingComponent} from './write-posting/write-posting.component';
 import {CommunityComponent} from './community/community.component';
 import {ProfilesResolver} from './resolver/profiles.resolver';
+import {WriteMailComponent} from './write-mail/write-mail.component';
 
 
 const routes: Routes = [
@@ -54,8 +55,16 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     resolve: {
       profiles: ProfilesResolver
+    }
     },
-  },
+  {
+    path: 'mail',
+    component: WriteMailComponent,
+    canActivate: [AuthGuard],
+    resolve: {
+      profiles: ProfilesResolver
+    },
+  }
 
 ];
 
