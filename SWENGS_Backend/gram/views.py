@@ -93,7 +93,7 @@ def posts_get_all(request):
 @api_view(['GET'])
 def posts_get_by_user(request, user_id):
     try:
-        posts = Post.objects.get(user_id=user_id)
+        posts = Post.objects.all().filter(user_id=user_id)
     except Post.DoesNotExist:
         return Response({'error': 'Post does not exist.'}, status=404)
 

@@ -18,6 +18,11 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent},
   {
+    path: 'posting/:id',
+    component: PostingComponent,
+    resolve: {activityOptions: ActivityOptionsResolver}
+  },
+   {
     path: 'posting',
     component: PostingComponent,
     resolve: {activityOptions: ActivityOptionsResolver}

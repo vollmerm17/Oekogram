@@ -34,8 +34,9 @@
     <mat-error *ngIf="registerFormGroup.controls.password.hasError('required')">Password is required</mat-error>
     <mat-error *ngIf="registerFormGroup.controls.password.hasError('pattern')"> Min. 8 Chars, One LowerCase, One UpperCase, Special Chracters, Numbers
     </mat-error>
-      <password-strength-meter [password]="password" enableFeedback="true"></password-strength-meter>
+
   </mat-form-field>
+  <password-strength-meter [password]="password" enableFeedback="true"></password-strength-meter>
 
   <app-date [required]="true" formControlName="date_of_birth" hint="Your birthday!"
             placeholder="Date of birth"></app-date>
