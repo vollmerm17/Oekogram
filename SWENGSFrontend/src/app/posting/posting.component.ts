@@ -48,12 +48,16 @@ export class PostingComponent implements OnInit {
   postOptions;
   finished = false;
   username;
+  private pictures;
 
   // panelOpenState = false;
   user;
 
   ngOnInit() {
-    this.postService.getAllPosts().subscribe((response: any) => {this.posts = response; });
+    this.postService.getAllPosts().subscribe((response: any) => {
+      this.posts = response;
+      /*this.pictures = response.pictures[0]; });*/});
+
     this.likeService.getLikesByUserID(this.userId).subscribe((response: any) => {
       this.likes = response;
       this.finished = true;

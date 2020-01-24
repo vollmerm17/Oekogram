@@ -19,6 +19,7 @@ SWENGS_backend/lib64/
 SWENGS_backend/parts/
 SWENGS_backend/sdist/
 SWENGS_backend/var/
+SWENGS_backend/media/
 SWENGS_backend/wheels/
 SWENGS_backend/pip-wheel-metadata/
 SWENGS_backend/share/python-wheels/
