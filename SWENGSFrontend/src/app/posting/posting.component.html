@@ -8,7 +8,7 @@
     <mat-card-title>{{post.name}}</mat-card-title>
     <mat-card-subtitle>{{post.date | date:'HH:mm MMM, dd yyyy'}}</mat-card-subtitle>
   </mat-card-header>
-  <img *ngIf="pictures" src="api/media/{{pictures}}" height="100px">
+  <img src="api/media/{{post.pictures[0]}}" height="100px">
   <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
   <mat-card-content>
     <p>{{post.content}}</p>
