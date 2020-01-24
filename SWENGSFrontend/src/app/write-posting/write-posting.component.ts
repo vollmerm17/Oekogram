@@ -62,7 +62,7 @@ export class WritePostingComponent implements OnInit {
   }
 
   createPosting() {
-    this.writePostFormGroup.controls.pictures.setValue(this.webcamImage);
+    // this.writePostFormGroup.controls.pictures.setValue(this.webcamImage); muss noch getestet werden!
     const post = this.writePostFormGroup.value;
     this.writePostService.createPost(post).subscribe(() => {
         alert('created successfully');
