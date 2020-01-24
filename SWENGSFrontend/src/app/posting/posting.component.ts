@@ -45,8 +45,9 @@ export class PostingComponent implements OnInit {
   post;
   postOptions;
   finished = false;
+  postFinished = false;
   username;
-  private pictures;
+  pictures;
 
   // panelOpenState = false;
   user;
