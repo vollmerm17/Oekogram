@@ -1,0 +1,37 @@
+.miniProfileBox {
+  display: flex;
+  flex-basis: 10%;
+  justify-content: center;
+  margin: 1%;
+  height: 98%;
+}
+.miniProfileBox > * {
+  margin-right: 20px;
+}
+img {
+  width: 20%;
+  height: auto;
+  border-radius: 50%;
+  margin: 5%;
+}
+p {
+  font-family: 'Merriweather', serif;
+}
+.name {
+  display: flex;
+  flex-grow: 2;
+  align-items: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+.scoreBox {
+  background-color: #F2F2F2;
+  display: flex;
+  border-style: solid;
+  border-color: #467302;
+  border-radius: 50%;
+
+  margin: 13px 13px;
+  padding: 5% 20% 5% 8%;
+  //padding: 5%;
+}
