@@ -31,6 +31,9 @@ export class MediainputComponent implements OnInit, ControlValueAccessor {
   initializing = true;
   medias: IMedia[];
   uploader: FileUploader;
+  hasBaseDropZoneOver: boolean;
+  justOne: boolean;
+
   onChange = (medias: number[]) => {
     // empty default
   }
@@ -39,7 +42,8 @@ export class MediainputComponent implements OnInit, ControlValueAccessor {
   }
 
   ngOnInit() {
-
+    this.justOne = false;
+    this.hasBaseDropZoneOver = false;
     this.uploader = new FileUploader({
       url: this.resourceUrl,
       authToken: 'Bearer ' + localStorage.getItem(this.userService.accessTokenLocalStorageKey),
@@ -60,6 +64,7 @@ export class MediainputComponent implements OnInit, ControlValueAccessor {
     };
     this.uploader.onSuccessItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
       const uploadedMedia = JSON.parse(response) as IMedia;
+      this.checkMedia();
       this.medias.find(media => !media.id && media.original_file_name === uploadedMedia.original_file_name).id = uploadedMedia.id;
     };
     this.uploader.onCompleteAll = () => {
@@ -69,11 +74,20 @@ export class MediainputComponent implements OnInit, ControlValueAccessor {
     };
   }
 
+  checkMedia() {
+    if (this.medias.length === 0) {
+      return this.justOne = true;
+    } else {
+      return this.justOne = false;
+    }
+  }
+
   deleteMedia(index: number): void {
     this.medias.splice(index, 1);
     this.onChange(this.medias.map((m) => {
       return m.id;
     }));
+    this.checkMedia();
   }
 
   downloadMedia(media: IMedia): void {
@@ -113,6 +127,10 @@ export class MediainputComponent implements OnInit, ControlValueAccessor {
       this.medias = medias;
       this.initializing = false;
     });
+  }
+
+  public fileOverBase(e: any): void {
+    this.hasBaseDropZoneOver = e;
   }
 
 }

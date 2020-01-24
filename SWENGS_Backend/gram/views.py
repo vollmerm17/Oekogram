@@ -321,10 +321,10 @@ def follow_add(request, username):
 
 
 @api_view(['DELETE'])
-def follow_delete(request, pk):
+def follow_delete(request, username):
     try:
-        other_user = Profile.objects.get(pk=pk)
-        FollowingManager.objects.remove_follower(
+        other_user = Profile.objects.get(username=username)
+        Follow.objects.remove_follower(
             request.user,
             other_user)
 
@@ -368,9 +368,9 @@ def blocking_get(request):
 
 
 @api_view(['DELETE'])
-def blocked_delete(request, pk):
+def blocked_delete(request, username):
     try:
-        other_user = Profile.objects.get(pk=pk)
+        other_user = Profile.objects.get(username=username)
         Block.objects.remove_block(
             request.user,
             other_user)

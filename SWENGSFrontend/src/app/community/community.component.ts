@@ -12,14 +12,15 @@ import {Router} from '@angular/router';
   styleUrls: ['./community.component.scss']
 })
 export class CommunityComponent implements OnInit {
+
   displayedColumns = ['pictures', 'username', 'greenscore', 'first_name', 'id'];
   readonly accessTokenLocalStorageKey = 'access_token';
   userId: number;
   profilesAll;
-  followingsAll;
+  followingsAll: any[string] = [];
   private finished: boolean;
   usernameLogIn: string;
-  blockingsAll;
+  blockingsAll: any[string] = [];
   search: '';
 
 
@@ -39,11 +40,15 @@ export class CommunityComponent implements OnInit {
       this.profilesAll = response;
     });
     this.relService.getFollowings().subscribe((res: any[]) => {
-        this.followingsAll = res;
+        for (const f of res) {
+          this.followingsAll.push(f.fields.username);
+        }
       }
     );
     this.relService.getBlockings().subscribe((res: any[]) => {
-        this.blockingsAll = res;
+        for (const f of res) {
+          this.blockingsAll.push(f.fields.username);
+        }
         this.finished = true;
       }
     );
@@ -51,7 +56,7 @@ export class CommunityComponent implements OnInit {
 
   followsAlready(profile: any) {
     for (const p of this.followingsAll) {
-      if (p.fields.username === profile.username) {
+      if (p === profile.username) {
         return true;
       }
     }
@@ -63,31 +68,48 @@ export class CommunityComponent implements OnInit {
 
 
   follow(profile: any) {
-    this.relService.sendFollow(profile).subscribe();
-    window.location.reload(); // evtl was besseres?!
+    this.relService.sendFollow(profile).subscribe((this.followingsAll.push(profile.username)));
   }
 
   removeFollow(profile: any) {
-    this.relService.removeFollow(profile.id).subscribe();
-    window.location.reload(); // evtl was besseres?!
+    this.relService.removeFollow(profile.username).subscribe(() => this.removeFollowfromFollows(profile.username));
+
+  }
+
+  removeFollowfromFollows(profileUsername: string) {
+    for (const p of this.followingsAll) {
+      let i = 0;
+      if (p.username === profileUsername) {
+        this.followingsAll.splice(i, 1);
+      }
+      i++;
+    }
   }
 
   blocksAlready(profile: any) {
     for (const p of this.blockingsAll) {
-      if (p.fields.username === profile.username) {
+      if (p === profile.username) {
         return true;
       }
     }
   }
 
   block(profile: any) {
-    this.relService.sendBlock(profile.username).subscribe();
-    window.location.reload(); // evtl was besseres?!
+    this.relService.sendBlock(profile.username).subscribe((this.blockingsAll.push(profile.username)));
+  }
+
+  removeBlockfromBlocks(profileUsername: string) {
+    for (const p of this.blockingsAll) {
+      let i = 0;
+      if (p.username === profileUsername) {
+        this.blockingsAll.splice(i, 1);
+      }
+      i++;
+    }
   }
 
   removeBlock(profile: any) {
-    this.relService.removeBlock(profile.id).subscribe();
-    window.location.reload(); // evtl was besseres?!
+    this.relService.removeBlock(profile.username).subscribe(() => this.removeBlockfromBlocks(profile.username));
   }
 
 }

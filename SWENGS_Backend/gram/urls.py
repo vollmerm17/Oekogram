@@ -51,13 +51,13 @@ urlpatterns = [
     path('followers/get', views.followers_get),
     path('follows/get', views.follows_get),
     # path('follows/<int:pk>/bool', views.follows_boolean_get),
-    path('follow/<int:pk>/delete', views.follow_delete),
+    path('follow/<slug:username>/delete', views.follow_delete),
     path('follow/<slug:username>/add', views.follow_add),
 
     # BLOCKED
     path('blocked/get', views.blocked_get),
     path('blocking/get', views.blocking_get),
-    path('blocked/<int:pk>/delete', views.blocked_delete),
+    path('blocked/<slug:username>/delete', views.blocked_delete),
     path('blocked/<slug:username>/add', views.block_add),
 
     # E-MAIL

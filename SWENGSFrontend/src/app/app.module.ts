@@ -119,8 +119,4 @@ export function tokenGetter() {
   }],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  exports: [
-    MatSortModule
-  ];
-}
+export class AppModule {}
