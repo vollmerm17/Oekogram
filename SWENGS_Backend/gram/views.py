@@ -448,6 +448,7 @@ def media_get(request, pk):
 
 @swagger_auto_schema(method='POST', request_body=EmailSerializer, responses={200: EmailSerializer()})
 @api_view(['POST'])
+@permission_classes([AllowAny])
 # @permission_required('gram.add_comment', raise_exception=True)
 def send_mail_request(request):
     data = JSONParser().parse(request)

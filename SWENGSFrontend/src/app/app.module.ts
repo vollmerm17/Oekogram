@@ -25,9 +25,6 @@ import {LogoutComponent} from './logout/logout.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
-import {HeaderComponent} from './header/header.component';
-import {DragDirective} from './write-posting/dragDrop.directive';
-import {FooterComponent} from './footer/footer.component';
 import {CommentComponent} from './comment/comment.component';
 import {ProfileFormComponent} from './profile-form/profile-form.component';
 import {MediainputComponent} from './mediainput/mediainput.component';
@@ -45,6 +42,8 @@ import { CommunityComponent } from './community/community.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {PasswordStrengthMeterModule} from 'angular-password-strength-meter';
+import { ProfileSmallComponent } from './profile-small/profile-small.component';
+import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -60,9 +59,6 @@ export function tokenGetter() {
     ProfileIconsComponent,
     LoginComponent,
     LogoutComponent,
-    HeaderComponent,
-    DragDirective,
-    FooterComponent,
     CommentComponent,
     ProfileFormComponent,
     MediainputComponent,
@@ -70,6 +66,8 @@ export function tokenGetter() {
     RegisterComponent,
     WriteMailComponent,
     CommunityComponent,
+    ProfileSmallComponent,
+    ProfileDetailComponent,
   ],
   imports: [
     BrowserModule,

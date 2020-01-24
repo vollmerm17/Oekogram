@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {FileHandle} from './dragDrop.directive';
 import {WebcamImage} from 'ngx-webcam';
 import {Observable, Subject} from 'rxjs';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -14,7 +13,6 @@ import {JwtHelperService} from '@auth0/angular-jwt';
   styleUrls: ['./write-posting.component.scss']
 })
 export class WritePostingComponent implements OnInit {
-  files: FileHandle[] = [];
   readonly accessTokenLocalStorageKey = 'access_token';
   userId;
   writePostFormGroup: FormGroup;
@@ -32,10 +30,6 @@ export class WritePostingComponent implements OnInit {
     this.userId = this.jwtHelper.decodeToken(token).user_id;
   }
 
- /* filesDropped(files: FileHandle[]): void {
-    this.files = files;
-  }
-*/
   ngOnInit() {
     this.writePostFormGroup = this.fb.group({
       id: [null],

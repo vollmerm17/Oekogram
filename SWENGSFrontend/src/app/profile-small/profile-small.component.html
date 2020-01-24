@@ -1,0 +1,9 @@
+<div class="miniProfileBox">
+  <img *ngIf="!pictures" src="../../assets/img_avatar.png" height="100px">
+  <img *ngIf="pictures" src="api/media/{{pictures}}" height="100px">
+  <p class="name">{{username}}</p>
+  <div class="scoreBox">
+    {{greenScore}}
+  </div>
+  <!--<p class="information">last Activity</p>-->
+</div>

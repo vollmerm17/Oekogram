@@ -10,9 +10,8 @@ import {UserService} from './service/user.service';
 
 export class AppComponent implements OnInit {
 
-  opened: boolean;
+  opened = true;
   isAuthenticated = false;
-  change = true;
 
   constructor(private userService: UserService) {}
 
@@ -21,6 +20,10 @@ export class AppComponent implements OnInit {
       this.isAuthenticated = isLoggedIn;
      });
 
+  }
+
+  profileSmall() {
+    this.opened = !this.opened;
   }
 }
 

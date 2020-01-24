@@ -1,0 +1,46 @@
+.profileDetail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  //border-style: dashed;
+}
+.horizontal {
+  display: flex;
+  justify-content: space-around;
+  //border-style: dotted;
+}
+
+.profileInfo {
+  flex-basis: 1000px;
+  display: flex;
+  justify-content: center;
+  //border-style: solid;
+}
+
+.profileInfo img {
+  flex-basis: 250px;
+  max-height: 250px;
+  border-radius: 50%;
+}
+
+.name {
+  flex-basis: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.username {
+
+}
+
+.fullname {
+
+}
+
+.friendshipButtons {
+}
+
+.profileBar {
+
+}

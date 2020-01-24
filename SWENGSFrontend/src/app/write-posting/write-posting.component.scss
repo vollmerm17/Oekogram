@@ -19,8 +19,12 @@
 .textArea {
   width: 100%;
 }
-.options {
+.activitiy {
+  display: flex;
+}
+.activityOptions {
   width: 50%;
+  margin-right: auto;
 }
 /*.dropzone {
   width: 100%;
