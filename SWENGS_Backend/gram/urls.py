@@ -50,7 +50,7 @@ urlpatterns = [
     # FOLLOW
     path('followers/get', views.followers_get),
     path('follows/get', views.follows_get),
-    path('follows/<int:pk>/bool', views.follows_boolean_get),
+    # path('follows/<int:pk>/bool', views.follows_boolean_get),
     path('follow/<int:pk>/delete', views.follow_delete),
     path('follow/<slug:username>/add', views.follow_add),
 

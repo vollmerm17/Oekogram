@@ -3,6 +3,7 @@ from django.core import serializers
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.core.mail import send_mail
+from django.forms import model_to_dict
 from django.http import HttpResponse
 from drf_yasg.utils import swagger_auto_schema
 from friendship.exceptions import AlreadyExistsError
@@ -11,6 +12,7 @@ from rest_framework import views
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.response import Response
+from rest_framework.utils import json
 
 from gram.models import Activity, Post, Comment, Media, Profile, LikedByUser
 from gram.serializers import MediaSerializer, ActivityOptionSerializer, ProfileListSerializer, ProfileFormSerializer, \
@@ -290,17 +292,19 @@ def followers_get(request):
 def follows_get(request):
     follows = Follow.objects.following(request.user)
     serialized_qs = serializers.serialize('json', follows, fields=('id', 'username'))
-    return Response(serialized_qs, status=200)
+    hu = model_to_dict(follows)
+    serialized = json.dumps(hu)
+    return Response(follows, status=200)
 
 
-@swagger_auto_schema(method='GET', responses={200})
-@api_view(['GET'])
-def follows_boolean_get(request, pk):
-    foll = Profile.objects.get(pk=pk)
-    follows = Follow.objects.follows(follwer=request.user, followee=foll)
-    serialized_qs = serializers.serialize('json', follows, fields=('id', 'username'))
-    return Response(serialized_qs, status=200)
-
+# @swagger_auto_schema(method='GET', responses={200})
+# @api_view(['GET'])
+# def follows_boolean_get(request, pk):
+#     foll = Profile.objects.get(pk=pk)
+#     follows = Follow.objects.follows(follower=request.user, followee=foll)
+#     serialized_qs = serializers.serialize('json', follows, fields=('id', 'username'))
+#     return Response(serialized_qs, status=200)
+#
 
 @swagger_auto_schema(method='POST', responses={200})
 @api_view(['POST'])

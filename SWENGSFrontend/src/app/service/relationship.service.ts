@@ -9,21 +9,21 @@ export class RelationshipService {
   constructor(private http: HttpClient) {
   }
 
-  getFriends() {
-    return this.http.get('api/friendship/get');
+  getFollowers() {
+    return this.http.get('api/followers/get');
   }
 
 
-  getRequests() {
-    return this.http.get('api/friendship/request');
+  getFollowings() {
+    return this.http.get('api/follows/get');
   }
 
-  sendRequest(username: any) {
-    return this.http.post('api/friendship/' + username + 'request', null);
+  sendFollow(profile: any) {
+    return this.http.post('api/follow/' + profile.username + '/add', profile);
   }
 
   sendBlock(username: any) {
-    return this.http.post('api/blocked/' + username + 'add', null);
+    return this.http.post('api/blocked/' + username + '/add', null);
   }
 
   getBlocks() {
