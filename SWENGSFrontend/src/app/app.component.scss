@@ -110,12 +110,12 @@
 }
 
 .content {
-  //display: flex;
+  display: flex;
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 600px;
   flex-wrap: wrap;
-  //justify-content: center; //funktioniert nur, wenn display: flex
+  justify-content: center; //funktioniert nur, wenn display: flex
   margin-top: 35px;
 }
 
