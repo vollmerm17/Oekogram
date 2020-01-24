@@ -16,6 +16,9 @@ export class CommentComponent implements OnInit {
   @Input()
   id: string;
 
+  @Input()
+  userId;
+
   comments: any[];
   commentslenth: number;
   commentFormGroup;
@@ -24,7 +27,7 @@ export class CommentComponent implements OnInit {
     this.commentService.getCommentsByPostID(this.id).subscribe((response: any) => {
       this.comments = response;
       this.commentFormGroup.controls.posts_id.setValue(this.id);
-      this.commentFormGroup.controls.user_id.setValue(1);
+      this.commentFormGroup.controls.user_id.setValue(this.userId);
       this.commentslenth = response.length;
     });
 

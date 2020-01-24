@@ -19,12 +19,7 @@
 <div *ngIf="finished">
 <button mat-icon-button color="accent" *ngIf="checkPostId(post.id)" (click)="removeLike(userId, post.id); updateLikes(post.id,post,-1) " ><mat-icon>favorite</mat-icon></button>
 <button mat-icon-button color="accent" *ngIf="!checkPostId(post.id)" (click)="likePost(post.id); updateLikes(post.id,post,1)"><mat-icon>favorite_border</mat-icon></button>
-<div *ngFor="let like of likes">
-<p>{{like.post_id}}</p>
 </div>
-</div>
-
-<p>This is Post_id: {{post.id}}</p>
 
   </mat-card-actions>
 
@@ -40,7 +35,7 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     <div class="comments">
-      <app-comment [id]="post.id"></app-comment>
+      <app-comment [id]="post.id" [userId] = userId></app-comment>
     </div>
   </mat-expansion-panel>
 </mat-card>
