@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ProfileService} from '../service/profile.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {EmailService} from "../service/email.service";
+import {EmailService} from '../service/email.service';
 
 @Component({
   selector: 'app-register',
@@ -60,13 +60,14 @@ export class RegisterComponent implements OnInit {
 
   createProfile() {
      const profile = this.registerFormGroup.value;
-    this.mailFormGroup.controls.recipient.setValue(profile.email);
-    this.mail = this.mailFormGroup.value;
+     this.mailFormGroup.controls.recipient.setValue(profile.email);
+     this.mail = this.mailFormGroup.value;
 
-    this.profileService.createProfile(profile).subscribe((response: any) => {
+     this.profileService.createProfile(profile).subscribe((response: any) => {
       this.router.navigate(['login/']);
-    });
-    this.emailService.sendMail(this.mail).subscribe(() => alert('Registration sent to: ' + this.mail.recipient));
+     });
+     this.emailService.sendMail(this.mail).subscribe(() => alert('Registration sent to: ' + this.mail.recipient));
+     this.registerFormGroup.reset(); // testen!!!
   }
 
   emailValidator(): AsyncValidatorFn {

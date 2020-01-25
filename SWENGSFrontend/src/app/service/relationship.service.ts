@@ -15,6 +15,7 @@ export class RelationshipService {
 
   getFollowings() {
     return this.http.get('api/follows/get');
+
   }
 
   getUserFollowers(username: any) {
