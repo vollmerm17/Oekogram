@@ -294,8 +294,8 @@ def followers_get(request):
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
 def follows_get(request):
-    follows = list(Follow.objects.following(request.user))
-    serialized_qs = serializers.serialize('json', follows, fields=('id', 'username'))
+    follows = Follow.objects.following(request.user)
+    serialized_qs = serializers.serialize('json', follows, fields=())
     return Response(json.loads(serialized_qs), status=200, content_type='json')
 
 

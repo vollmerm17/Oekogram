@@ -18,20 +18,20 @@ export class RelationshipService {
 
   }
 
-  getUserFollowers(username: any) {
-    return this.http.get('api/followers/' + username + '/get');
+  getUserFollowers(profileId: any) {
+    return this.http.get('api/followers/' + profileId + '/get');
   }
 
-  getUserFollowings(username: any) {
-    return this.http.get('api/follows/' + username + '/get');
+  getUserFollowings(profileId: any) {
+    return this.http.get('api/follows/' + profileId + '/get');
   }
 
-  sendFollow(profile: any) {
-    return this.http.post('api/follow/' + profile.username + '/add', profile);
+  sendFollow(profileId: any) {
+    return this.http.post('api/follow/' + profileId + '/add', null);
   }
 
-  sendBlock(username: any) {
-    return this.http.post('api/blocked/' + username + '/add', null);
+  sendBlock(profileId: any) {
+    return this.http.post('api/blocked/' + profileId + '/add', null);
   }
 
   getBlockings() {
@@ -42,12 +42,12 @@ export class RelationshipService {
     return this.http.get('api/blocked/get');
   }
 
-  removeBlock(username: any) {
-    return this.http.delete('api/blocked/' + username + '/delete');
+  removeBlock(profileId: any) {
+    return this.http.delete('api/blocked/' + profileId + '/delete');
   }
 
-  removeFollow(username: any) {
-    return this.http.delete('api/follow/' + username + '/delete');
+  removeFollow(profileId: any) {
+    return this.http.delete('api/follow/' + profileId + '/delete');
   }
 }
 
