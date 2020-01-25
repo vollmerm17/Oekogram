@@ -231,7 +231,7 @@ def comment_delete(request, pk):
 @swagger_auto_schema(method='GET', responses={200: ProfileListSerializer(many=True)})
 @api_view(['GET'])
 def profile_list(request):
-    users = Profile.objects.exclude(blockees__blocker=request.user)
+    users = Profile.objects.exclude(blocking__blocked=request.user)
     serializer = ProfileListSerializer(users, many=True)
     return Response(serializer.data, status=200)
 
