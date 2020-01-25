@@ -15,13 +15,14 @@ export class CommunityComponent implements OnInit {
 
   displayedColumns = ['pictures', 'username', 'greenscore', 'actionFollow', 'actionBlock'];
   readonly accessTokenLocalStorageKey = 'access_token';
-  userId: number;
+  userId;
   profilesAll;
-  followingsAll: any[string] = [];
+  followingsAll: any[number] = [];
   private finished: boolean;
-  usernameLogIn: string;
-  blockingsAll: any[string] = [];
+  userIdLogIn;
+  blockingsAll: any[number] = [];
   search: '';
+  beingBlockedAll;
 
 
   constructor(private http: HttpClient, private router: Router, private profileService: ProfileService,
@@ -33,83 +34,93 @@ export class CommunityComponent implements OnInit {
 
   ngOnInit() {
     this.finished = false;
+
     this.profileService.getProfile(this.userId).subscribe((res: any) => {
-      this.usernameLogIn = res.username;
+      this.userIdLogIn = res.id;
     });
+
     this.profileService.getProfiles().subscribe((response: any[]) => {
       this.profilesAll = response;
     });
+
     this.relService.getFollowings().subscribe((res: any[]) => {
-        for (const f of res) {
-          this.followingsAll.push(f.fields.username);
-        }
+      for (const f of res) {
+        this.followingsAll.push(f.pk);
       }
-    );
+    });
+
     this.relService.getBlockings().subscribe((res: any[]) => {
-        for (const f of res) {
-          this.blockingsAll.push(f.fields.username);
-        }
-        this.finished = true;
+      for (const f of res) {
+        this.blockingsAll.push(f.pk);
       }
-    );
+      this.finished = true;
+    });
   }
+
 
   followsAlready(profile: any) {
     for (const p of this.followingsAll) {
-      if (p === profile.username) {
+      if (p === profile.id) {
         return true;
       }
     }
   }
 
   isItMe(profile: any) {
-    return this.usernameLogIn === profile.username;
+    return this.userIdLogIn === profile.id;
   }
 
 
   follow(profile: any) {
-    this.relService.sendFollow(profile).subscribe((this.followingsAll.push(profile.username)));
+    this.relService.sendFollow(profile.id).subscribe();
+    (this.followingsAll.push(profile.id));
   }
 
   removeFollow(profile: any) {
-    this.relService.removeFollow(profile.username).subscribe(() => this.removeFollowfromFollows(profile.username));
+    this.relService.removeFollow(profile.id).subscribe(() => this.removeFollowfromFollows(profile.id));
 
   }
 
-  removeFollowfromFollows(profileUsername: string) {
-    for (const p of this.followingsAll) {
-      let i = 0;
-      if (p.username === profileUsername) {
-        this.followingsAll.splice(i, 1);
-      }
-      i++;
+  removeFollowfromFollows(profileId: any) {
+    const i: number = this.followingsAll.indexOf(profileId);
+    if (i !== -1) {
+      this.followingsAll.splice(i, 1);
     }
   }
 
   blocksAlready(profile: any) {
     for (const p of this.blockingsAll) {
-      if (p === profile.username) {
+      if (p === profile.id) {
         return true;
       }
     }
   }
 
   block(profile: any) {
-    this.relService.sendBlock(profile.username).subscribe((this.blockingsAll.push(profile.username)));
+    this.relService.sendBlock(profile.id).subscribe();
+    (this.blockingsAll.push(profile.id));
   }
 
-  removeBlockfromBlocks(profileUsername: string) {
-    for (const p of this.blockingsAll) {
-      let i = 0;
-      if (p.username === profileUsername) {
-        this.blockingsAll.splice(i, 1);
+  /*  removeBlockfromBlocks(profileUsername: string) {
+      for (const p of this.blockingsAll) {
+        let i = 0;
+        if (p.username === profileUsername) {
+          this.blockingsAll.splice(i, 1);
+        }
+        i++;
       }
-      i++;
+    }*/
+
+  removeBlockfromBlocks(profileId: any) {
+    const i: number = this.blockingsAll.indexOf(profileId);
+    if (i !== -1) {
+      this.blockingsAll.splice(i, 1);
     }
   }
 
+
   removeBlock(profile: any) {
-    this.relService.removeBlock(profile.username).subscribe(() => this.removeBlockfromBlocks(profile.username));
+    this.relService.removeBlock(profile.id).subscribe(() => this.removeBlockfromBlocks(profile.id));
   }
 
 }
