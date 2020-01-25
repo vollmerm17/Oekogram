@@ -33,12 +33,12 @@ export class RelationshipService {
     return this.http.post('api/blocked/' + username + '/add', null);
   }
 
-  getBlocks() {
-    return this.http.get('api/blocked/get');
-  }
-
   getBlockings() {
     return this.http.get('api/blocking/get');
+  }
+
+  getBlocks() {
+    return this.http.get('api/blocked/get');
   }
 
   removeBlock(username: any) {

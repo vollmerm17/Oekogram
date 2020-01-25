@@ -3,10 +3,11 @@ from django.core import serializers
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.core.mail import send_mail
-from django.http import HttpResponse
+from django.forms import model_to_dict
+from django.http import HttpResponse, JsonResponse
 from drf_yasg.utils import swagger_auto_schema
 from friendship.exceptions import AlreadyExistsError
-from friendship.models import Follow, FollowingManager, Block
+from friendship.models import Friend, BlockManager, Follow, FollowingManager, Block
 from rest_framework import views
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.parsers import JSONParser, MultiPartParser
@@ -84,7 +85,7 @@ def activity_delete(request, pk):
 @api_view(['GET'])
 def posts_get_all(request):
     try:
-        posts = Post.objects.all()
+        posts = Post.objects.all().order_by('-date')
     except Post.DoesNotExist:
         return Response({'error': 'Post does not exist.'}, status=404)
 
@@ -96,7 +97,7 @@ def posts_get_all(request):
 @api_view(['GET'])
 def posts_get_by_user(request, user_id):
     try:
-        posts = Post.objects.all().filter(user_id=user_id)
+        posts = Post.objects.all().filter(user_id=user_id).order_by('-date')
     except Post.DoesNotExist:
         return Response({'error': 'Post does not exist.'}, status=404)
 
@@ -108,7 +109,7 @@ def posts_get_by_user(request, user_id):
 @api_view(['GET'])
 def posts_get_by_id(request, pk):
     try:
-        posts = Post.objects.get(pk=pk)
+        posts = Post.objects.get(pk=pk).order_by('-date')
     except Post.DoesNotExist:
         return Response({'error': 'Post does not exist.'}, status=404)
 
@@ -379,30 +380,12 @@ def blocked_get(request):
     return Response(json.loads(serialized_qs), status=200, content_type='json')
 
 
-# @swagger_auto_schema(method='GET', responses={200})
-# @api_view(['GET'])
-# def blocked_of_user_get(request, username):
-#     other_user = Profile.objects.get(username=username)
-#     blocked = Block.objects.blocked(other_user)
-#     serialized_qs = serializers.serialize('json', blocked, fields=('id', 'username'))
-#     return Response(json.loads(serialized_qs), status=200, content_type='json')
-
-
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
 def blocking_get(request):
     blocking = Block.objects.blocking(request.user)
     serialized_qs = serializers.serialize('json', blocking, fields=('id', 'username'))
     return Response(json.loads(serialized_qs), status=200, content_type='json')
-
-
-# @swagger_auto_schema(method='GET', responses={200})
-# @api_view(['GET'])
-# def blocking_of_user_get(request, username):
-#     other_user = Profile.objects.get(username=username)
-#     blocking = Block.objects.blocking(other_user)
-#     serialized_qs = serializers.serialize('json', blocking, fields=('id', 'username'))
-#     return Response(json.loads(serialized_qs), status=200, content_type='json')
 
 
 @api_view(['DELETE'])

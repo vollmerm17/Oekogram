@@ -23,12 +23,15 @@
   <app-date [required]="true" formControlName="date_of_birth" hint="Your birthday!"
             placeholder="Date of birth"></app-date>
   <div *ngIf="age !== undefined">Age: {{age}}</div>
+  <br>
   <mat-form-field>
     <textarea formControlName="bio" matInput placeholder="Biography"></textarea>
     <mat-hint align="end">Your biography</mat-hint>
   </mat-form-field>
+  <br>
+  <br>
   <div>
-    <app-mediainput formControlName="pictures"></app-mediainput>
+    <app-mediainput formControlName="pictures" text="DROP your profile picture here!"></app-mediainput>
   </div>
   <br/>
   <mat-card-actions align="center">

@@ -24,7 +24,7 @@ class PostsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['id', 'name', 'content', 'pictures', 'likes', 'activity', 'date', 'pictures']
+        fields = ['id', 'name', 'content', 'pictures', 'likes', 'activity', 'date', 'pictures', 'user_id']
 
     def get_name(self, obj):
         return obj.user_id.username
@@ -34,7 +34,6 @@ class PostsSerializer(serializers.ModelSerializer):
 
 
 class WritePostSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Post
         fields = ['id', 'user_id', 'content', 'pictures', 'activity', 'date']
@@ -43,26 +42,35 @@ class WritePostSerializer(serializers.ModelSerializer):
 # Comments
 class CommentsSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
+    picture = serializers.SerializerMethodField()
 
     class Meta:
         model = Comment
-        fields = ['id', 'content', 'posts_id', 'user_id', 'date', 'name']
+        fields = ['id', 'content', 'posts_id', 'user_id', 'date', 'name', 'picture']
 
     def get_name(self, obj):
         return obj.user_id.username
+
+    def get_picture(self, obj):
+        list_media = obj.user_id.pictures.all()
+        list_of_id = []
+        for media in list_media:
+            list_of_id.append(media.id)
+        return list_of_id
 
 
 # Profile
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['id', 'first_name', 'last_name', 'username', 'greenscore', 'email', 'bio', 'date_of_birth', 'pictures',]
+        fields = ['id', 'first_name', 'last_name', 'username', 'greenscore', 'email', 'bio', 'date_of_birth',
+                  'pictures', ]
 
 
 class ProfileUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['id','first_name', 'last_name', 'email', 'bio', 'date_of_birth', 'pictures', 'greenscore',]
+        fields = ['id', 'first_name', 'last_name', 'email', 'bio', 'date_of_birth', 'pictures', 'greenscore', ]
 
 
 class ProfileFormSerializer(serializers.ModelSerializer):

@@ -2,6 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {CommentsService} from '../service/comments.service';
 import {FormBuilder} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
+import {UserService} from '../service/user.service';
+import {ProfileService} from '../service/profile.service';
+
 
 @Component({
   selector: 'app-comment',
@@ -20,7 +23,7 @@ export class CommentComponent implements OnInit {
   userId;
 
   comments: any[];
-  commentslenth: number;
+  commentslength: number;
   commentFormGroup;
 
   ngOnInit() {
@@ -28,7 +31,7 @@ export class CommentComponent implements OnInit {
       this.comments = response;
       this.commentFormGroup.controls.posts_id.setValue(this.id);
       this.commentFormGroup.controls.user_id.setValue(this.userId);
-      this.commentslenth = response.length;
+      this.commentslength = response.length;
     });
 
 

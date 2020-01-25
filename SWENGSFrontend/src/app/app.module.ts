@@ -22,7 +22,7 @@ import {ProfileIconsComponent} from './profile-icons/profile-icons.component';
 import {JwtModule} from '@auth0/angular-jwt';
 import {LoginComponent} from './login/login.component';
 import {LogoutComponent} from './logout/logout.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
 import {CommentComponent} from './comment/comment.component';
@@ -41,6 +41,7 @@ import { RegisterComponent } from './register/register.component';
 import { CommunityComponent } from './community/community.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
+import { FilterPipe } from './community/filter.pipe';
 import {PasswordStrengthMeterModule} from 'angular-password-strength-meter';
 import { ProfileSmallComponent } from './profile-small/profile-small.component';
 import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
@@ -66,6 +67,7 @@ export function tokenGetter() {
     RegisterComponent,
     WriteMailComponent,
     CommunityComponent,
+    FilterPipe,
     ProfileSmallComponent,
     ProfileDetailComponent,
   ],
@@ -106,6 +108,7 @@ export function tokenGetter() {
     MatSnackBarModule,
     WebcamModule,
     MatTableModule,
+    FormsModule,
     PasswordStrengthMeterModule,
   ],
   providers: [{
@@ -116,8 +119,4 @@ export function tokenGetter() {
   }],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  exports: [
-    MatSortModule
-  ];
-}
+export class AppModule {}
