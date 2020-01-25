@@ -45,6 +45,7 @@ import { FilterPipe } from './community/filter.pipe';
 import {PasswordStrengthMeterModule} from 'angular-password-strength-meter';
 import { ProfileSmallComponent } from './profile-small/profile-small.component';
 import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
+import { FollowersComponent } from './followers/followers.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -70,6 +71,7 @@ export function tokenGetter() {
     FilterPipe,
     ProfileSmallComponent,
     ProfileDetailComponent,
+    FollowersComponent,
   ],
   imports: [
     BrowserModule,

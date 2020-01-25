@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
-import {ActivatedRoute} from '@angular/router';
 import {ProfileService} from '../service/profile.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 
@@ -39,6 +37,6 @@ export class ProfileComponent implements OnInit {
   }
 
   friends() {
-
+    return null;
   }
 }

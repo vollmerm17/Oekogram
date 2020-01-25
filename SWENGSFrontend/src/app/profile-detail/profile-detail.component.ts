@@ -21,12 +21,12 @@ export class ProfileDetailComponent implements OnInit {
   blocking = false;
   followersCount = 0;
   followingsCount = 0;
-  followingsAll: any[string] = [];
-  followersUserAll: any[string] = [];
-  followingsUserAll: any[string] = [];
+  followingsAll: any[number] = [];
+  followersUserAll: any[number] = [];
+  followingsUserAll: any[number] = [];
   finishedLoadFollowings = false;
   finishedLoadFollowers = false;
-  blockingsAll: any[string] = [];
+  blockingsAll: any[number] = [];
   finishedBlockings = false;
 
   constructor(private http: HttpClient, private profileService: ProfileService, private route: ActivatedRoute,
@@ -46,7 +46,7 @@ export class ProfileDetailComponent implements OnInit {
     // Get a list of everyone who the logged in user is following
     this.relService.getFollowings().subscribe((res: any[]) => {
         for (const f of res) {
-          this.followingsAll.push(f.fields.username);
+          this.followingsAll.push(f.pk);
         }
         // Check if logged in user already follows the selected user
         if (this.followsAlready()) {
@@ -58,7 +58,7 @@ export class ProfileDetailComponent implements OnInit {
     // Get a list of everyone who the logged in user is blocking
     this.relService.getBlockings().subscribe((res: any[]) => {
       for (const f of res) {
-        this.blockingsAll.push(f.fields.username);
+        this.blockingsAll.push(f.pk);
       }
       // Check if logged in user already blocks the selected user
       if (this.blocksAlready()) {
@@ -68,9 +68,9 @@ export class ProfileDetailComponent implements OnInit {
     });
 
     // Get a list of everyone who follows the selected user (length = amount of followers)
-    this.relService.getUserFollowers(this.profile.username).subscribe((response: any[]) => {
+    this.relService.getUserFollowers(this.profile.id).subscribe((response: any[]) => {
         for (const f of response) {
-          this.followersUserAll.push(f.fields.username);
+          this.followersUserAll.push(f.pk);
         }
         this.followersCount = this.followersUserAll.length;
         this.finishedLoadFollowers = true;
@@ -78,9 +78,9 @@ export class ProfileDetailComponent implements OnInit {
     );
 
     // Get a list of everyone who is followed by the selected user (length = amount of followings)
-    this.relService.getUserFollowings(this.profile.username).subscribe((res: any[]) => {
+    this.relService.getUserFollowings(this.profile.id).subscribe((res: any[]) => {
         for (const f of res) {
-          this.followingsUserAll.push(f.fields.username);
+          this.followingsUserAll.push(f.pk);
         }
         this.followingsCount = this.followingsUserAll.length;
         this.finishedLoadFollowings = true;
@@ -91,11 +91,11 @@ export class ProfileDetailComponent implements OnInit {
 
   changeFollowingState() {
     if (this.following) {
-      this.relService.removeFollow(this.profile.username).subscribe(() =>
+      this.relService.removeFollow(this.profile.id).subscribe(() =>
         this.following = false);
       this.followersCount--;
     } else {
-      this.relService.sendFollow(this.profile).subscribe(() =>
+      this.relService.sendFollow(this.profile.id).subscribe(() =>
         this.following = true);
       this.followersCount++;
     }
@@ -103,17 +103,17 @@ export class ProfileDetailComponent implements OnInit {
 
   changeBlockingState() {
     if (this.blocking) {
-      this.relService.removeBlock(this.profile.username).subscribe(() =>
+      this.relService.removeBlock(this.profile.id).subscribe(() =>
         this.blocking = false);
     } else {
-      this.relService.sendBlock(this.profile.username).subscribe(() =>
+      this.relService.sendBlock(this.profile.id).subscribe(() =>
         this.blocking = true);
     }
   }
 
   followsAlready() {
     for (const p of this.followingsAll) {
-      if (p === this.profile.username) {
+      if (p === this.profile.id) {
         return true;
       }
     }
@@ -121,7 +121,7 @@ export class ProfileDetailComponent implements OnInit {
 
   blocksAlready() {
     for (const p of this.blockingsAll) {
-      if (p === this.profile.username) {
+      if (p === this.profile.id) {
         return true;
       }
     }

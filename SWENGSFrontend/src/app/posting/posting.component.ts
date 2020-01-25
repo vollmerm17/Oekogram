@@ -7,6 +7,7 @@ import {ProfileService} from '../service/profile.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {FormBuilder, FormControl} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
+import {RelationshipService} from '../service/relationship.service';
 
 
 @Component({
@@ -29,7 +30,8 @@ export class PostingComponent implements OnInit {
               private userService: UserService, public likeService: LikeService,
               private profileService: ProfileService, public jwtHelper: JwtHelperService,
               private fb: FormBuilder,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private relationshipService: RelationshipService) {
     const token = localStorage.getItem(this.accessTokenLocalStorageKey);
     this.userId = this.jwtHelper.decodeToken(token).user_id;
   }
@@ -40,6 +42,7 @@ export class PostingComponent implements OnInit {
   @Input()
   postByUserID: string;
 
+
   like: any;
   likes: any[];
   post;
@@ -48,16 +51,28 @@ export class PostingComponent implements OnInit {
   postFinished = false;
   username;
   pictures;
-
+  followings: any[];
   // panelOpenState = false;
   user;
 
   ngOnInit() {
-    // const postByUserID = this.route.snapshot.paramMap.get('id');
+    let getAllPosts = this.route.snapshot.paramMap.get('all');
 
-    if (this.postByUserID == null) {
+    if (getAllPosts == null) {
+      getAllPosts = '1';
+    }
+
+    if (this.postByUserID == null && getAllPosts === '1') {
       this.postService.getAllPosts().subscribe((response: any) => {
         this.posts = response;
+      });
+    } else if (this.postByUserID == null && getAllPosts === '0') {
+      this.relationshipService.getFollowings().subscribe((response: any) => {
+        this.followings = response;
+        this.postService.getPostsByFollows(this.followings).subscribe((res: any) => {
+          this.posts = res;
+        });
+
       });
     } else {
       this.postService.getPostByUserID(this.postByUserID).subscribe((response: any) => this.posts = response);

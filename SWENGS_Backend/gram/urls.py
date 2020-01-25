@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework_jwt.views import obtain_jwt_token
@@ -17,7 +17,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     url(r'^api-token-auth/', obtain_jwt_token),
-    #url(r'^friendship/', include('friendship.urls')),
+    # url(r'^friendship/', include('friendship.urls')),
     path('admin/', admin.site.urls),
 
     # ACTIVITY
@@ -31,6 +31,7 @@ urlpatterns = [
     path('post/get', views.posts_get_all),
     path('post/<int:user_id>/get', views.posts_get_by_user),
     path('posts/<int:pk>/get', views.posts_get_by_id),
+    path('post/follows', views.posts_get_from_follows),
     path('post/create', views.post_form_create),
     path('post/<int:pk>/update', views.post_update),
     path('post/<int:pk>/delete', views.post_delete),
@@ -49,20 +50,19 @@ urlpatterns = [
 
     # FOLLOW
     path('followers/get', views.followers_get),
+    path('followers/list', views.followers_list),
     path('follows/get', views.follows_get),
-    path('followers/<slug:username>/get', views.followers_of_user_get),
-    path('follows/<slug:username>/get', views.follows_of_user_get),
-    # path('follows/<int:pk>/bool', views.follows_boolean_get),
-    path('follow/<slug:username>/delete', views.follow_delete),
-    path('follow/<slug:username>/add', views.follow_add),
+    path('follows/list', views.follows_list),
+    path('followers/<int:pk>/get', views.followers_of_user_get),
+    path('follows/<int:pk>/get', views.follows_of_user_get),
+    path('follow/<int:pk>/delete', views.follow_delete),
+    path('follow/<int:pk>/add', views.follow_add),
 
     # BLOCKED
     path('blocked/get', views.blocked_get),
     path('blocking/get', views.blocking_get),
-    # path('blocked/<slug:username>/get', views.blocked_of_user_get),
-    # path('blocking/<slug:username>/get', views.blocking_of_user_get),
-    path('blocked/<slug:username>/delete', views.blocked_delete),
-    path('blocked/<slug:username>/add', views.block_add),
+    path('blocked/<int:pk>/delete', views.blocked_delete),
+    path('blocked/<int:pk>/add', views.block_add),
 
     # E-MAIL
     path('email/send', views.send_mail_request),
@@ -71,7 +71,6 @@ urlpatterns = [
     path('like/<int:user_id>/get', views.like_form_get),
     path('like/create', views.like_form_create),
     path('like/<int:userId>/<int:postId>/delete', views.like_delete),
-
 
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

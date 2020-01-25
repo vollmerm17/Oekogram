@@ -1,13 +1,14 @@
+# import self as self
 from django.contrib.auth.decorators import permission_required
 from django.core import serializers
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.core.mail import send_mail
-from django.forms import model_to_dict
-from django.http import HttpResponse, JsonResponse
+from django.db.models import Q
+from django.http import HttpResponse
 from drf_yasg.utils import swagger_auto_schema
 from friendship.exceptions import AlreadyExistsError
-from friendship.models import Friend, BlockManager, Follow, FollowingManager, Block
+from friendship.models import Follow, Block
 from rest_framework import views
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.parsers import JSONParser, MultiPartParser
@@ -114,6 +115,22 @@ def posts_get_by_id(request, pk):
         return Response({'error': 'Post does not exist.'}, status=404)
 
     serializer = PostsSerializer(posts)
+    return Response(serializer.data)
+
+
+@swagger_auto_schema(method='POST', responses={200: PostsSerializer(many=True)})
+@api_view(['POST'])
+def posts_get_from_follows(request):
+    try:
+        data = JSONParser().parse(request)
+        list_id = []
+        for d in data:
+            list_id.append(d['pk'])
+        posts = Post.objects.all().filter(user_id__in=list_id).order_by('-date')
+    except Post.DoesNotExist:
+        return Response({'error': 'Post does not exist.'}, status=404)
+
+    serializer = PostsSerializer(posts, many=True)
     return Response(serializer.data)
 
 
@@ -230,7 +247,7 @@ def comment_delete(request, pk):
 @swagger_auto_schema(method='GET', responses={200: ProfileListSerializer(many=True)})
 @api_view(['GET'])
 def profile_list(request):
-    users = Profile.objects.all()
+    users = Profile.objects.exclude(blocking__blocked=request.user.id)
     serializer = ProfileListSerializer(users, many=True)
     return Response(serializer.data, status=200)
 
@@ -286,22 +303,40 @@ def profile_delete(request, pk):
 @api_view(['GET'])
 def followers_get(request):
     followers = Follow.objects.followers(request.user)
-    serialized_qs = serializers.serialize('json', followers, fields=('id', 'username'))
+    serialized_qs = serializers.serialize('json', followers, fields=())
     return Response(json.loads(serialized_qs), status=200, content_type='json')
+
+# Leute die mir folgen
+@swagger_auto_schema(method='GET', responses={200: ProfileListSerializer(many=True)})
+@api_view(['GET'])
+def followers_list(request):
+    profile = Profile.objects.get(pk=request.user.id)
+    users = Profile.objects.filter(following__followee=profile.id)
+    serializer = ProfileListSerializer(users, many=True)
+    return Response(serializer.data, status=200)
 
 
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
 def follows_get(request):
-    follows = list(Follow.objects.following(request.user))
-    serialized_qs = serializers.serialize('json', follows, fields=('id', 'username'))
+    follows = Follow.objects.following(request.user)
+    serialized_qs = serializers.serialize('json', follows, fields=())
     return Response(json.loads(serialized_qs), status=200, content_type='json')
+
+# Leute denen ich folge
+@swagger_auto_schema(method='GET', responses={200: ProfileListSerializer(many=True)})
+@api_view(['GET'])
+def follows_list(request):
+    profile = Profile.objects.get(pk=request.user.id)
+    users = Profile.objects.filter(followers__follower=profile.id)
+    serializer = ProfileListSerializer(users, many=True)
+    return Response(serializer.data, status=200)
 
 
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
-def followers_of_user_get(request, username):
-    other_user = Profile.objects.get(username=username)
+def followers_of_user_get(request, pk):
+    other_user = Profile.objects.get(pk=pk)
     followers = Follow.objects.followers(other_user)
     serialized_qs = serializers.serialize('json', followers, fields=('id', 'username'))
     return Response(json.loads(serialized_qs), status=200, content_type='json')
@@ -309,8 +344,8 @@ def followers_of_user_get(request, username):
 
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
-def follows_of_user_get(request, username):
-    other_user = Profile.objects.get(username=username)
+def follows_of_user_get(request, pk):
+    other_user = Profile.objects.get(pk=pk)
     follows = Follow.objects.following(other_user)
     serialized_qs = serializers.serialize('json', follows, fields=('id', 'username'))
     return Response(json.loads(serialized_qs), status=200, content_type='json')
@@ -327,8 +362,8 @@ def follows_of_user_get(request, username):
 
 @swagger_auto_schema(method='POST', responses={200})
 @api_view(['POST'])
-def follow_add(request, username):
-    other_user = Profile.objects.get(username=username)
+def follow_add(request, pk):
+    other_user = Profile.objects.get(pk=pk)
     try:
         Follow.objects.add_follower(
             request.user,
@@ -342,9 +377,9 @@ def follow_add(request, username):
 
 
 @api_view(['DELETE'])
-def follow_delete(request, username):
+def follow_delete(request, pk):
     try:
-        other_user = Profile.objects.get(username=username)
+        other_user = Profile.objects.get(pk=pk)
         Follow.objects.remove_follower(
             request.user,
             other_user)
@@ -358,8 +393,8 @@ def follow_delete(request, username):
 # BLOCK
 @swagger_auto_schema(method='POST', responses={200})
 @api_view(['POST'])
-def block_add(request, username):
-    other_user = Profile.objects.get(username=username)
+def block_add(request, pk):
+    other_user = Profile.objects.get(pk=pk)
     try:
         Block.objects.add_block(
             request.user,
@@ -389,9 +424,9 @@ def blocking_get(request):
 
 
 @api_view(['DELETE'])
-def blocked_delete(request, username):
+def blocked_delete(request, pk):
     try:
-        other_user = Profile.objects.get(username=username)
+        other_user = Profile.objects.get(pk=pk)
         Block.objects.remove_block(
             request.user,
             other_user)

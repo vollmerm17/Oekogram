@@ -32,7 +32,7 @@
     </div>
     <mat-card-content class="bio">{{profile.bio}}</mat-card-content>
     <div class="profileBar">
-      <div class="infoBox" *ngIf="finishedLoadFollowers">FOLLOWER <br/> {{followersCount}}</div>
+      <a [routerLink]="['/followers']"><div class="infoBox" *ngIf="finishedLoadFollowers">FOLLOWER <br/> {{followersCount}}</div></a>
       <div class="infoBox">GREENSCORE <br/> {{profile.greenscore}}</div>
       <div class="infoBox" *ngIf="finishedLoadFollowings">FOLLOWING <br/> {{followingsCount}}</div>
     </div>
