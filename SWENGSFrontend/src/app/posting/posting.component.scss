@@ -14,8 +14,11 @@
 }
 
 .profile-picture {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
+  display: block;
+  margin-right: 40px;
+  height: 40px;
+  border-radius: 50%;
+  vertical-align: bottom;
 }
 
 .comments {
