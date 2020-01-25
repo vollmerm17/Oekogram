@@ -1,16 +1,20 @@
-/*.flexbox {
+.main {
+  //display: flex;
+  //flex-grow: 1;
+  border-style: solid;
+}
+.test {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-}*/
+  flex-grow: 1;
+
+}
+
 .posting {
-  // max-width: 90%;
-  // margin: 50px ;
-  justify-content: center;
+  //justify-content: center;
   font-family: 'Merriweather', serif;
   box-shadow: 2px 2px grey;
   margin-top: 50px;
-  width: 100%;
+  //flex-basis: 1000px;
 }
 .profile-picture {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');

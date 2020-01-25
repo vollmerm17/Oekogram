@@ -20,12 +20,13 @@ p {
   display: flex;
   flex-grow: 2;
   align-items: center;
-  font-weight: bold;
+  //font-weight: bold;
   font-size: 20px;
+  //text-shadow: 1px 1px grey;
   margin-left: 20px;
 }
 .name a {
-  color: #467302;
+  color: #E6E6E6;
   text-decoration: none;
 }
 .scoreBox {
