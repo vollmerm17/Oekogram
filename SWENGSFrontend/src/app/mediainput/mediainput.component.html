@@ -1,9 +1,23 @@
+<style>
+  .my-drop-zone {
+    background: white;
+    border: dotted 3px darkgray;
+  }
+
+  .nv-file-over {
+    border: dotted 3px red;
+  }
+
+  /* Default class applied to drop zones on over */
+  html, body {
+    height: 200%;
+  }
+</style>
 <div *ngIf="!initializing">
   <table class="table" *ngIf="medias?.length">
     <thead>
     <tr>
       <th>Name</th>
-      <th>Größe</th>
       <th>Status</th>
       <th></th>
     </tr>
@@ -11,25 +25,30 @@
     <tbody>
     <tr *ngFor="let media of medias; let i = index;">
       <td><strong>{{ media.original_file_name }}</strong></td>
-      <td>{{ media.size / 1024 / 1024 | number }}&nbsp;MB</td>
       <td>
         <span *ngIf="!media.id">Uploading...</span>
         <span *ngIf="media.id">Uploaded</span>
       </td>
       <td>
         <div class="btn-group">
-          <button type="button" class="btn btn-primary" (click)="downloadMedia(media)">
+          <button mat-raised-button (click)="downloadMedia(media)">
             Download
           </button>
-          <button type="button" class="btn btn-danger" (click)="deleteMedia(i)">
-            Entfernen
+          <button mat-raised-button (click)="deleteMedia(i)">
+            Delete
           </button>
         </div>
       </td>
     </tr>
     </tbody>
   </table>
-  <input type="file" [accept]="accept" ng2FileSelect [uploader]="uploader"/>
+  <div *ngIf="justOne" ng2FileDrop
+       [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+       (fileOver)="fileOverBase($event)"
+       [uploader]="uploader"
+       class="well my-drop-zone">
+    DROP your profile picture!
+  </div>
 </div>
 
 
