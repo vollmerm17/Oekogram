@@ -1,17 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
 import {ProfileService} from '../service/profile.service';
 import {RelationshipService} from '../service/relationship.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import {Router} from '@angular/router';
-
 
 @Component({
-  selector: 'app-community',
-  templateUrl: './community.component.html',
-  styleUrls: ['./community.component.scss']
+  selector: 'app-followers',
+  templateUrl: './followers.component.html',
+  styleUrls: ['./followers.component.scss']
 })
-export class CommunityComponent implements OnInit {
+export class FollowersComponent implements OnInit {
+
 
   displayedColumns = ['pictures', 'username', 'greenscore', 'actionFollow', 'actionBlock'];
   readonly accessTokenLocalStorageKey = 'access_token';
@@ -23,6 +23,7 @@ export class CommunityComponent implements OnInit {
   blockingsAll: any[number] = [];
   search: '';
   beingBlockedAll;
+  private followersAll: any[number] = [];
 
 
   constructor(private http: HttpClient, private router: Router, private profileService: ProfileService,
@@ -39,13 +40,19 @@ export class CommunityComponent implements OnInit {
       this.userIdLogIn = res.id;
     });
 
-    this.profileService.getProfiles().subscribe((response: any[]) => {
-      this.profilesAll = response;
+    this.relService.getListFollowers().subscribe((response: any[]) => {
+      this.followersAll = response;
     });
 
     this.relService.getFollowings().subscribe((res: any[]) => {
       for (const f of res) {
         this.followingsAll.push(f.pk);
+      }
+    });
+
+    this.relService.getFollowers().subscribe((res: any[]) => {
+      for (const f of res) {
+        this.followersAll.push(f.pk);
       }
     });
 

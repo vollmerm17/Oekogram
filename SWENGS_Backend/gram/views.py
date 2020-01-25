@@ -247,7 +247,7 @@ def comment_delete(request, pk):
 @swagger_auto_schema(method='GET', responses={200: ProfileListSerializer(many=True)})
 @api_view(['GET'])
 def profile_list(request):
-    users = Profile.objects.exclude(blocking__blocked=request.user)
+    users = Profile.objects.exclude(blocking__blocked=request.user.id)
     serializer = ProfileListSerializer(users, many=True)
     return Response(serializer.data, status=200)
 
@@ -303,8 +303,17 @@ def profile_delete(request, pk):
 @api_view(['GET'])
 def followers_get(request):
     followers = Follow.objects.followers(request.user)
-    serialized_qs = serializers.serialize('json', followers, fields=('id', 'username'))
+    serialized_qs = serializers.serialize('json', followers, fields=())
     return Response(json.loads(serialized_qs), status=200, content_type='json')
+
+# Leute die mir folgen
+@swagger_auto_schema(method='GET', responses={200: ProfileListSerializer(many=True)})
+@api_view(['GET'])
+def followers_list(request):
+    profile = Profile.objects.get(pk=request.user.id)
+    users = Profile.objects.filter(following__followee=profile.id)
+    serializer = ProfileListSerializer(users, many=True)
+    return Response(serializer.data, status=200)
 
 
 @swagger_auto_schema(method='GET', responses={200})
@@ -313,6 +322,15 @@ def follows_get(request):
     follows = Follow.objects.following(request.user)
     serialized_qs = serializers.serialize('json', follows, fields=())
     return Response(json.loads(serialized_qs), status=200, content_type='json')
+
+# Leute denen ich folge
+@swagger_auto_schema(method='GET', responses={200: ProfileListSerializer(many=True)})
+@api_view(['GET'])
+def follows_list(request):
+    profile = Profile.objects.get(pk=request.user.id)
+    users = Profile.objects.filter(followers__follower=profile.id)
+    serializer = ProfileListSerializer(users, many=True)
+    return Response(serializer.data, status=200)
 
 
 @swagger_auto_schema(method='GET', responses={200})
