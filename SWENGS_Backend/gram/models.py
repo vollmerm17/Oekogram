@@ -2,6 +2,7 @@ from datetime import datetime
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models import PositiveIntegerField
+from django.utils import timezone
 
 
 class Activity(models.Model):
@@ -45,7 +46,7 @@ class Post(models.Model):
     pictures = models.ManyToManyField('Media', blank=True)
     likes = models.PositiveIntegerField(default=0)
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
-    date = models.DateTimeField(default=datetime.now, blank=True)
+    date = models.DateTimeField(default=timezone.now, blank=True)
 
 
 class Comment(models.Model):

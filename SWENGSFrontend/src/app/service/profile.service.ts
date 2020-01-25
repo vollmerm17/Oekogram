@@ -21,7 +21,7 @@ export class ProfileService {
   }
 
   updateProfile(profile: any) {
-    return this.http.put('/api/profile/' + profile.Id + '/change', profile);
+    return this.http.put('/api/profile/' + profile.id + '/update', profile);
   }
 
   deleteProfile(profileId: any) {

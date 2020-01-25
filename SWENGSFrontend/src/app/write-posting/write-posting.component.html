@@ -16,26 +16,46 @@
       <mat-hint align="end"></mat-hint>
     </mat-form-field>
     <br/>
-
     <div class="activitiy">
       <mat-form-field class="activityOptions">
         <mat-select placeholder="Activity" formControlName="activity" required>
-          <mat-option [value]="activityOption.id" *ngFor="let activityOption of activityOptions">{{activityOption.name}}</mat-option>
+          <mat-option [value]="activityOption.id"
+                      *ngFor="let activityOption of activityOptions" >{{activityOption.name}}</mat-option>
         </mat-select>
         <mat-hint align="end">Type of your activity</mat-hint>
       </mat-form-field>
+
       <mat-card-actions>
-        <button mat-button routerLink="posting/write">
+        <button mat-button  (click)="showAddActivity=!showAddActivity" *ngIf="userService.hasPermission('gram.add_activity')">
           <i class="material-icons">
             add
           </i>
-          Add activities</button>
+          Add activities
+        </button>
       </mat-card-actions>
-    </div>
+      </div>
+      <div *ngIf="showAddActivity">
+        <form [formGroup]="activityFormGroup">
+          <mat-form-field>
+            <input formControlName="name" matInput placeholder="Activity Name" required type="text">
+            <mat-hint align="end">Name of the Activity</mat-hint>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="description" matInput placeholder="Activity Description" required type="text">
+            <mat-hint align="end">Describe the Activity</mat-hint>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="greenscore" matInput placeholder="Activity Greenscore" required type="number">
+            <mat-hint align="end">Greenscore of the Activity</mat-hint>
+          </mat-form-field>
+          <button mat-raised-button color="primary" [disabled]="!activityFormGroup.valid" (click)="createActivity()">Create Activity</button>
+        </form>
+      </div>
 
-  <div>
-    <app-mediainput formControlName="pictures"></app-mediainput>
-  </div>
+
+    <div>
+      <app-mediainput formControlName="pictures" text="DROP your Picture here!"></app-mediainput>
+    </div>
   </form>
 
   <br/>
@@ -48,7 +68,7 @@
 
 
   <div class="centered" *ngIf="showWebcam">
-    <webcam  [trigger]="triggerObservable" (imageCapture)="handleImage($event)" height="200" width="200"></webcam>
+    <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)" height="200" width="200"></webcam>
     <br>
     <button mat-raised-button color="primary" (click)="takePicture()">Take Picture!</button>
 
@@ -56,11 +76,9 @@
   </div>
 
 </mat-card>
-  <!--<textarea name="message" rows="10" cols="60">
-  ... Write Post ...
-  </textarea>-->
-
-
+<!--<textarea name="message" rows="10" cols="60">
+... Write Post ...
+</textarea>-->
 
 
 <!--<div *ngIf="!files.length" class="col-12 rmpm dropzone" appDrag (files)="filesDropped($event)">

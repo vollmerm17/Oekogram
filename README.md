@@ -13,14 +13,13 @@ This is an Angular/Django project conducted by students of the UAS JOANNEUM as p
 
 * @vollmerm17 is responsible for the components: mediainput, profile, profile-form, community, date, register
 
-* @juliagruber is responsible for the components: comment, write-mail
+* @juliagruber is responsible for the components: comment, write-mail, login, logout
 
 
-* @markusAUT-FH is responsible for the components: comment, posting, write-mail,
-,posting
+* @markusAUT-FH is responsible for the components: comment, posting, write-mail, search
 
 * @BeckerDavid is responsible for the components: profile-form, posting_detail, posting_form,
-,write-posting, profile-icons
+write-posting, profile-icons
 
 # Project
 
@@ -42,21 +41,21 @@ Here is guidance to run this project.
 
 3. Load initial data to database using Django fixtures
 
-  `venv\Scripts\python.exe manage.py loaddata initial_data`
+      `venv\Scripts\python.exe manage.py loaddata initial_data`
 
 4. Run App
 
-  `python manage.py runserver 8000`
+      `python manage.py runserver 8000`
 
 ### Angular
 
  1. Install all required packages using package.json
 
- `npm install`
+      `npm install`
 
  2. Run the development server
 
- `ng serve`
+      `ng serve`
 
  3.  Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
