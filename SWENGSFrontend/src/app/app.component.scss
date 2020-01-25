@@ -7,8 +7,8 @@
   width: 100%;
   z-index: 3;
   box-shadow: 2px 2px grey;
+  height: 65px;
   /*flex-grow: 0;
-  height: 5rem;
   min-height: 5rem;
   display: flex;
   flex-wrap: wrap;
@@ -22,6 +22,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   //padding: 30px;
   background-color: #9DBF54;
 }
@@ -32,18 +33,19 @@
 }*/
 .profileSmall {
    display: flex;
-   flex-basis: 300px;
+   flex-basis: 450px;
    flex-shrink: 1;
    flex-grow: 0;
+   flex-wrap: nowrap;
    align-items: center;
-   justify-content: center;
+   justify-content: flex-start;
    color: #467302;
    height: 65px;
  }
-.profileSmall > * {
+/*.profileSmall > * {
   // display: flex;
   align-items: center;
-}
+}*/
 .title {
   display: flex;
   flex-basis: 450px;
@@ -60,12 +62,6 @@
   align-items: center;
   justify-content: center;
 }
-/*.menuBar > * {
-  display: flex;
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: 50px;
-}*/
 .menuToolBar {
   display: flex;
   flex-wrap: wrap;
@@ -77,7 +73,7 @@
   color: #467302;
 }
 .contentBody {
-  padding-top: 65px;
+  padding-top: 67px;
   width: 100%;
 }
 .flexBox-container {

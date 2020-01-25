@@ -13,6 +13,7 @@ from rest_framework import views
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.permissions import AllowAny
+
 from rest_framework.response import Response
 from rest_framework.utils import json
 
@@ -298,6 +299,24 @@ def follows_get(request):
     return Response(json.loads(serialized_qs), status=200, content_type='json')
 
 
+@swagger_auto_schema(method='GET', responses={200})
+@api_view(['GET'])
+def followers_of_user_get(request, pk):
+    other_user = Profile.objects.get(pk=pk)
+    followers = Follow.objects.followers(other_user)
+    serialized_qs = serializers.serialize('json', followers, fields=('id', 'username'))
+    return Response(json.loads(serialized_qs), status=200, content_type='json')
+
+
+@swagger_auto_schema(method='GET', responses={200})
+@api_view(['GET'])
+def follows_of_user_get(request, pk):
+    other_user = Profile.objects.get(pk=pk)
+    follows = Follow.objects.following(other_user)
+    serialized_qs = serializers.serialize('json', follows, fields=('id', 'username'))
+    return Response(json.loads(serialized_qs), status=200, content_type='json')
+
+
 # @swagger_auto_schema(method='GET', responses={200})
 # @api_view(['GET'])
 # def follows_boolean_get(request, pk):
@@ -418,8 +437,8 @@ def media_download(request, pk):
 def media_get(request, pk):
     try:
         media = Media.objects.get(pk=pk)
-    except Media.DoesNotExist:
-        return Response({'error': 'Media does not exist.'}, status=404)
+    except Profile.DoesNotExist:
+        return Response({'error': 'Profile does not exist.'}, status=404)
 
     serializer = MediaSerializer(media)
     return Response(serializer.data)
@@ -427,7 +446,6 @@ def media_get(request, pk):
 
 @swagger_auto_schema(method='POST', request_body=EmailSerializer, responses={200: EmailSerializer()})
 @api_view(['POST'])
-@permission_classes([AllowAny])
 # @permission_required('gram.add_comment', raise_exception=True)
 def send_mail_request(request):
     data = JSONParser().parse(request)

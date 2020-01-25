@@ -13,7 +13,7 @@ import {Router} from '@angular/router';
 })
 export class CommunityComponent implements OnInit {
 
-  displayedColumns = ['pictures', 'username', 'greenscore', 'first_name', 'id'];
+  displayedColumns = ['pictures', 'username', 'greenscore', 'actionFollow', 'actionBlock'];
   readonly accessTokenLocalStorageKey = 'access_token';
   userId: number;
   profilesAll;
