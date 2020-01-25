@@ -9,6 +9,7 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import {ProfileService} from '../service/profile.service';
 import {ActivityService} from '../service/activity.service';
 import {UserService} from '../service/user.service';
+import {getLocaleDateTimeFormat} from "@angular/common";
 
 @Component({
   selector: 'app-write-posting',
