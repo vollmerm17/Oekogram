@@ -84,7 +84,7 @@ def activity_delete(request, pk):
 @api_view(['GET'])
 def posts_get_all(request):
     try:
-        posts = Post.objects.all()
+        posts = Post.objects.all().order_by('-date')
     except Post.DoesNotExist:
         return Response({'error': 'Post does not exist.'}, status=404)
 
@@ -96,7 +96,7 @@ def posts_get_all(request):
 @api_view(['GET'])
 def posts_get_by_user(request, user_id):
     try:
-        posts = Post.objects.all().filter(user_id=user_id)
+        posts = Post.objects.all().filter(user_id=user_id).order_by('-date')
     except Post.DoesNotExist:
         return Response({'error': 'Post does not exist.'}, status=404)
 
@@ -108,7 +108,7 @@ def posts_get_by_user(request, user_id):
 @api_view(['GET'])
 def posts_get_by_id(request, pk):
     try:
-        posts = Post.objects.get(pk=pk)
+        posts = Post.objects.get(pk=pk).order_by('-date')
     except Post.DoesNotExist:
         return Response({'error': 'Post does not exist.'}, status=404)
 
