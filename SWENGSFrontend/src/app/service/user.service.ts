@@ -41,6 +41,12 @@ export class UserService {
     this.router.navigate(['/login']);
   }
 
+    hasPermission(permission) {
+    const token = localStorage.getItem(this.accessTokenLocalStorageKey); const decodedToken = this.jwtHelperService.decodeToken(token);
+    const permissions = decodedToken.permissions;
+    return permission in permissions;
+  }
+
 
 
 }
