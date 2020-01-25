@@ -6,6 +6,8 @@ import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WritePostingService} from '../service/write-posting.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {ProfileService} from '../service/profile.service';
+import {ActivityService} from '../service/activity.service';
 
 @Component({
   selector: 'app-write-posting',
@@ -20,12 +22,17 @@ export class WritePostingComponent implements OnInit {
   contentValue = '';
   showWebcam = false;
   webcamImage: WebcamImage = null;
+  userProfile;
+  activityFormGroup: FormGroup;
 
   private trigger: Subject<void> = new Subject<void>();
+  showAddActivity = false;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute,
               private router: Router, public jwtHelper: JwtHelperService,
-              private writePostService: WritePostingService) {
+              private writePostService: WritePostingService,
+              private profileService: ProfileService,
+              private activityService: ActivityService) {
     const token = localStorage.getItem(this.accessTokenLocalStorageKey);
     this.userId = this.jwtHelper.decodeToken(token).user_id;
   }
@@ -37,6 +44,19 @@ export class WritePostingComponent implements OnInit {
       content: [],
       pictures: [[]],
       activity: [],
+    });
+
+    this.activityFormGroup = this.fb.group({
+      id: [null],
+      name: [''],
+      description: [''],
+      shortcut: ['xxx'],
+      greenscore: [''],
+    });
+
+    this.profileService.getProfile(this.userId).subscribe((response: any) => {
+      this.userProfile = response;
+      console.log(this.userProfile);
     });
 
     const data = this.route.snapshot.data;
@@ -56,14 +76,26 @@ export class WritePostingComponent implements OnInit {
   }
 
   createPosting() {
-
-
     // this.writePostFormGroup.controls.pictures.setValue(this.webcamImage); muss noch getestet werden!
     const post = this.writePostFormGroup.value;
-    console.log(post);
+    this.activityService.getActivity(post.activity).subscribe((response: any) => {
+      this.userProfile.greenscore += response.greenscore;
+      this.profileService.updateProfile(this.userProfile).subscribe();
+    });
+
     this.writePostService.createPost(post).subscribe(() => {
-        alert('created successfully');
-      });
+      alert('created successfully');
+    });
   }
 
+  createActivity() {
+    const activity = this.activityFormGroup.value;
+    this.activityService.createActivity(activity).subscribe(() => {
+      this.activityService.getActivities().subscribe((response: any) => {
+        this.activityOptions = response; });
+      this.showAddActivity = false;
+      this.activityFormGroup.reset();
+      alert("Activity Added!");
+    });
+  }
 }

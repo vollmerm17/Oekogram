@@ -24,7 +24,7 @@ class PostsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['id', 'name', 'content', 'pictures', 'likes', 'activity', 'date', 'pictures']
+        fields = ['id', 'name', 'content', 'pictures', 'likes', 'activity', 'date', 'pictures', 'user_id']
 
     def get_name(self, obj):
         return obj.user_id.username
