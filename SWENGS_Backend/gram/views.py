@@ -297,6 +297,24 @@ def follows_get(request):
     return Response(json.loads(serialized_qs), status=200, content_type='json')
 
 
+@swagger_auto_schema(method='GET', responses={200})
+@api_view(['GET'])
+def followers_of_user_get(request, username):
+    other_user = Profile.objects.get(username=username)
+    followers = Follow.objects.followers(other_user)
+    serialized_qs = serializers.serialize('json', followers, fields=('id', 'username'))
+    return Response(json.loads(serialized_qs), status=200, content_type='json')
+
+
+@swagger_auto_schema(method='GET', responses={200})
+@api_view(['GET'])
+def follows_of_user_get(request, username):
+    other_user = Profile.objects.get(username=username)
+    follows = Follow.objects.following(other_user)
+    serialized_qs = serializers.serialize('json', follows, fields=('id', 'username'))
+    return Response(json.loads(serialized_qs), status=200, content_type='json')
+
+
 # @swagger_auto_schema(method='GET', responses={200})
 # @api_view(['GET'])
 # def follows_boolean_get(request, pk):
@@ -361,12 +379,30 @@ def blocked_get(request):
     return Response(json.loads(serialized_qs), status=200, content_type='json')
 
 
+# @swagger_auto_schema(method='GET', responses={200})
+# @api_view(['GET'])
+# def blocked_of_user_get(request, username):
+#     other_user = Profile.objects.get(username=username)
+#     blocked = Block.objects.blocked(other_user)
+#     serialized_qs = serializers.serialize('json', blocked, fields=('id', 'username'))
+#     return Response(json.loads(serialized_qs), status=200, content_type='json')
+
+
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
 def blocking_get(request):
     blocking = Block.objects.blocking(request.user)
     serialized_qs = serializers.serialize('json', blocking, fields=('id', 'username'))
     return Response(json.loads(serialized_qs), status=200, content_type='json')
+
+
+# @swagger_auto_schema(method='GET', responses={200})
+# @api_view(['GET'])
+# def blocking_of_user_get(request, username):
+#     other_user = Profile.objects.get(username=username)
+#     blocking = Block.objects.blocking(other_user)
+#     serialized_qs = serializers.serialize('json', blocking, fields=('id', 'username'))
+#     return Response(json.loads(serialized_qs), status=200, content_type='json')
 
 
 @api_view(['DELETE'])

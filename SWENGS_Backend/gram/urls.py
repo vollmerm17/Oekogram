@@ -50,12 +50,17 @@ urlpatterns = [
     # FOLLOW
     path('followers/get', views.followers_get),
     path('follows/get', views.follows_get),
+    path('followers/<slug:username>/get', views.followers_of_user_get),
+    path('follows/<slug:username>/get', views.follows_of_user_get),
     # path('follows/<int:pk>/bool', views.follows_boolean_get),
     path('follow/<slug:username>/delete', views.follow_delete),
     path('follow/<slug:username>/add', views.follow_add),
 
     # BLOCKED
     path('blocked/get', views.blocked_get),
+    path('blocking/get', views.blocking_get),
+    # path('blocked/<slug:username>/get', views.blocked_of_user_get),
+    # path('blocking/<slug:username>/get', views.blocking_of_user_get),
     path('blocked/<slug:username>/delete', views.blocked_delete),
     path('blocked/<slug:username>/add', views.block_add),
 

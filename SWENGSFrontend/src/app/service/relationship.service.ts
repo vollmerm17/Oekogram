@@ -13,9 +13,16 @@ export class RelationshipService {
     return this.http.get('api/followers/get');
   }
 
-
   getFollowings() {
     return this.http.get('api/follows/get');
+  }
+
+  getUserFollowers(username: any) {
+    return this.http.get('api/followers/' + username + '/get');
+  }
+
+  getUserFollowings(username: any) {
+    return this.http.get('api/follows/' + username + '/get');
   }
 
   sendFollow(profile: any) {
@@ -28,6 +35,10 @@ export class RelationshipService {
 
   getBlocks() {
     return this.http.get('api/blocked/get');
+  }
+
+  getBlockings() {
+    return this.http.get('api/blocking/get');
   }
 
   removeBlock(username: any) {

@@ -1,20 +1,19 @@
 .miniProfileBox {
   display: flex;
-  flex-basis: 10%;
-  justify-content: center;
-  margin: 1%;
-  height: 98%;
-}
-.miniProfileBox > * {
-  margin-right: 20px;
+  align-items: center;
+  justify-self: stretch;
+  height: 65px;
+  padding: 0 10px;
 }
 img {
-  width: 20%;
-  height: auto;
+  margin-top: 3px;
+  flex-basis:65px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  margin: 5%;
 }
 p {
+  flex-basis: 200px;
   font-family: 'Merriweather', serif;
 }
 .name {
@@ -22,7 +21,12 @@ p {
   flex-grow: 2;
   align-items: center;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 20px;
+  margin-left: 20px;
+}
+.name a {
+  color: #467302;
+  text-decoration: none;
 }
 .scoreBox {
   background-color: #F2F2F2;
@@ -30,8 +34,9 @@ p {
   border-style: solid;
   border-color: #467302;
   border-radius: 50%;
+  margin-left: 20px;
 
-  margin: 13px 13px;
-  padding: 5% 20% 5% 8%;
-  //padding: 5%;
+  text-align: center;
+  vertical-align: center;
+  padding: 5% 10%;
 }
