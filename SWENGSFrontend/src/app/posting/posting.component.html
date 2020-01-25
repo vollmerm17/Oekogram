@@ -5,13 +5,13 @@
   <mat-card-header>
     <div mat-card-avatar>
       <a [routerLink]="['/profile', post.user_id]">
-        <img mat-card-avatar class="profile-picture" src="api/media/{{post.pictures[0]}}"/>
+        <img mat-card-avatar class="profile-picture" src="api/media/{{post.user_picture[0]}}"/>
       </a>
     </div>
     <mat-card-title><a class="link" href="/profile/{{post.user_id}}">{{post.name}}</a></mat-card-title>
     <mat-card-subtitle>{{post.date | date:'HH:mm MMM, dd yyyy'}}</mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image *ngIf="post.pictures" src="api/media/{{post.pictures[0]}}">
+  <img mat-card-image *ngIf="post.pictures.length !=0" src="api/media/{{post.pictures[0]}}">
 <!--  <img mat-card-image *ngIf="!post.pictures" src="https://material.angular.io/assets/img/examples/shiba2.jpg"
        alt="Photo of a Shiba Inu">-->
   <mat-card-content>

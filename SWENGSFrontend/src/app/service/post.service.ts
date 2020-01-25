@@ -21,5 +21,8 @@ export class PostService {
     return this.http.get('api/post/' + id + '/get');
   }
 
+  getPostsByFollows(followsID: any[]) {
+    return this.http.post('/api/post/follows', followsID);
+  }
 
 }

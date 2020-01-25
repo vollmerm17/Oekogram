@@ -1,4 +1,4 @@
-import self as self
+# import self as self
 from django.contrib.auth.decorators import permission_required
 from django.core import serializers
 from django.core.files.base import ContentFile
@@ -115,6 +115,22 @@ def posts_get_by_id(request, pk):
         return Response({'error': 'Post does not exist.'}, status=404)
 
     serializer = PostsSerializer(posts)
+    return Response(serializer.data)
+
+
+@swagger_auto_schema(method='POST', responses={200: PostsSerializer(many=True)})
+@api_view(['POST'])
+def posts_get_from_follows(request):
+    try:
+        data = JSONParser().parse(request)
+        list_id = []
+        for d in data:
+            list_id.append(d['pk'])
+        posts = Post.objects.all().filter(user_id__in=list_id).order_by('-date')
+    except Post.DoesNotExist:
+        return Response({'error': 'Post does not exist.'}, status=404)
+
+    serializer = PostsSerializer(posts, many=True)
     return Response(serializer.data)
 
 
