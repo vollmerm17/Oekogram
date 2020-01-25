@@ -22,6 +22,7 @@ export class CommunityComponent implements OnInit {
   usernameLogIn: string;
   blockingsAll: any[string] = [];
   search: '';
+  beingBlockedAll: any[string] = [];
 
 
   constructor(private http: HttpClient, private router: Router, private profileService: ProfileService,
@@ -49,10 +50,25 @@ export class CommunityComponent implements OnInit {
         for (const f of res) {
           this.blockingsAll.push(f.fields.username);
         }
+      }
+    );
+    this.relService.getBlocks().subscribe((res: any[]) => {
+        for (const f of res) {
+          this.beingBlockedAll.push(f.fields.username);
+        }
         this.finished = true;
       }
     );
   }
+
+  blocksMe(profile: any) {
+    for (const p of this.beingBlockedAll) {
+      if (p === profile.username) {
+        return true;
+      }
+    }
+  }
+
 
   followsAlready(profile: any) {
     for (const p of this.followingsAll) {

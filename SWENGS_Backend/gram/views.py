@@ -1,13 +1,14 @@
+import self as self
 from django.contrib.auth.decorators import permission_required
 from django.core import serializers
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.core.mail import send_mail
-from django.forms import model_to_dict
-from django.http import HttpResponse, JsonResponse
+from django.db.models import Q
+from django.http import HttpResponse
 from drf_yasg.utils import swagger_auto_schema
 from friendship.exceptions import AlreadyExistsError
-from friendship.models import Friend, BlockManager, Follow, FollowingManager, Block
+from friendship.models import Follow, Block
 from rest_framework import views
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.parsers import JSONParser, MultiPartParser
@@ -229,7 +230,7 @@ def comment_delete(request, pk):
 @swagger_auto_schema(method='GET', responses={200: ProfileListSerializer(many=True)})
 @api_view(['GET'])
 def profile_list(request):
-    users = Profile.objects.all()
+    users = Profile.objects.exclude(blockees__blocker=request.user)
     serializer = ProfileListSerializer(users, many=True)
     return Response(serializer.data, status=200)
 
@@ -289,13 +290,13 @@ def followers_get(request):
     return Response(json.loads(serialized_qs), status=200, content_type='json')
 
 
-
 @swagger_auto_schema(method='GET', responses={200})
 @api_view(['GET'])
 def follows_get(request):
     follows = list(Follow.objects.following(request.user))
     serialized_qs = serializers.serialize('json', follows, fields=('id', 'username'))
     return Response(json.loads(serialized_qs), status=200, content_type='json')
+
 
 # @swagger_auto_schema(method='GET', responses={200})
 # @api_view(['GET'])
@@ -308,8 +309,8 @@ def follows_get(request):
 
 @swagger_auto_schema(method='POST', responses={200})
 @api_view(['POST'])
-def follow_add(request, username):
-    other_user = Profile.objects.get(username=username)
+def follow_add(request, pk):
+    other_user = Profile.objects.get(pk=pk)
     try:
         Follow.objects.add_follower(
             request.user,
@@ -323,9 +324,9 @@ def follow_add(request, username):
 
 
 @api_view(['DELETE'])
-def follow_delete(request, username):
+def follow_delete(request, pk):
     try:
-        other_user = Profile.objects.get(username=username)
+        other_user = Profile.objects.get(pk=pk)
         Follow.objects.remove_follower(
             request.user,
             other_user)
@@ -339,8 +340,8 @@ def follow_delete(request, username):
 # BLOCK
 @swagger_auto_schema(method='POST', responses={200})
 @api_view(['POST'])
-def block_add(request, username):
-    other_user = Profile.objects.get(username=username)
+def block_add(request, pk):
+    other_user = Profile.objects.get(pk=pk)
     try:
         Block.objects.add_block(
             request.user,
@@ -370,9 +371,9 @@ def blocking_get(request):
 
 
 @api_view(['DELETE'])
-def blocked_delete(request, username):
+def blocked_delete(request, pk):
     try:
-        other_user = Profile.objects.get(username=username)
+        other_user = Profile.objects.get(pk=pk)
         Block.objects.remove_block(
             request.user,
             other_user)
