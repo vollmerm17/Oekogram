@@ -26,7 +26,7 @@
       </mat-form-field>
 
       <mat-card-actions>
-        <button mat-button  (click)="showAddActivity=!showAddActivity">
+        <button mat-button  (click)="showAddActivity=!showAddActivity" *ngIf="userService.hasPermission('gram.add_activity')">
           <i class="material-icons">
             add
           </i>

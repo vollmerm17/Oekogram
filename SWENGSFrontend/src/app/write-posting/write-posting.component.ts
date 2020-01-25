@@ -8,6 +8,7 @@ import {WritePostingService} from '../service/write-posting.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {ProfileService} from '../service/profile.service';
 import {ActivityService} from '../service/activity.service';
+import {UserService} from '../service/user.service';
 
 @Component({
   selector: 'app-write-posting',
@@ -32,7 +33,8 @@ export class WritePostingComponent implements OnInit {
               private router: Router, public jwtHelper: JwtHelperService,
               private writePostService: WritePostingService,
               private profileService: ProfileService,
-              private activityService: ActivityService) {
+              private activityService: ActivityService,
+              private userService: UserService) {
     const token = localStorage.getItem(this.accessTokenLocalStorageKey);
     this.userId = this.jwtHelper.decodeToken(token).user_id;
   }
@@ -56,7 +58,6 @@ export class WritePostingComponent implements OnInit {
 
     this.profileService.getProfile(this.userId).subscribe((response: any) => {
       this.userProfile = response;
-      console.log(this.userProfile);
     });
 
     const data = this.route.snapshot.data;
@@ -95,7 +96,7 @@ export class WritePostingComponent implements OnInit {
         this.activityOptions = response; });
       this.showAddActivity = false;
       this.activityFormGroup.reset();
-      alert("Activity Added!");
+      alert('Activity Added!');
     });
   }
 }
