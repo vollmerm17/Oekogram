@@ -1,6 +1,34 @@
+.picture {
+  width: 150px;
+  height: 150px;
+  margin-right: 124px;
+}
 img {
-  width: 20%;
-  height: auto;
+  width: 90%;
+  height: 90%;
   border-radius: 50%;
   margin: 5%;
+}
+.mat-header-cell {
+  font-weight: bold;
+  font-size: 20px;
+}
+.mat-cell {
+  // display:flex;
+  padding: 0 50px 0 0;
+}
+.link {
+  color: #000000;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+}
+.score {
+  text-align: center;
+  color: #467302;
+  font-weight: bold;
+  font-size: 20px;
+}
+.scoreIcon {
+  color: #467302;
 }
