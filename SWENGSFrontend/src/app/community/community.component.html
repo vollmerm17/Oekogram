@@ -29,10 +29,10 @@
       <button mat-button (click)="removeFollow(profile)" *ngIf="finished && followsAlready(profile) && !isItMe(profile)"
               color="accent">
         <i class="material-icons">person_add_disabled</i>
-        <button mat-button (click)="follow(profile)" *ngIf="finished && !followsAlready(profile) && !isItMe(profile) "
-                color="primary">
-          <i class="material-icons">person_add</i>
-        </button>
+      </button>
+      <button mat-button (click)="follow(profile)" *ngIf="finished && !followsAlready(profile) && !isItMe(profile) "
+              color="primary">
+        <i class="material-icons">person_add</i>
       </button>
     </td>
   </ng-container>

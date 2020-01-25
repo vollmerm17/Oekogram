@@ -95,18 +95,27 @@ export class CommunityComponent implements OnInit {
   }
 
   block(profile: any) {
-    this.relService.sendBlock(profile.username).subscribe((this.blockingsAll.push(profile.username)));
+    this.relService.sendBlock(profile.username).subscribe();
+    (this.blockingsAll.push(profile.username));
   }
 
-  removeBlockfromBlocks(profileUsername: string) {
-    for (const p of this.blockingsAll) {
-      let i = 0;
-      if (p.username === profileUsername) {
-        this.blockingsAll.splice(i, 1);
+  /*  removeBlockfromBlocks(profileUsername: string) {
+      for (const p of this.blockingsAll) {
+        let i = 0;
+        if (p.username === profileUsername) {
+          this.blockingsAll.splice(i, 1);
+        }
+        i++;
       }
-      i++;
+    }*/
+
+  removeBlockfromBlocks(profileUsername: string) {
+    const i: number = this.blockingsAll.indexOf(profileUsername);
+    if (i !== -1) {
+      this.blockingsAll.splice(i, 1);
     }
   }
+
 
   removeBlock(profile: any) {
     this.relService.removeBlock(profile.username).subscribe(() => this.removeBlockfromBlocks(profile.username));
