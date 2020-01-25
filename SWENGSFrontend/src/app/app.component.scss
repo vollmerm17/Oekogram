@@ -85,6 +85,14 @@
   flex-grow: 1;
   justify-content: center;
 }
+.register{
+  display: flex;
+  flex-basis: 650px;
+  flex-shrink: 1;
+  flex-grow: 1;
+  justify-content: center;
+  background-color: #F2F2F2;
+}
 .profile{
   display: flex;
   flex-basis: 450px;
@@ -95,7 +103,7 @@
 }
 .placeholder{
   flex-basis: 450px;
-  flex-shrink: 1;
+  flex-shrink: 10;
   flex-grow: 0;
 }
 
