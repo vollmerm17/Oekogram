@@ -7,8 +7,10 @@
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let profile">
       <div class="picture">
-        <img *ngIf="!profile.pictures.length" src="../../assets/img_avatar.png">
-        <img *ngIf="profile.pictures.length" src="api/media/{{profile.pictures}}">
+        <a class="link" [routerLink]="['/profile', profile.id]">
+          <img *ngIf="!profile.pictures.length" src="../../assets/img_avatar.png">
+          <img *ngIf="profile.pictures.length" src="api/media/{{profile.pictures}}">
+        </a>
       </div>
     </td>
   </ng-container>
