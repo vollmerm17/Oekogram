@@ -42,7 +42,7 @@ export class MediainputComponent implements OnInit, ControlValueAccessor {
   }
 
   ngOnInit() {
-    this.justOne = false;
+    this.justOne = true;
     this.hasBaseDropZoneOver = false;
     this.uploader = new FileUploader({
       url: this.resourceUrl,
@@ -55,6 +55,7 @@ export class MediainputComponent implements OnInit, ControlValueAccessor {
     this.uploader.onBeforeUploadItem = (item: FileItem) => {
       if (!this.medias) {
         this.medias = [];
+        this.checkMedia();
       }
       this.medias.push({
         content_type: item.file.type,
