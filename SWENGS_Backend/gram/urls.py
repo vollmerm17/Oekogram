@@ -31,6 +31,7 @@ urlpatterns = [
     path('post/get', views.posts_get_all),
     path('post/<int:user_id>/get', views.posts_get_by_user),
     path('posts/<int:pk>/get', views.posts_get_by_id),
+    path('post/follows', views.posts_get_from_follows),
     path('post/create', views.post_form_create),
     path('post/<int:pk>/update', views.post_update),
     path('post/<int:pk>/delete', views.post_delete),

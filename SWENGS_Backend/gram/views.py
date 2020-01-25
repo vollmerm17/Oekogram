@@ -117,6 +117,19 @@ def posts_get_by_id(request, pk):
     return Response(serializer.data)
 
 
+@swagger_auto_schema(method='POST', responses={200: PostsSerializer()})
+@api_view(['POST'])
+def posts_get_from_follows(request):
+    try:
+        data = JSONParser().parse(request)
+        posts = Post.objects.all().filter(user_id__in=data.id).order_by('-date')
+    except Post.DoesNotExist:
+        return Response({'error': 'Post does not exist.'}, status=404)
+
+    serializer = PostsSerializer(posts)
+    return Response(serializer.data)
+
+
 @swagger_auto_schema(method='POST', request_body=WritePostSerializer, responses={200: WritePostSerializer()})
 @api_view(['POST'])
 def post_form_create(request):
