@@ -34,6 +34,9 @@ export class MediainputComponent implements OnInit, ControlValueAccessor {
   hasBaseDropZoneOver: boolean;
   justOne: boolean;
 
+  @Input()
+  text: string;
+
   onChange = (medias: number[]) => {
     // empty default
   }
