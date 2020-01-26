@@ -25,7 +25,8 @@ const routes: Routes = [
   {
     path: 'posting/:all',
     component: PostingComponent,
-    resolve: {activityOptions: ActivityOptionsResolver}
+    resolve: {activityOptions: ActivityOptionsResolver},
+    runGuardsAndResolvers: 'paramsChange',
   },
   {
     path: 'posting',
@@ -88,8 +89,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
+  exports: [RouterModule],
 })
 export class AppRoutingModule {
 }

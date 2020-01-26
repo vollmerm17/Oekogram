@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {PostService} from '../service/post.service';
 import {UserService} from '../service/user.service';
 import {LikeService} from '../service/like.service';
@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
 import {ProfileService} from '../service/profile.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {FormBuilder, FormControl} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {RelationshipService} from '../service/relationship.service';
 import {ActivityService} from '../service/activity.service';
 
@@ -18,14 +18,14 @@ import {ActivityService} from '../service/activity.service';
 })
 
 
-export class PostingComponent implements OnInit {
+export class PostingComponent implements OnInit, OnDestroy {
 
   posts: any[];
   profile: any;
   userId: number;
   likeFormGroup;
   readonly accessTokenLocalStorageKey = 'access_token';
-
+  navigationSubscription;
 
   constructor(private http: HttpClient, private postService: PostService,
               private userService: UserService, public likeService: LikeService,
@@ -33,9 +33,17 @@ export class PostingComponent implements OnInit {
               public jwtHelper: JwtHelperService,
               private fb: FormBuilder,
               private route: ActivatedRoute,
+              private router: Router,
               private relationshipService: RelationshipService) {
     const token = localStorage.getItem(this.accessTokenLocalStorageKey);
     this.userId = this.jwtHelper.decodeToken(token).user_id;
+
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.ngOnInit();
+      }
+    });
   }
 
 
@@ -93,6 +101,13 @@ export class PostingComponent implements OnInit {
     );
   }
 
+  ngOnDestroy() {
+    // method on every navigationEnd event.
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
+  }
+
   checkPostId(postid: number): boolean {
     for (const like of this.likes) {
       if (like.post_id === postid) {
@@ -135,7 +150,7 @@ export class PostingComponent implements OnInit {
       this.profileService.updateProfile(this.profile).subscribe();
       this.postService.deletePost(post.id).subscribe(() => {
           alert('Post successfully deleted');
-          window.location.reload();
+          this.router.navigate([this.router.url]);
         });
     });
   }
