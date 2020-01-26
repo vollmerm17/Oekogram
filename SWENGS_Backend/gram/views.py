@@ -10,7 +10,7 @@ from drf_yasg.utils import swagger_auto_schema
 from friendship.exceptions import AlreadyExistsError
 from friendship.models import Follow, Block
 from rest_framework import views
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.permissions import AllowAny
 
@@ -20,7 +20,7 @@ from rest_framework.utils import json
 from gram.models import Activity, Post, Comment, Media, Profile, LikedByUser
 from gram.serializers import MediaSerializer, ActivityOptionSerializer, ProfileListSerializer, ProfileFormSerializer, \
     ActivityFormSerializer, PostsSerializer, CommentsSerializer, ProfileSerializer, LikedByUserSerializer, \
-    EmailSerializer, ProfileUpdateSerializer, WritePostSerializer
+    EmailSerializer, ProfileUpdateSerializer, WritePostSerializer, ProfileUsernameEmailSerializer
 
 
 # ACTIVITY
@@ -244,9 +244,18 @@ def comment_delete(request, pk):
 
 
 # PROFILE
+@swagger_auto_schema(method='GET', responses={200: ProfileUsernameEmailSerializer(many=True)})
+@api_view(['GET'])
+@authentication_classes([])
+@permission_classes([])
+def profile_user_email(request):
+    users = Profile.objects.all()
+    serializer = ProfileUsernameEmailSerializer(users, many=True)
+    return Response(serializer.data, status=200)
+
+
 @swagger_auto_schema(method='GET', responses={200: ProfileListSerializer(many=True)})
 @api_view(['GET'])
-@permission_classes([AllowAny])
 def profile_list(request):
     users = Profile.objects.exclude(blocking__blocked=request.user.id)
     serializer = ProfileListSerializer(users, many=True)
