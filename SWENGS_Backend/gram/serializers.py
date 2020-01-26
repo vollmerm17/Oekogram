@@ -77,7 +77,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class ProfileUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['id', 'first_name', 'last_name', 'email', 'bio', 'date_of_birth', 'pictures', 'greenscore', ]
+        fields = ['id', 'first_name', 'last_name', 'email', 'bio', 'date_of_birth', 'pictures', 'greenscore']
 
 
 class ProfileFormSerializer(serializers.ModelSerializer):

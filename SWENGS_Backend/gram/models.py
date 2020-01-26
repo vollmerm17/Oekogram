@@ -29,7 +29,7 @@ class Profile(AbstractUser):
     last_name = models.TextField()
     username = models.TextField(unique=True)
     password = models.TextField()
-    bio = models.TextField()
+    bio = models.TextField(blank=True)
     date_of_birth = models.DateField(null=True)
     greenscore = models.PositiveIntegerField(default=0, editable=True)
     pictures = models.ManyToManyField('Media', blank=True)

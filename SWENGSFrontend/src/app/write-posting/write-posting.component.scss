@@ -1,20 +1,16 @@
 .card {
-  // font-family: 'Merriweather', serif;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
-  // flex-basis: 700px;
-  // flex-grow: 0;
-  // flex-shrink: 0;
   box-shadow: 2px 2px grey;
-  width: 100%;
 }
 .cardHeader {
-  // display: flex;
+  background-color: #33A619;
+  color: #F2F2F2;
 }
-.cardForm {
-  // display: flex;
+.cardTitle {
+  margin-top: 5px;
 }
 .textArea {
   width: 100%;

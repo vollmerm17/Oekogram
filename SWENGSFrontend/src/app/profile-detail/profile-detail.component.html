@@ -32,6 +32,7 @@
         </button>
       </div>
     </div>
+    <mat-card-content class="bio">{{profile.bio}}</mat-card-content>
     <div class="profileBar">
       <a [routerLink]="['/followers']">
         <div class="infoBox" *ngIf="finishedLoadFollowers">FOLLOWER <br/> {{followersCount}}</div>

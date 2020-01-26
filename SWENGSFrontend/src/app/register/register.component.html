@@ -1,5 +1,5 @@
-<form [formGroup]="registerFormGroup" class="profile-form">
-  <mat-form-field>
+<form [formGroup]="registerFormGroup" class="register">
+  <mat-form-field class="inputField">
     <input formControlName="username" matInput placeholder="Username" required type="text">
     <mat-hint align="end">Type in your username</mat-hint>
     <mat-error *ngIf="registerFormGroup.controls.username.hasError('required')">Username is required</mat-error>
@@ -7,19 +7,19 @@
     </mat-error>
   </mat-form-field>
   <br>
-    <mat-form-field>
+    <mat-form-field class="inputField">
     <input formControlName="first_name" matInput placeholder="First Name" required type="text">
     <mat-hint align="end">Type in your first name</mat-hint>
     <mat-error *ngIf="registerFormGroup.controls.first_name.hasError('required')">First name is required</mat-error>
   </mat-form-field>
   <br>
-      <mat-form-field>
+      <mat-form-field class="inputField">
     <input formControlName="last_name" matInput placeholder="Last Name" required type="text">
     <mat-hint align="end">Type in your last name</mat-hint>
     <mat-error *ngIf="registerFormGroup.controls.last_name.hasError('required')">Last name is required</mat-error>
   </mat-form-field>
   <br>
-  <mat-form-field>
+  <mat-form-field class="inputField">
     <input formControlName="email" matInput placeholder="E-Mail" required type="text">
     <mat-hint align="end">Type in your e-mail</mat-hint>
     <mat-error *ngIf="registerFormGroup.controls.email.hasError('required')">E-Mail is required</mat-error>
@@ -28,7 +28,7 @@
     <mat-error *ngIf="registerFormGroup.controls.email.hasError('pattern')"> Please enter a valid E-Mail address
     </mat-error>
   </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="inputField">
     <input formControlName="password" matInput placeholder="Password" required type="password">
     <mat-hint align="end">Type in your password, min 8 chars</mat-hint>
     <mat-error *ngIf="registerFormGroup.controls.password.hasError('required')">Password is required</mat-error>
@@ -41,8 +41,9 @@
   <app-date [required]="true" formControlName="date_of_birth" hint="Your birthday!"
             placeholder="Date of birth"></app-date>
   <div *ngIf="age !== undefined">Age: {{age}}</div>
-  <mat-form-field>
-    <textarea formControlName="bio" matInput placeholder="Biography"></textarea>
+  <mat-form-field class="textArea">
+    <textarea matInput rows="6" name="bio" formControlName="bio"
+              placeholder="Tell us something about you!"></textarea>
     <mat-hint align="end">Your biography</mat-hint>
   </mat-form-field>
 

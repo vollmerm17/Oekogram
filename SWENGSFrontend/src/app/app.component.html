@@ -1,39 +1,51 @@
-<div class="header">
-  <div class="header-container">
-    <div class="profileSmall">
-      <button mat-icon-button (click)="profileSmall()">
-        <i *ngIf="this.opened" class="material-icons"> arrow_drop_down </i>
-        <i *ngIf="!this.opened" class="material-icons"> arrow_right </i>
-      </button>
-      <app-profile-small *ngIf="!this.opened"></app-profile-small>
+<div class="container">
+  <div class="body">
+    <div class="header">
+      <div class="header-container">
+        <div class="profileSmall">
+          <button *ngIf="this.isAuthenticated" mat-icon-button (click)="profileSmall()">
+            <i *ngIf="this.opened" class="material-icons"> arrow_drop_down </i>
+            <i *ngIf="!this.opened" class="material-icons"> arrow_right </i>
+          </button>
+          <app-profile-small *ngIf="!this.opened"></app-profile-small>
+        </div>
+        <!--<div class="title">
+          <h2>Ökogram | IMA Project</h2>
+        </div>-->
+        <div class="menuBar" *ngIf="this.isAuthenticated">
+          <!--      <button class="navButton" *ngIf="this.isAuthenticated" mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>-->
+          <mat-toolbar class="menuToolBar">
+            <button mat-button routerLink="posting">Newsfeed</button>
+            <button mat-button routerLink="posting/1">Recent Posts</button>
+            <button mat-button routerLink="community">Community</button>
+            <!--<button mat-button routerLink="logout">Logout</button>-->
+          </mat-toolbar>
+          <app-logout></app-logout>
+        </div>
+      </div>
     </div>
-    <!--<div class="title">
-      <h2>Ökogram | IMA Project</h2>
-    </div>-->
-    <div class="menuBar" *ngIf="this.isAuthenticated">
-      <!--      <button class="navButton" *ngIf="this.isAuthenticated" mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>-->
-      <mat-toolbar class="menuToolBar">
-        <button mat-button routerLink="posting/0">Newsfeed</button>
-        <button mat-button routerLink="posting/1">Recent Posts</button>
-        <button mat-button routerLink="community">Community</button>
-        <!--<button mat-button routerLink="logout">Logout</button>-->
-      </mat-toolbar>
-      <app-logout></app-logout>
+    <div class="main">
+      <div class="flexBox-container">
+        <div class="register" *ngIf="!this.isAuthenticated">
+          <app-register></app-register>
+        </div>
+        <div class="profile" *ngIf="this.isAuthenticated && this.opened">
+          <app-profile></app-profile>
+        </div>
+        <div class="contentBody">
+          <div class="content">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+<!--        <div class="placeholder" *ngIf="this.isAuthenticated"></div>-->
+      </div>
     </div>
   </div>
-</div>
-<div class="contentBody">
-  <div class="flexBox-container">
-    <div class="profile">
-      <app-register *ngIf="!this.isAuthenticated"></app-register>
-      <app-profile *ngIf="this.isAuthenticated && this.opened"></app-profile>
-    </div>
-    <div class="content">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-
   <div class="footer">
-    <app-write-mail></app-write-mail>
+    <p>© 2020 Instagreen</p>
+    <!--    <app-write-mail></app-write-mail>-->
   </div>
 </div>
+
+
+
