@@ -27,6 +27,7 @@ export class FollowingsComponent implements OnInit {
   private followersAll: any[number] = [];
   private followingsAllList: any[];
   profile;
+  private isEmpty: boolean;
 
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private profileService: ProfileService,
@@ -46,7 +47,11 @@ export class FollowingsComponent implements OnInit {
     });
 
     this.relService.getListFollowings(this.profile.id).subscribe((response: any[]) => {
-      this.followingsAllList = response;
+      if (response.length > 0) {
+        this.followingsAllList = response;
+      } else {
+        this.isEmpty = true;
+      }
     });
 
     this.relService.getFollowings().subscribe((res: any[]) => {

@@ -22,7 +22,7 @@ export class RelationshipService {
   }
 
   getListFollowings(profileId: any) {
-    return this.http.get('api/follows' + profileId + '/list');
+    return this.http.get('api/follows/' + profileId + '/list');
   }
 
 

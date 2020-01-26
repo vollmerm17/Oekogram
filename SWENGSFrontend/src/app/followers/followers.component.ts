@@ -19,6 +19,7 @@ export class FollowersComponent implements OnInit {
   profilesAll;
   followingsAll: any[number] = [];
   private finished: boolean;
+  private isEmpty: boolean;
   userIdLogIn;
   blockingsAll: any[number] = [];
   search: '';
@@ -35,6 +36,7 @@ export class FollowersComponent implements OnInit {
 
 
   ngOnInit() {
+    this.isEmpty = false;
     this.finished = false;
     const data = this.route.snapshot.data;
     this.profileC = data.profile;
@@ -45,7 +47,11 @@ export class FollowersComponent implements OnInit {
     });
 
     this.relService.getListFollowers(this.profileC.id).subscribe((response: any[]) => {
-      this.followersAll = response;
+      if (response.length > 0) {
+        this.followersAll = response;
+      } else {
+        this.isEmpty = true;
+      }
     });
 
     this.relService.getFollowings().subscribe((res: any[]) => {
