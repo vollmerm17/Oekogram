@@ -1,21 +1,32 @@
 .profile{
   position: sticky;
+ /* @media (max-width: 450px) {top: 198px;}
+  @media (min-width: 451px) and (max-width: 650px) {top: 133px;}
+  @media (min-width: 651px) {top: 68px;}*/
   top: 68px;
-  bottom: auto;
   justify-content: center;
-  background: url("../../assets/background/Oekogram600px.png");
-  background-repeat: no-repeat;
-  background-size: auto;
   border-style: solid;
-  border-color: #33A619;
+  border-color: #2e6504;
   box-shadow: 2px 2px grey;
   border-radius: 1px;
+  max-width: 300px;
+  max-height: 420px;
+}
+.actions {
+  background-color: #2e6504;
+  padding-right: 5%;
+  text-align: right;
+}
+.info {
+  background: url("../../assets/background/background1.png");
+  background-repeat: no-repeat;
+  background-size: auto;
 }
 img {
   width: 60%;
   height: auto;
-  margin-left: 20%;
-  margin-right: 20%;
+  margin: 2% 20% 0 20%;
+
   border-radius: 50%;
 }
 p {
@@ -27,30 +38,28 @@ p {
   font-size: 20px;
 }
 .name a {
-  color: #467302;
+  color: #2e6504;
   text-decoration: none;
 }
 .scoreBox {
   background-color: #F2F2F2;
   border-style: solid;
-  border-color: #467302;
+  border-color: #33A619;
   border-radius: 5%;
+  box-shadow: 1px 1px grey;
   margin-left: 20%;
   margin-right: 20%;
   padding: 2% 2%;
 }
 .score {
   text-align: center;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
-  color: #467302;
+  color: #2e6504;
   //display: table-cell;
   //vertical-align: middle;
 }
-.actions {
-  padding-right: 5%;
-  text-align: right;
-}
+
 .icon {
   border-radius: 50%;
   padding: 1%;

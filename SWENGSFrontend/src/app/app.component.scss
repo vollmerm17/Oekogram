@@ -4,6 +4,7 @@
 }
 .body {
   padding-bottom: 60px;
+  width: 100%;
 }
 
 .header {
@@ -57,6 +58,7 @@
   flex-basis: 600px;
   align-items: center;
   justify-content: center;
+  background-color: #33A619;
 }
 .menuToolBar {
   display: flex;
@@ -70,9 +72,9 @@
 }
 .main {
   @media (max-width: 450px) {padding-top: 197px;}
-  @media (min-width: 451px) and (max-width: 650px) {padding-top: 132px;}
-  @media (min-width: 651px) {padding-top: 67px;}
-  //padding-top: 67px;
+  @media (min-width: 451px) and (max-width: 899px) {padding-top: 132px;}
+  @media (min-width: 900px) {padding-top: 67px;}
+  padding-top: 67px;
   width: 100%;
 }
 .flexBox-container {
@@ -82,29 +84,35 @@
 }
 .contentBody {
   display: flex;
+  flex-basis: 500px;
   flex-grow: 1;
+  flex-shrink: 5;
   justify-content: center;
+  //padding-top: 67px;
 }
 .register{
-  display: flex;
-  flex-basis: 650px;
+  flex-basis: 450px;
   flex-shrink: 1;
   flex-grow: 1;
   justify-content: center;
   background-color: #F2F2F2;
+  @media (max-width: 450px) { order: 0;}
+  @media (max-width: 949px) { order: 2;}
 }
 .profile{
-  display: flex;
+  //display: flex;
   flex-basis: 450px;
   flex-shrink: 1;
   flex-grow: 0;
   justify-content: center;
   background-color: #F2F2F2;
+  order: 0;
 }
 .placeholder{
   flex-basis: 450px;
   flex-shrink: 10;
   flex-grow: 0;
+  order: 3;
 }
 
 .content {
@@ -115,6 +123,7 @@
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 35px;
+  order: 1;
 }
 
 .login {

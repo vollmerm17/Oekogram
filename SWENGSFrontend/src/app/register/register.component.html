@@ -33,9 +33,9 @@
     <mat-hint align="end">Type in your password, min 8 chars</mat-hint>
     <mat-error *ngIf="registerFormGroup.controls.password.hasError('required')">Password is required</mat-error>
   </mat-form-field>
-  <password-strength-meter [password]="password" enableFeedback="true"></password-strength-meter>
+  <password-strength-meter class="inputField" [password]="password" enableFeedback="true"></password-strength-meter>
 
-  <app-date [required]="true" formControlName="date_of_birth" hint="Your birthday!"
+  <app-date class="inputField" [required]="true" formControlName="date_of_birth" hint="Your birthday!"
             placeholder="Date of birth"></app-date>
   <div *ngIf="age !== undefined">Age: {{age}}</div>
   <mat-form-field class="textArea">

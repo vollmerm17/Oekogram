@@ -2,7 +2,7 @@
   <mat-card class="card">
     <div class="horizontal">
       <div class="profileInfo">
-        <img *ngIf="!picture" src="../../assets/img_avatar.png">
+        <img *ngIf="!picture" src="../../assets/default_avatar.png">
         <img *ngIf="picture" src="api/media/{{picture}}">
         <div class="name">
           <p class="username">{{profile.username}}</p>
@@ -34,9 +34,7 @@
     </div>
     <mat-card-content class="bio">{{profile.bio}}</mat-card-content>
     <div class="profileBar">
-      <a [routerLink]="['/followers', profile.id]">
-        <div class="infoBox" *ngIf="finishedLoadFollowers">FOLLOWER <br/> {{followersCount}}</div>
-      </a>
+      <div class="infoBox" *ngIf="finishedLoadFollowers"><a [routerLink]="['/followers', profile.id]">FOLLOWER <br/> {{followersCount}}</a></div>
       <div class="infoBox">GREENSCORE <br/> {{profile.greenscore}}</div>
       <a [routerLink]="['/followings', profile.id]">
         <div class="infoBox" *ngIf="finishedLoadFollowings">FOLLOWING <br/> {{followingsCount}}</div>
