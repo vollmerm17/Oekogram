@@ -147,7 +147,7 @@ def post_form_create(request):
 
 @swagger_auto_schema(method='PUT', request_body=PostsSerializer, responses={200: PostsSerializer()})
 @api_view(['PUT'])
-@permission_required('gram.update_post', raise_exception=True)
+#@permission_required('gram.update_post', raise_exception=True)
 def post_update(request, pk):
     try:
         post = Post.objects.get(pk=pk)
@@ -187,7 +187,7 @@ def like_form_get(request, user_id):
 
 @swagger_auto_schema(method='POST', request_body=LikedByUserSerializer, responses={200: LikedByUserSerializer()})
 @api_view(['POST'])
-@permission_required('gram.add_like', raise_exception=True)
+#@permission_required('gram.add_like', raise_exception=True)
 def like_form_create(request):
     data = JSONParser().parse(request)
     serializer = LikedByUserSerializer(data=data)
@@ -198,7 +198,7 @@ def like_form_create(request):
 
 
 @api_view(['DELETE'])
-@permission_required('gram.like_delete', raise_exception=True)
+#@permission_required('gram.like_delete', raise_exception=True)
 def like_delete(request, postId, userId):
     try:
         like = LikedByUser.objects.get(post_id=postId, user_id=userId)
@@ -223,7 +223,7 @@ def comment_form_get(request, post_id):
 
 @swagger_auto_schema(method='POST', request_body=CommentsSerializer, responses={200: CommentsSerializer()})
 @api_view(['POST'])
-@permission_required('gram.add_comment', raise_exception=True)
+#@permission_required('gram.add_comment', raise_exception=True)
 def comment_form_create(request):
     data = JSONParser().parse(request)
     serializer = CommentsSerializer(data=data)
