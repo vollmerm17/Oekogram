@@ -9,7 +9,6 @@
   box-shadow: 2px 2px grey;
 }
 .horizontal {
-
   display: flex;
   justify-content: space-evenly;
   //border-style: dotted;
@@ -25,6 +24,7 @@
 
 .profileInfo img {
   flex-basis: 250px;
+  flex-grow: 1;
   flex-shrink: 1;
   max-height: 300px;
   border-radius: 50%;
@@ -51,6 +51,8 @@
 }
 
 .friendshipButtons {
+  display:flex;
+  flex-direction: column;
   flex-basis: 200px;
   align-self: center;
 }
@@ -60,7 +62,7 @@
   border-style: solid;
   border-color: #9DBF54;
   //background-color: #9DBF54;
-  min-width: 180px;
+  //min-width: 180px;
 }
 
 .controlButtonActive {
@@ -69,7 +71,7 @@
   border-style: solid;
   border-color: #9DBF54;
   background-color: #9DBF54;
-  min-width: 180px;
+  //min-width: 180px;
 }
 
 .controlButton:hover {
@@ -102,6 +104,11 @@
   font-size: 16px;
   color: #467302;
   //padding: 20px 100px;
+}
+
+.infoBox a {
+  text-decoration: none;
+  color: #467302;
 }
 
 .posts {
