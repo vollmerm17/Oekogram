@@ -94,4 +94,11 @@ export class ProfileFormComponent implements OnInit {
       return 0;
     }
   }
+
+  deleteProfile() {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.profileService.deleteProfile(id).subscribe((response: any) => {
+      this.router.navigate(['login/']);
+     });
+  }
 }
