@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
 
   emailValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
-      return this.profileService.getProfiles()
+      return this.profileService.getNamesEmails()
         .pipe(
           map((profiles: any[]) => {
             const currentEmail = this.registerFormGroup.controls.email.value;
@@ -94,7 +94,7 @@ export class RegisterComponent implements OnInit {
 
   usernameValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
-      return this.profileService.getProfiles()
+      return this.profileService.getNamesEmails()
         .pipe(
           map((profiles: any[]) => {
             const currentUsername = this.registerFormGroup.controls.username.value;

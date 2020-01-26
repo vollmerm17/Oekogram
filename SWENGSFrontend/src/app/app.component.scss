@@ -43,17 +43,16 @@
    color: #467302;
    height: 65px;
  }
-.title {
-  display: flex;
-  flex-basis: 450px;
+.logo {
+  //display: flex;
+  flex-basis: 150px;
   flex-shrink: 1;
-  flex-grow: 0;
-  justify-content: center;
-  color: #E6E6E6;
+  flex-grow: 1;
+  justify-content: flex-start;
 }
 .menuBar {
   display: flex;
-  flex-grow: 1;
+  flex-grow: 5;
   flex-shrink: 1;
   flex-basis: 600px;
   align-items: center;

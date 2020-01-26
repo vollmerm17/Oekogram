@@ -6,7 +6,8 @@ from django.utils import timezone
 
 
 class Activity(models.Model):
-    name = models.TextField(unique=True)
+    id = models.PositiveIntegerField (primary_key=True)
+    name = models.TextField()
     description = models.TextField()
     shortcut = models.CharField(max_length=3)
     greenscore = PositiveIntegerField()

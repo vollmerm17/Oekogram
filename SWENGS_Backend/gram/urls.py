@@ -43,6 +43,7 @@ urlpatterns = [
 
     # PROFILE
     path('profile/list', views.profile_list),
+    path('profile/validator', views.profile_user_email),
     path('profile/<int:pk>/get', views.profile_get),
     path('profile/create', views.profile_form_create),
     path('profile/<int:pk>/update', views.profile_form_update),

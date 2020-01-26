@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
@@ -6,10 +6,15 @@ import {HttpClient} from '@angular/common/http';
 })
 export class ProfileService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getProfiles() {
     return this.http.get('api/profile/list');
+  }
+
+  getNamesEmails() {
+    return this.http.get('api/profile/validator');
   }
 
   getProfile(profileId: any) {

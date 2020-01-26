@@ -5,36 +5,35 @@
   <mat-card-header>
     <div mat-card-avatar>
       <a [routerLink]="['/profile', post.user_id]">
-<!--        <img *ngIf="!post.user_picture" mat-card-avatar class="profile-picture" src="../../assets/default_avatar.png"/>-->
+        <img *ngIf="!post.user_picture" mat-card-avatar class="profile-picture" src="../../assets/default_avatar.png"/>
         <img *ngIf="post.user_picture" mat-card-avatar class="profile-picture" src="api/media/{{post.user_picture[0]}}"/>
       </a>
     </div>
     <mat-card-title><a class="link" href="/profile/{{post.user_id}}">{{post.name}}</a></mat-card-title>
     <mat-card-subtitle>{{post.date | date:'HH:mm MMM, dd yyyy'}}</mat-card-subtitle>
+    <button class="deleteButton" mat-button *ngIf="post.user_id === userId" (click)="removePosting(post)">
+      <i class="material-icons">
+        clear
+      </i> Delete
+    </button>
   </mat-card-header>
   <img mat-card-image *ngIf="post.pictures.length !=0" src="api/media/{{post.pictures[0]}}">
-<!--  <img mat-card-image *ngIf="!post.pictures" src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-       alt="Photo of a Shiba Inu">-->
   <mat-card-content>
-    <p>{{post.content}}</p>
+    <p class="textInhalt">{{post.content}}</p>
      <mat-divider></mat-divider>
   </mat-card-content>
   <mat-card-actions>
     <p *ngIf="post.likes != 0">Likes: {{post.likes}}</p>
-<p><i class="material-icons">sports_kabaddi</i> {{post.activity}}</p>
+<p><i class="material-icons">sports_kabaddi</i> {{post.activityName}}</p>
 <div *ngIf="finished">
 <button mat-icon-button color="accent" *ngIf="checkPostId(post.id)" (click)="removeLike(userId, post.id); updateLikes(post.id,post,-1) " ><mat-icon>favorite</mat-icon></button>
 <button mat-icon-button color="accent" *ngIf="!checkPostId(post.id)" (click)="likePost(post.id); updateLikes(post.id,post,1)"><mat-icon>favorite_border</mat-icon></button>
 </div>
-
   </mat-card-actions>
-
-
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
           Comments
-
         </mat-panel-title>
         <mat-panel-description>
           Click to show comments

@@ -1,15 +1,11 @@
 .main {
-  //display: flex;
-  //flex-grow: 1;
   border-style: solid;
 }
 
 .posting {
-  //justify-content: center;
   font-family: 'Merriweather', serif;
   box-shadow: 2px 2px grey;
   margin-top: 50px;
-  //flex-basis: 1000px;
 }
 .profile-picture {
   display: block;
@@ -22,6 +18,12 @@
   color: #000000;
   text-decoration: none;
 }
+.deleteButton {
+  //nothing
+}
+.textInhalt {
+  font-size: 20px;
+}
 .comments {
   margin: 2px;
   padding-top: 5px;
@@ -29,17 +31,3 @@
   padding-bottom: 2px;
   border-radius: 2px;
 }
-/*img {
-  float: left;
-  vertical-align: sub;
-  padding-right: 7px;
-}*/
-
-/*
-.writePost {
-  display: flex;
-  justify-content: center;
-  box-shadow: 2px 2px grey;
-  // margin: 50px 0;
-}
-*/

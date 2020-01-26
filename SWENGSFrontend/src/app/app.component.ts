@@ -10,7 +10,7 @@ import {UserService} from './service/user.service';
 
 export class AppComponent implements OnInit {
 
-  opened = true;
+  opened = false;
   isAuthenticated = false;
 
   constructor(private userService: UserService) {}
