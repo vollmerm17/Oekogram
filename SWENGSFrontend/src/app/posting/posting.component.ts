@@ -8,6 +8,7 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import {FormBuilder, FormControl} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {RelationshipService} from '../service/relationship.service';
+import {ActivityService} from '../service/activity.service';
 
 
 @Component({
@@ -20,15 +21,16 @@ import {RelationshipService} from '../service/relationship.service';
 export class PostingComponent implements OnInit {
 
   posts: any[];
+  profile: any;
   userId: number;
-  postFormGroup;
   likeFormGroup;
   readonly accessTokenLocalStorageKey = 'access_token';
 
 
   constructor(private http: HttpClient, private postService: PostService,
               private userService: UserService, public likeService: LikeService,
-              private profileService: ProfileService, public jwtHelper: JwtHelperService,
+              private profileService: ProfileService, private activityService: ActivityService,
+              public jwtHelper: JwtHelperService,
               private fb: FormBuilder,
               private route: ActivatedRoute,
               private relationshipService: RelationshipService) {
@@ -46,13 +48,10 @@ export class PostingComponent implements OnInit {
   like: any;
   likes: any[];
   post;
-  postOptions;
   finished = false;
-  postFinished = false;
   username;
   pictures;
   followings: any[];
-  // panelOpenState = false;
   user;
 
   ngOnInit() {
@@ -61,6 +60,10 @@ export class PostingComponent implements OnInit {
     if (getAllPosts == null) {
       getAllPosts = '1';
     }
+
+    this.profileService.getProfile(this.userId).subscribe((res: any) => {
+      this.profile = res;
+    });
 
     if (this.postByUserID == null && getAllPosts === '1') {
       this.postService.getAllPosts().subscribe((response: any) => {
@@ -105,7 +108,6 @@ export class PostingComponent implements OnInit {
     this.postService.updatePost(id, newpost).subscribe();
   }
 
-
   removeLike(userid: number, postid: number) {
     this.likeService.removeLike(userid, postid).subscribe(() => this.removeLikefromLikes(postid));
   }
@@ -125,6 +127,17 @@ export class PostingComponent implements OnInit {
       }
       i++;
     }
+  }
+
+  removePosting(post: any) {
+    this.activityService.getActivity(post.activity).subscribe((response: any) => {
+      this.profile.greenscore -= response.greenscore;
+      this.profileService.updateProfile(this.profile).subscribe();
+      this.postService.deletePost(post.id).subscribe(() => {
+          alert('Post successfully deleted');
+          window.location.reload();
+        });
+    });
   }
 }
 

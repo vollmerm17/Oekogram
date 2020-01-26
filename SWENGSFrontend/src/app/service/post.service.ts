@@ -25,4 +25,7 @@ export class PostService {
     return this.http.post('/api/post/follows', followsID);
   }
 
+  deletePost(id: string) {
+    return this.http.delete('/api/post/' + id + '/delete');
+  }
 }
