@@ -23,42 +23,47 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="greenscore">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>GreenScore</th>
+    <ng-container matColumnDef="greenscore">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>GreenScore</th>
 
-    <td mat-cell *matCellDef="let profile">
-      <div class="score">{{profile.greenscore}} <i class="material-icons">eco</i></div>
-    </td>
-  </ng-container>
+      <td mat-cell *matCellDef="let profile">
+        <div class="score">{{profile.greenscore}} <i class="material-icons">eco</i></div>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="actionFollow">
-    <th mat-header-cell *matHeaderCellDef>Follow</th>
-    <td mat-cell *matCellDef="let profile">
-      <button mat-button (click)="removeFollow(profile)" *ngIf="finished && followsAlready(profile) && !isItMe(profile)"
-              color="accent">
-        <i class="material-icons">person_add_disabled</i>
-      </button>
-      <button mat-button (click)="follow(profile)" *ngIf="finished && !followsAlready(profile) && !isItMe(profile) "
-              color="primary">
-        <i class="material-icons">person_add</i>
-      </button>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="actionFollow">
+      <th mat-header-cell *matHeaderCellDef>Follow</th>
+      <td mat-cell *matCellDef="let profile">
+        <button mat-button (click)="removeFollow(profile)"
+                *ngIf="finished && followsAlready(profile) && !isItMe(profile)"
+                color="accent">
+          <i class="material-icons">person_add_disabled</i>
+        </button>
+        <button mat-button (click)="follow(profile)" *ngIf="finished && !followsAlready(profile) && !isItMe(profile) "
+                color="primary">
+          <i class="material-icons">person_add</i>
+        </button>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="actionBlock">
-    <th mat-header-cell *matHeaderCellDef>Block</th>
-    <td mat-cell *matCellDef="let profile">
-      <button mat-button (click)="block(profile)" *ngIf="finished && !blocksAlready(profile) && !isItMe(profile) "
-              color="accent">
-        <i class="material-icons">block</i>
-      </button>
-      <button mat-button (click)="removeBlock(profile)" *ngIf="finished && blocksAlready(profile) && !isItMe(profile)"
-              color="primary">
-        <i class="material-icons">lens</i>
-      </button>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="actionBlock">
+      <th mat-header-cell *matHeaderCellDef>Block</th>
+      <td mat-cell *matCellDef="let profile">
+        <button mat-button (click)="block(profile)" *ngIf="finished && !blocksAlready(profile) && !isItMe(profile) "
+                color="accent">
+          <i class="material-icons">block</i>
+        </button>
+        <button mat-button (click)="removeBlock(profile)"
+                *ngIf="finished && blocksAlready(profile) && !isItMe(profile)"
+                color="primary">
+          <i class="material-icons">lens</i>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+

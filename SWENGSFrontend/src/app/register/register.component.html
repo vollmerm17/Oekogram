@@ -32,9 +32,6 @@
     <input formControlName="password" matInput placeholder="Password" required type="password">
     <mat-hint align="end">Type in your password, min 8 chars</mat-hint>
     <mat-error *ngIf="registerFormGroup.controls.password.hasError('required')">Password is required</mat-error>
-    <mat-error *ngIf="registerFormGroup.controls.password.hasError('pattern')"> Min. 8 Chars, One LowerCase, One UpperCase, Special Chracters, Numbers
-    </mat-error>
-
   </mat-form-field>
   <password-strength-meter class="inputField" [password]="password" enableFeedback="true"></password-strength-meter>
 

@@ -50,9 +50,9 @@ urlpatterns = [
 
     # FOLLOW
     path('followers/get', views.followers_get),
-    path('followers/list', views.followers_list),
+    path('followers/<int:pk>/list', views.followers_list),
     path('follows/get', views.follows_get),
-    path('follows/list', views.follows_list),
+    path('follows/<int:pk>/list', views.follows_list),
     path('followers/<int:pk>/get', views.followers_of_user_get),
     path('follows/<int:pk>/get', views.follows_of_user_get),
     path('follow/<int:pk>/delete', views.follow_delete),

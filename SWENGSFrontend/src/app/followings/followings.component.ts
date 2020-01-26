@@ -2,15 +2,16 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProfileService} from '../service/profile.service';
-import {RelationshipService} from '../service/relationship.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {RelationshipService} from '../service/relationship.service';
+
 
 @Component({
-  selector: 'app-followers',
-  templateUrl: './followers.component.html',
-  styleUrls: ['./followers.component.scss']
+  selector: 'app-followings',
+  templateUrl: './followings.component.html',
+  styleUrls: ['./followings.component.scss']
 })
-export class FollowersComponent implements OnInit {
+export class FollowingsComponent implements OnInit {
 
 
   displayedColumns = ['pictures', 'username', 'greenscore', 'actionFollow', 'actionBlock'];
@@ -19,13 +20,14 @@ export class FollowersComponent implements OnInit {
   profilesAll;
   followingsAll: any[number] = [];
   private finished: boolean;
-  private isEmpty: boolean;
   userIdLogIn;
   blockingsAll: any[number] = [];
   search: '';
   beingBlockedAll;
   private followersAll: any[number] = [];
-  private profileC: any;
+  private followingsAllList: any[];
+  profile;
+  private isEmpty: boolean;
 
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private profileService: ProfileService,
@@ -36,19 +38,17 @@ export class FollowersComponent implements OnInit {
 
 
   ngOnInit() {
-    this.isEmpty = false;
     this.finished = false;
     const data = this.route.snapshot.data;
-    this.profileC = data.profile;
-
+    this.profile = data.profile;
 
     this.profileService.getProfile(this.userId).subscribe((res: any) => {
       this.userIdLogIn = res.id;
     });
 
-    this.relService.getListFollowers(this.profileC.id).subscribe((response: any[]) => {
+    this.relService.getListFollowings(this.profile.id).subscribe((response: any[]) => {
       if (response.length > 0) {
-        this.followersAll = response;
+        this.followingsAllList = response;
       } else {
         this.isEmpty = true;
       }
@@ -131,3 +131,5 @@ export class FollowersComponent implements OnInit {
   }
 
 }
+
+

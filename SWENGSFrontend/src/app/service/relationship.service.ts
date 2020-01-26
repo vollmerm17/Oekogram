@@ -13,16 +13,16 @@ export class RelationshipService {
     return this.http.get('api/followers/get');
   }
 
-  getListFollowers() {
-    return this.http.get('api/followers/list');
+  getListFollowers(profileId: any) {
+    return this.http.get('api/followers/' + profileId + '/list');
   }
 
   getFollowings() {
     return this.http.get('api/follows/get');
   }
 
-  getListFollowings() {
-    return this.http.get('api/follows/list');
+  getListFollowings(profileId: any) {
+    return this.http.get('api/follows/' + profileId + '/list');
   }
 
 

@@ -14,7 +14,9 @@ import {ProfilesResolver} from './resolver/profiles.resolver';
 import {WriteMailComponent} from './write-mail/write-mail.component';
 import {ProfileSmallComponent} from './profile-small/profile-small.component';
 import {ProfileDetailComponent} from './profile-detail/profile-detail.component';
-import {FollowersComponent} from "./followers/followers.component";
+import {FollowersComponent} from './followers/followers.component';
+import {FollowingsComponent} from './followings/followings.component';
+
 
 
 const routes: Routes = [
@@ -61,11 +63,18 @@ const routes: Routes = [
     }
     },
       {
-    path: 'followers',
+    path: 'followers/:id',
     component: FollowersComponent,
     canActivate: [AuthGuard],
     resolve: {
-      profiles: ProfilesResolver
+      profile: ProfileResolver
+    }
+    },      {
+    path: 'followings/:id',
+    component: FollowingsComponent,
+    canActivate: [AuthGuard],
+    resolve: {
+      profile: ProfileResolver
     }
     },
   {
