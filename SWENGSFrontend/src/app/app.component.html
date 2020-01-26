@@ -10,7 +10,7 @@
           <app-profile-small *ngIf="!this.opened"></app-profile-small>
         </div>
         <div class="logo">
-          <img *ngIf="!this.isAuthenticated" src="../assets/Instagreen.png" height="60px"/>
+          <img *ngIf="!this.isAuthenticated" src="../assets/Instagreen.png" height="60px" style="margin-left: 50px"/>
           <a *ngIf="this.isAuthenticated" [routerLink]="['/posting']">
             <img src="../assets/Instagreen.png" height="60px"/>
           </a>
