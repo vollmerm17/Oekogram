@@ -11,14 +11,13 @@ This is an Angular/Django project conducted by students of the UAS JOANNEUM as p
 
 # Responsible Persons
 
-* @vollmerm17 is responsible for the components: mediainput, profile, profile-form, community, date, register
+* @vollmerm17 is responsible for the components: mediainput, profile, profile-form, community, date, register, following, follower, register
 
 * @juliagruber is responsible for the components: comment, write-mail, login, logout
 
+* @markusAUT-FH is responsible for the components: comment, posting, write-mail
 
-* @markusAUT-FH is responsible for the components: comment, posting, write-mail, search
-
-* @BeckerDavid is responsible for the components: profile-form, posting_detail, posting_form,
+* @BeckerDavid is responsible for the components: profile-form, profile-detail,
 write-posting, profile-icons
 
 # Project
