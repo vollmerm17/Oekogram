@@ -17,7 +17,6 @@ import {
 import {PostingComponent} from './posting/posting.component';
 import {WritePostingComponent} from './write-posting/write-posting.component';
 import {ProfileComponent} from './profile/profile.component';
-import {SearchComponent} from './search/search.component';
 import {ProfileIconsComponent} from './profile-icons/profile-icons.component';
 import {JwtModule} from '@auth0/angular-jwt';
 import {LoginComponent} from './login/login.component';
@@ -47,7 +46,7 @@ import { ProfileSmallComponent } from './profile-small/profile-small.component';
 import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
 import { FollowersComponent } from './followers/followers.component';
 import { FollowingsComponent } from './followings/followings.component';
-import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -59,7 +58,6 @@ export function tokenGetter() {
     PostingComponent,
     WritePostingComponent,
     ProfileComponent,
-    SearchComponent,
     ProfileIconsComponent,
     LoginComponent,
     LogoutComponent,

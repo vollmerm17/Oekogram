@@ -2,7 +2,7 @@
   <input matInput id="search" type="search" [(ngModel)]="search" placeholder="Search">
   <label class="label-icon" for="search"><i class="material-icons">search</i></label>
 </div>
-<div *ngIf="isEmpty">No followers yet! Look at our community and find new friends!</div>
+<div *ngIf="isEmpty">No followings yet! Look at our community and find people you may wanna follow!</div>
 <table mat-table [dataSource]="followingsAllList| filter:search" *ngIf="!isEmpty" matSort>
   <ng-container matColumnDef="pictures">
     <th mat-header-cell *matHeaderCellDef></th>

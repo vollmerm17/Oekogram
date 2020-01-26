@@ -30,8 +30,8 @@ export class RegisterComponent implements OnInit {
       id: [null],
       first_name: [''],
       last_name: [''],
-      username: ['', Validators.required ],
-      email: ['', Validators.required],
+      username: ['', Validators.required, this.usernameValidator()],
+      email: ['', Validators.required, this.emailValidator()],
       bio: ['Hey, I\'m new here...And I love the environment! '],
       date_of_birth: [null],
       password: ['', Validators.required]
@@ -75,10 +75,9 @@ export class RegisterComponent implements OnInit {
       return this.profileService.getProfiles()
         .pipe(
           map((profiles: any[]) => {
-            const currentId = this.registerFormGroup.controls.id.value;
             const currentEmail = this.registerFormGroup.controls.email.value;
             const profileWithSameEmail = profiles.find((p) => {
-              return p.id !== currentId && p.email === currentEmail;
+              return p.email === currentEmail;
             });
             if (profileWithSameEmail) {
               return {
@@ -98,10 +97,9 @@ export class RegisterComponent implements OnInit {
       return this.profileService.getProfiles()
         .pipe(
           map((profiles: any[]) => {
-            const currentId = this.registerFormGroup.controls.id.value;
             const currentUsername = this.registerFormGroup.controls.username.value;
             const profileWithSameUsername = profiles.find((p) => {
-              return p.id !== currentId && p.username === currentUsername;
+              return p.username === currentUsername;
             });
             if (profileWithSameUsername) {
               return {
