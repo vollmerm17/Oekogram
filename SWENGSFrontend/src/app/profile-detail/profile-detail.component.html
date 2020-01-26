@@ -11,29 +11,35 @@
       </div>
       <div class="friendshipButtons">
         <button mat-button *ngIf="!following && !myProfile" class="controlButton" (click)="changeFollowingState()">
-<!--          <i *ngIf="!following" class="material-icons">emoji_nature</i>-->
+          <!--          <i *ngIf="!following" class="material-icons">emoji_nature</i>-->
           <i class="material-icons">check_circle_outline</i>
           <span> Follow</span>
         </button>
         <button mat-button *ngIf="following && !myProfile" class="controlButtonActive" (click)="changeFollowingState()">
-<!--          <i *ngIf="following" class="material-icons">local_florist</i>-->
+          <!--          <i *ngIf="following" class="material-icons">local_florist</i>-->
           <i class="material-icons">check_circle</i>
           <span> Followed</span>
         </button>
-        <button mat-button *ngIf="finishedBlockings && !blocking && !myProfile" class="controlButton" (click)="changeBlockingState()">
+        <button mat-button *ngIf="finishedBlockings && !blocking && !myProfile" class="controlButton"
+                (click)="changeBlockingState()">
           <i class="material-icons">block</i>
           <span> Block</span>
         </button>
-        <button mat-button *ngIf="finishedBlockings && blocking && !myProfile" class="controlButtonActive" (click)="changeBlockingState()">
+        <button mat-button *ngIf="finishedBlockings && blocking && !myProfile" class="controlButtonActive"
+                (click)="changeBlockingState()">
           <i class="material-icons">sentiment_very_dissatisfied</i>
           <span> Unblock</span>
         </button>
       </div>
     </div>
     <div class="profileBar">
-      <a [routerLink]="['/followers']"><div class="infoBox" *ngIf="finishedLoadFollowers">FOLLOWER <br/> {{followersCount}}</div></a>
+      <a [routerLink]="['/followers']">
+        <div class="infoBox" *ngIf="finishedLoadFollowers">FOLLOWER <br/> {{followersCount}}</div>
+      </a>
       <div class="infoBox">GREENSCORE <br/> {{profile.greenscore}}</div>
-      <div class="infoBox" *ngIf="finishedLoadFollowings">FOLLOWING <br/> {{followingsCount}}</div>
+      <a [routerLink]="['/followings']">
+        <div class="infoBox" *ngIf="finishedLoadFollowings">FOLLOWING <br/> {{followingsCount}}</div>
+      </a>
     </div>
   </mat-card>
   <div class="posts">

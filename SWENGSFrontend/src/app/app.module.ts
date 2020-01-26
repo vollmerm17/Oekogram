@@ -46,6 +46,8 @@ import {PasswordStrengthMeterModule} from 'angular-password-strength-meter';
 import { ProfileSmallComponent } from './profile-small/profile-small.component';
 import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
 import { FollowersComponent } from './followers/followers.component';
+import { FollowingsComponent } from './followings/followings.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -72,6 +74,7 @@ export function tokenGetter() {
     ProfileSmallComponent,
     ProfileDetailComponent,
     FollowersComponent,
+    FollowingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -112,6 +115,7 @@ export function tokenGetter() {
     MatTableModule,
     FormsModule,
     PasswordStrengthMeterModule,
+    MatPaginatorModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
