@@ -67,14 +67,14 @@ const routes: Routes = [
     component: FollowersComponent,
     canActivate: [AuthGuard],
     resolve: {
-      profiles: ProfilesResolver
+      profile: ProfileResolver
     }
     },      {
     path: 'followings/:id',
     component: FollowingsComponent,
     canActivate: [AuthGuard],
     resolve: {
-      profiles: ProfilesResolver
+      profile: ProfileResolver
     }
     },
   {
