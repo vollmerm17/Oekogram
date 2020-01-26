@@ -101,7 +101,7 @@ class ProfileListSerializer(serializers.ModelSerializer):
 class ProfileUsernameEmailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['username', 'e-mail']
+        fields = ['username', 'email']
 
 
 class MediaSerializer(serializers.ModelSerializer):
