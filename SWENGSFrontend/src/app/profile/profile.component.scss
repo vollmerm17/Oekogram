@@ -5,11 +5,12 @@
   @media (min-width: 651px) {top: 68px;}*/
   top: 68px;
   justify-content: center;
-  border-style: solid;
+  //border-style: solid;
   border-color: #2e6504;
-  box-shadow: 2px 2px grey;
+  //box-shadow: 2px 2px grey;
   border-radius: 1px;
   max-width: 300px;
+  min-height: 420px;
   max-height: 420px;
 }
 .actions {
@@ -18,7 +19,7 @@
   text-align: right;
 }
 .info {
-  background: url("../../assets/background/background1.png");
+  background: url("../../assets/background/background5.png");
   background-repeat: no-repeat;
   background-size: auto;
 }
@@ -44,7 +45,7 @@ p {
 .scoreBox {
   background-color: #F2F2F2;
   border-style: solid;
-  border-color: #33A619;
+  border-color: #2e6504;
   border-radius: 5%;
   box-shadow: 1px 1px grey;
   margin-left: 20%;
