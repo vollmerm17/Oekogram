@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ProfileService} from '../service/profile.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {RelationshipService} from '../service/relationship.service';
@@ -26,9 +26,10 @@ export class FollowingsComponent implements OnInit {
   beingBlockedAll;
   private followersAll: any[number] = [];
   private followingsAllList: any[];
+  profile;
 
 
-  constructor(private http: HttpClient, private router: Router, private profileService: ProfileService,
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private profileService: ProfileService,
               private relService: RelationshipService, public jwtHelper: JwtHelperService) {
     const token = localStorage.getItem(this.accessTokenLocalStorageKey);
     this.userId = this.jwtHelper.decodeToken(token).user_id;
@@ -37,12 +38,14 @@ export class FollowingsComponent implements OnInit {
 
   ngOnInit() {
     this.finished = false;
+    const data = this.route.snapshot.data;
+    this.profile = data.profile;
 
     this.profileService.getProfile(this.userId).subscribe((res: any) => {
       this.userIdLogIn = res.id;
     });
 
-    this.relService.getListFollowings().subscribe((response: any[]) => {
+    this.relService.getListFollowings(this.profile.id).subscribe((response: any[]) => {
       this.followingsAllList = response;
     });
 

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ProfileService} from '../service/profile.service';
 import {RelationshipService} from '../service/relationship.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
@@ -24,9 +24,10 @@ export class FollowersComponent implements OnInit {
   search: '';
   beingBlockedAll;
   private followersAll: any[number] = [];
+  private profileC: any;
 
 
-  constructor(private http: HttpClient, private router: Router, private profileService: ProfileService,
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private profileService: ProfileService,
               private relService: RelationshipService, public jwtHelper: JwtHelperService) {
     const token = localStorage.getItem(this.accessTokenLocalStorageKey);
     this.userId = this.jwtHelper.decodeToken(token).user_id;
@@ -35,12 +36,15 @@ export class FollowersComponent implements OnInit {
 
   ngOnInit() {
     this.finished = false;
+    const data = this.route.snapshot.data;
+    this.profileC = data.profile;
+
 
     this.profileService.getProfile(this.userId).subscribe((res: any) => {
       this.userIdLogIn = res.id;
     });
 
-    this.relService.getListFollowers().subscribe((response: any[]) => {
+    this.relService.getListFollowers(this.profileC.id).subscribe((response: any[]) => {
       this.followersAll = response;
     });
 

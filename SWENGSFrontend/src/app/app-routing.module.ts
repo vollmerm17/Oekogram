@@ -18,6 +18,7 @@ import {FollowersComponent} from './followers/followers.component';
 import {FollowingsComponent} from './followings/followings.component';
 
 
+
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
@@ -62,14 +63,14 @@ const routes: Routes = [
     }
     },
       {
-    path: 'followers',
+    path: 'followers/:id',
     component: FollowersComponent,
     canActivate: [AuthGuard],
     resolve: {
       profiles: ProfilesResolver
     }
     },      {
-    path: 'followings',
+    path: 'followings/:id',
     component: FollowingsComponent,
     canActivate: [AuthGuard],
     resolve: {
