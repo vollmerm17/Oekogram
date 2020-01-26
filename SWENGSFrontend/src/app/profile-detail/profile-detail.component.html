@@ -36,7 +36,7 @@
     <div class="profileBar">
       <div class="infoBox" *ngIf="finishedLoadFollowers"><a [routerLink]="['/followers', profile.id]">FOLLOWER <br/> {{followersCount}}</a></div>
       <div class="infoBox">GREENSCORE <br/> {{profile.greenscore}}</div>
-      <a [routerLink]="['/followings',profile.id]">
+      <a [routerLink]="['/followings', profile.id]">
         <div class="infoBox" *ngIf="finishedLoadFollowings">FOLLOWING <br/> {{followingsCount}}</div>
       </a>
     </div>
