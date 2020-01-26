@@ -19,18 +19,18 @@ class ActivityFormSerializer(serializers.ModelSerializer):
 # Posts
 class PostsSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
-    activity = serializers.SerializerMethodField()
+    activityName = serializers.SerializerMethodField()
     user_picture = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
-        fields = ['id', 'name', 'content', 'pictures', 'likes', 'activity', 'date', 'pictures', 'user_id', 'user_picture']
+        fields = ['id', 'name', 'content', 'pictures', 'likes',  'activity', 'activityName', 'date', 'pictures', 'user_id', 'user_picture']
 
     def get_name(self, obj):
         return obj.user_id.username
 
-    def get_activity(self, obj):
-        return obj.activity.name
+    def get_activityName(self, obj):
+       return obj.activity.name
 
     def get_user_picture(self, obj):
         list_media = obj.user_id.pictures.all()

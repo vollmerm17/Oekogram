@@ -10,14 +10,14 @@
           <app-profile-small *ngIf="!this.opened"></app-profile-small>
         </div>
         <div class="logo">
-          <img *ngIf="!this.isAuthenticated" src="../assets/Instagreen.png" height="60px"/>
+          <img *ngIf="!this.isAuthenticated" src="../assets/Instagreen.png" height="60px" style="margin-left: 50px"/>
           <a *ngIf="this.isAuthenticated" [routerLink]="['/posting']">
             <img src="../assets/Instagreen.png" height="60px"/>
           </a>
         </div>
         <div class="menuBar" *ngIf="this.isAuthenticated">
           <mat-toolbar class="menuToolBar">
-            <button mat-button routerLink="posting">Newsfeed</button>
+            <button mat-button routerLink="posting/0">Newsfeed</button>
             <button mat-button routerLink="posting/1">Recent Posts</button>
             <button mat-button routerLink="community">Community</button>
           </mat-toolbar>
