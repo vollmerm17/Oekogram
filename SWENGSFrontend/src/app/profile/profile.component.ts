@@ -35,8 +35,5 @@ export class ProfileComponent implements OnInit {
       this.pictures = res.pictures[0];
     });
   }
-
-  friends() {
-    return null;
-  }
+  
 }

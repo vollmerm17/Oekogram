@@ -9,7 +9,7 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import {ProfileService} from '../service/profile.service';
 import {ActivityService} from '../service/activity.service';
 import {UserService} from '../service/user.service';
-import {getLocaleDateTimeFormat} from "@angular/common";
+import {getLocaleDateTimeFormat} from '@angular/common';
 
 @Component({
   selector: 'app-write-posting',
@@ -84,9 +84,9 @@ export class WritePostingComponent implements OnInit {
       this.userProfile.greenscore += response.greenscore;
       this.profileService.updateProfile(this.userProfile).subscribe();
     });
-
     this.writePostService.createPost(post).subscribe(() => {
       alert('created successfully');
+      window.location.reload();
     });
   }
 

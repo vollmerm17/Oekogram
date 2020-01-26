@@ -1,0 +1,112 @@
+[
+  {
+    "model": "gram.activity",
+    "pk": 1,
+    "fields": {
+      "name": "Saling",
+      "description": "North Atlantic Ocean",
+      "shortcut": "xxx",
+      "greenscore": 300
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 2,
+    "fields": {
+      "name": "Vegan Lunch",
+      "description": "with friends",
+      "shortcut": "xxx",
+      "greenscore": 50
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 3,
+    "fields": {
+      "name": "Waste Free Shopping",
+      "description": "No waste!",
+      "shortcut": "xxx",
+      "greenscore": 20
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 4,
+    "fields": {
+      "name": "Second-Hand Shopping",
+      "description": "Reuse Clothes!",
+      "shortcut": "xxx",
+      "greenscore": 30
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 5,
+    "fields": {
+      "name": "Reusable Coffe Cup",
+      "description": "No waste! & Reusable!",
+      "shortcut": "xxx",
+      "greenscore": 15
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 6,
+    "fields": {
+      "name": "Repairing",
+      "description": "No waste!",
+      "shortcut": "xxx",
+      "greenscore": 80
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 7,
+    "fields": {
+      "name": "Plant a Tree",
+      "description": "Help the environment!",
+      "shortcut": "xxx",
+      "greenscore": 70
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 8,
+    "fields": {
+      "name": "ICE instead of car",
+      "description": "Use public transport!",
+      "shortcut": "xxx",
+      "greenscore": 65
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 9,
+    "fields": {
+      "name": "Demonstartion",
+      "description": "Fridays for Future!",
+      "shortcut": "xxx",
+      "greenscore": 10
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 10,
+    "fields": {
+      "name": "Vegan Dinner",
+      "description": "Yum",
+      "shortcut": "xxx",
+      "greenscore": 60
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 11,
+    "fields": {
+      "name": "Waste Collecting",
+      "description": "Recycling is important!",
+      "shortcut": "xxx",
+      "greenscore": 60
+    }
+  }
+]

@@ -1,0 +1,144 @@
+[
+  {
+    "model": "gram.profile",
+    "pk": 1,
+    "fields": {
+      "last_login": "2020-01-26T20:09:46.206Z",
+      "is_superuser": true,
+      "email": "admin@admin.de",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2020-01-26T19:32:12.194Z",
+      "first_name": "Administrator",
+      "last_name": "Instagreen",
+      "username": "admin",
+      "password": "pbkdf2_sha256$150000$vjr11KacKfFN$TXzF8hFdZRwOgenfWwhxCjl75BEyOJHw4Zl/yUL/Fag=",
+      "bio": "",
+      "date_of_birth": "2020-01-26",
+      "greenscore": 0,
+      "groups": [],
+      "user_permissions": [],
+      "pictures": []
+    }
+  },
+  {
+    "model": "gram.profile",
+    "pk": 2,
+    "fields": {
+      "last_login": null,
+      "is_superuser": false,
+      "email": "mona@green.de",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-01-26T19:40:23.054Z",
+      "first_name": "Mona",
+      "last_name": "Schneider",
+      "username": "GreenGirl3000",
+      "password": "pbkdf2_sha256$150000$K8NQ2zbI0Mr0$YPYbBXeKQjq/Kh2HRDCXrFzqUv4ZcLyFmWQVFniSQKQ=",
+      "bio": "Hey, I'm new here...And I love the environment!",
+      "date_of_birth": "1992-06-08",
+      "greenscore": 15,
+      "groups": [],
+      "user_permissions": [],
+      "pictures": [
+        8
+      ]
+    }
+  },
+  {
+    "model": "gram.profile",
+    "pk": 3,
+    "fields": {
+      "last_login": null,
+      "is_superuser": false,
+      "email": "jim@jimmy.de",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-01-26T20:01:09.273Z",
+      "first_name": "Jim",
+      "last_name": "Taube",
+      "username": "ecoFriend",
+      "password": "pbkdf2_sha256$150000$wEHbDOA62Cxm$EMSjHHPx/dZnz1UD67WOWmctm994HUHC88hFK0PM3Tw=",
+      "bio": "Hey, I love this new page!!!",
+      "date_of_birth": "1986-08-14",
+      "greenscore": 80,
+      "groups": [],
+      "user_permissions": [],
+      "pictures": [
+        10
+      ]
+    }
+  },
+  {
+    "model": "gram.profile",
+    "pk": 4,
+    "fields": {
+      "last_login": null,
+      "is_superuser": false,
+      "email": "zoe@firma.at",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-01-26T20:03:07.880Z",
+      "first_name": "Zoe",
+      "last_name": "Kohl",
+      "username": "veganChick",
+      "password": "pbkdf2_sha256$150000$41cyTOdhVjOy$K7+um4BNzaXe2csd65mbiQAcU0nA0e/d2DpPrkalxxY=",
+      "bio": "I'm vegan and everybody has to it !",
+      "date_of_birth": "1989-01-16",
+      "greenscore": 110,
+      "groups": [],
+      "user_permissions": [],
+      "pictures": [
+        2
+      ]
+    }
+  },
+  {
+    "model": "gram.profile",
+    "pk": 5,
+    "fields": {
+      "last_login": null,
+      "is_superuser": false,
+      "email": "greta@fridays.eco",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-01-26T20:09:11.520Z",
+      "first_name": "Greta",
+      "last_name": "Thunberg",
+      "username": "forFuture",
+      "password": "pbkdf2_sha256$150000$9PKVVrt3yvn0$gJYcemOFpnefXowui8LH211VC5Cvu4B8lgDUBhDe3Q8=",
+      "bio": "A teenager working on her anger management problem. Currently chilling and watching a good old fashioned movie with a friend.",
+      "date_of_birth": "2000-10-19",
+      "greenscore": 375,
+      "groups": [],
+      "user_permissions": [],
+      "pictures": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "gram.profile",
+    "pk": 6,
+    "fields": {
+      "last_login": null,
+      "is_superuser": false,
+      "email": "john@greenpeace.de",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-01-26T21:22:27.849Z",
+      "first_name": "John",
+      "last_name": "Vert",
+      "username": "zeroWaster",
+      "password": "pbkdf2_sha256$150000$xaT2K5D3JwKC$cO4WjSA14dAzGXfZdqOALQBgjgxV/3D2jcLX/VzzsDc=",
+      "bio": "Hey, I'm new here...And I love the environment!",
+      "date_of_birth": "1986-10-22",
+      "greenscore": 80,
+      "groups": [],
+      "user_permissions": [],
+      "pictures": [
+        12
+      ]
+    }
+  }
+]

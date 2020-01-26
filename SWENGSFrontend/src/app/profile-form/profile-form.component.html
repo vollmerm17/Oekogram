@@ -32,12 +32,25 @@
   <br>
   <br>
   <div>
-    <app-mediainput formControlName="pictures" text="DROP your profile picture here! Delete your old one!"></app-mediainput>
+    <app-mediainput formControlName="pictures"
+                    text="DROP your profile picture here! Delete your old one!"></app-mediainput>
   </div>
   <br/>
   <mat-card-actions align="center">
     <button mat-raised-button (click)="updateProfile()" [disabled]="!profileFormGroup.valid" color="primary">
       Update
+    </button>
+  </mat-card-actions>
+  <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  <mat-card-actions align="right">
+    <button mat-raised-button (click)="deleteProfile()" color="warn" >
+      <i class="material-icons">
+        delete
+      </i>Delete Profile
     </button>
   </mat-card-actions>
 </form>

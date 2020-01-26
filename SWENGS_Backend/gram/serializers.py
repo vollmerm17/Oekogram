@@ -1,7 +1,6 @@
-from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from friendship.models import *
-from .models import Media, Activity, Profile, Post, Comment, LikedByUser, Email
+from gram.models import Media, Activity, Profile, Post, Comment, LikedByUser, Email
 
 
 # Activities

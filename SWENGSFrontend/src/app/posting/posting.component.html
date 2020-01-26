@@ -5,8 +5,8 @@
   <mat-card-header>
     <div mat-card-avatar>
       <a [routerLink]="['/profile', post.user_id]">
-        <img *ngIf="!post.user_picture" mat-card-avatar class="profile-picture" src="../../assets/default_avatar.png"/>
-        <img *ngIf="post.user_picture" mat-card-avatar class="profile-picture" src="api/media/{{post.user_picture[0]}}"/>
+        <img *ngIf="post.user_picture.length == 0" mat-card-avatar class="profile-picture" src="../../assets/default_avatar.png"/>
+        <img *ngIf="post.user_picture.length != 0" mat-card-avatar class="profile-picture" src="api/media/{{post.user_picture[0]}}"/>
       </a>
     </div>
     <mat-card-title><a class="link" href="/profile/{{post.user_id}}">{{post.name}}</a></mat-card-title>
