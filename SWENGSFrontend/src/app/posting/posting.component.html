@@ -18,10 +18,8 @@
     </button>
   </mat-card-header>
   <img mat-card-image *ngIf="post.pictures.length !=0" src="api/media/{{post.pictures[0]}}">
-<!--  <img mat-card-image *ngIf="!post.pictures" src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-       alt="Photo of a Shiba Inu">-->
   <mat-card-content>
-    <p>{{post.content}}</p>
+    <p class="textInhalt">{{post.content}}</p>
      <mat-divider></mat-divider>
   </mat-card-content>
   <mat-card-actions>
@@ -31,15 +29,11 @@
 <button mat-icon-button color="accent" *ngIf="checkPostId(post.id)" (click)="removeLike(userId, post.id); updateLikes(post.id,post,-1) " ><mat-icon>favorite</mat-icon></button>
 <button mat-icon-button color="accent" *ngIf="!checkPostId(post.id)" (click)="likePost(post.id); updateLikes(post.id,post,1)"><mat-icon>favorite_border</mat-icon></button>
 </div>
-
   </mat-card-actions>
-
-
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
           Comments
-
         </mat-panel-title>
         <mat-panel-description>
           Click to show comments
