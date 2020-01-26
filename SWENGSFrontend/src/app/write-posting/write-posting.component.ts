@@ -84,9 +84,9 @@ export class WritePostingComponent implements OnInit {
       this.userProfile.greenscore += response.greenscore;
       this.profileService.updateProfile(this.userProfile).subscribe();
     });
-
     this.writePostService.createPost(post).subscribe(() => {
       alert('created successfully');
+      window.location.reload();
     });
   }
 

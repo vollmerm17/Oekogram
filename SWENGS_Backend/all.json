@@ -1,0 +1,1443 @@
+[
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+      "app_label": "admin",
+      "model": "logentry"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+      "app_label": "auth",
+      "model": "permission"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+      "app_label": "auth",
+      "model": "group"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+      "app_label": "contenttypes",
+      "model": "contenttype"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+      "app_label": "sessions",
+      "model": "session"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+      "app_label": "gram",
+      "model": "profile"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+      "app_label": "gram",
+      "model": "activity"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+      "app_label": "gram",
+      "model": "email"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+      "app_label": "gram",
+      "model": "media"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields": {
+      "app_label": "gram",
+      "model": "post"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 11,
+    "fields": {
+      "app_label": "gram",
+      "model": "likedbyuser"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 12,
+    "fields": {
+      "app_label": "gram",
+      "model": "comment"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 13,
+    "fields": {
+      "app_label": "friendship",
+      "model": "follow"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 14,
+    "fields": {
+      "app_label": "friendship",
+      "model": "friend"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 15,
+    "fields": {
+      "app_label": "friendship",
+      "model": "friendshiprequest"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 16,
+    "fields": {
+      "app_label": "friendship",
+      "model": "block"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "ytt7lsr4xmet9u2t12idy3p7ikkgdswz",
+    "fields": {
+      "session_data": "ZTQ2ZmY0MjQwNjk0M2JkOGFkMzY5YTYwMzcwNDFmNmQ4MTQwMWY3Zjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlNTkwZWE2Nzg2NDlhOTI0MWZjNWFmOGRhNTYxNDUwMjRiODBjNGQxIn0=",
+      "expire_date": "2020-02-09T20:09:46.215Z"
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 1,
+    "fields": {
+      "name": "Saling",
+      "description": "North Atlantic Ocean",
+      "shortcut": "xxx",
+      "greenscore": 300
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 2,
+    "fields": {
+      "name": "Vegan Lunch",
+      "description": "with friends",
+      "shortcut": "xxx",
+      "greenscore": 50
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 3,
+    "fields": {
+      "name": "Waste Free Shopping",
+      "description": "No waste!",
+      "shortcut": "xxx",
+      "greenscore": 20
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 4,
+    "fields": {
+      "name": "Second-Hand Shopping",
+      "description": "Reuse Clothes!",
+      "shortcut": "xxx",
+      "greenscore": 30
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 5,
+    "fields": {
+      "name": "Reusable Coffe Cup",
+      "description": "No waste! & Reusable!",
+      "shortcut": "xxx",
+      "greenscore": 15
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 6,
+    "fields": {
+      "name": "Repairing",
+      "description": "No waste!",
+      "shortcut": "xxx",
+      "greenscore": 80
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 7,
+    "fields": {
+      "name": "Plant a Tree",
+      "description": "Help the environment!",
+      "shortcut": "xxx",
+      "greenscore": 70
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 8,
+    "fields": {
+      "name": "ICE instead of car",
+      "description": "Use public transport!",
+      "shortcut": "xxx",
+      "greenscore": 65
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 9,
+    "fields": {
+      "name": "Demonstartion",
+      "description": "Fridays for Future!",
+      "shortcut": "xxx",
+      "greenscore": 10
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 10,
+    "fields": {
+      "name": "Vegan Dinner",
+      "description": "Yum",
+      "shortcut": "xxx",
+      "greenscore": 60
+    }
+  },
+  {
+    "model": "gram.activity",
+    "pk": 11,
+    "fields": {
+      "name": "Waste Collecting",
+      "description": "Recycling is important!",
+      "shortcut": "xxx",
+      "greenscore": 60
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 1,
+    "fields": {
+      "original_file_name": "greta.jpeg",
+      "content_type": "image/jpeg",
+      "size": 4734
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 2,
+    "fields": {
+      "original_file_name": "zoe.jpg",
+      "content_type": "image/jpeg",
+      "size": 4958
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 3,
+    "fields": {
+      "original_file_name": "vegan_lunch.jpg",
+      "content_type": "image/jpeg",
+      "size": 108678
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 4,
+    "fields": {
+      "original_file_name": "LentilTofuSalad1.jpg",
+      "content_type": "image/jpeg",
+      "size": 110136
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 5,
+    "fields": {
+      "original_file_name": "sailing_englang_usa.jpg",
+      "content_type": "image/jpeg",
+      "size": 98664
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 6,
+    "fields": {
+      "original_file_name": "demostration2.jpg",
+      "content_type": "image/jpeg",
+      "size": 386212
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 7,
+    "fields": {
+      "original_file_name": "ice.jpg",
+      "content_type": "image/jpeg",
+      "size": 70167
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 8,
+    "fields": {
+      "original_file_name": "mona.jpg",
+      "content_type": "image/jpeg",
+      "size": 233046
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 9,
+    "fields": {
+      "original_file_name": "reusable_cup.jpg",
+      "content_type": "image/jpeg",
+      "size": 30991
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 10,
+    "fields": {
+      "original_file_name": "Jim.jpg",
+      "content_type": "image/jpeg",
+      "size": 24504
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 11,
+    "fields": {
+      "original_file_name": "washmachine-repairs.jpg",
+      "content_type": "image/jpeg",
+      "size": 78920
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 12,
+    "fields": {
+      "original_file_name": "john.jpg",
+      "content_type": "image/jpeg",
+      "size": 132905
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 13,
+    "fields": {
+      "original_file_name": "zerowaste-shop.png",
+      "content_type": "image/png",
+      "size": 527443
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 14,
+    "fields": {
+      "original_file_name": "Recyclers.jpg",
+      "content_type": "image/jpeg",
+      "size": 60805
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+      "name": "Can add log entry",
+      "content_type": 1,
+      "codename": "add_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+      "name": "Can change log entry",
+      "content_type": 1,
+      "codename": "change_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+      "name": "Can delete log entry",
+      "content_type": 1,
+      "codename": "delete_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+      "name": "Can view log entry",
+      "content_type": 1,
+      "codename": "view_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+      "name": "Can add permission",
+      "content_type": 2,
+      "codename": "add_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+      "name": "Can change permission",
+      "content_type": 2,
+      "codename": "change_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+      "name": "Can delete permission",
+      "content_type": 2,
+      "codename": "delete_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+      "name": "Can view permission",
+      "content_type": 2,
+      "codename": "view_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+      "name": "Can add group",
+      "content_type": 3,
+      "codename": "add_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+      "name": "Can change group",
+      "content_type": 3,
+      "codename": "change_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+      "name": "Can delete group",
+      "content_type": 3,
+      "codename": "delete_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+      "name": "Can view group",
+      "content_type": 3,
+      "codename": "view_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+      "name": "Can add content type",
+      "content_type": 4,
+      "codename": "add_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+      "name": "Can change content type",
+      "content_type": 4,
+      "codename": "change_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+      "name": "Can delete content type",
+      "content_type": 4,
+      "codename": "delete_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+      "name": "Can view content type",
+      "content_type": 4,
+      "codename": "view_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+      "name": "Can add session",
+      "content_type": 5,
+      "codename": "add_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+      "name": "Can change session",
+      "content_type": 5,
+      "codename": "change_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+      "name": "Can delete session",
+      "content_type": 5,
+      "codename": "delete_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+      "name": "Can view session",
+      "content_type": 5,
+      "codename": "view_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+      "name": "Can add user",
+      "content_type": 6,
+      "codename": "add_profile"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+      "name": "Can change user",
+      "content_type": 6,
+      "codename": "change_profile"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+      "name": "Can delete user",
+      "content_type": 6,
+      "codename": "delete_profile"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+      "name": "Can view user",
+      "content_type": 6,
+      "codename": "view_profile"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+      "name": "Can add activity",
+      "content_type": 7,
+      "codename": "add_activity"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+      "name": "Can change activity",
+      "content_type": 7,
+      "codename": "change_activity"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+      "name": "Can delete activity",
+      "content_type": 7,
+      "codename": "delete_activity"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+      "name": "Can view activity",
+      "content_type": 7,
+      "codename": "view_activity"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+      "name": "Can add email",
+      "content_type": 8,
+      "codename": "add_email"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+      "name": "Can change email",
+      "content_type": 8,
+      "codename": "change_email"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+      "name": "Can delete email",
+      "content_type": 8,
+      "codename": "delete_email"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+      "name": "Can view email",
+      "content_type": 8,
+      "codename": "view_email"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+      "name": "Can add media",
+      "content_type": 9,
+      "codename": "add_media"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+      "name": "Can change media",
+      "content_type": 9,
+      "codename": "change_media"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+      "name": "Can delete media",
+      "content_type": 9,
+      "codename": "delete_media"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+      "name": "Can view media",
+      "content_type": 9,
+      "codename": "view_media"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+      "name": "Can add post",
+      "content_type": 10,
+      "codename": "add_post"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+      "name": "Can change post",
+      "content_type": 10,
+      "codename": "change_post"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+      "name": "Can delete post",
+      "content_type": 10,
+      "codename": "delete_post"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+      "name": "Can view post",
+      "content_type": 10,
+      "codename": "view_post"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 41,
+    "fields": {
+      "name": "Can add liked by user",
+      "content_type": 11,
+      "codename": "add_likedbyuser"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 42,
+    "fields": {
+      "name": "Can change liked by user",
+      "content_type": 11,
+      "codename": "change_likedbyuser"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 43,
+    "fields": {
+      "name": "Can delete liked by user",
+      "content_type": 11,
+      "codename": "delete_likedbyuser"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 44,
+    "fields": {
+      "name": "Can view liked by user",
+      "content_type": 11,
+      "codename": "view_likedbyuser"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 45,
+    "fields": {
+      "name": "Can add comment",
+      "content_type": 12,
+      "codename": "add_comment"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 46,
+    "fields": {
+      "name": "Can change comment",
+      "content_type": 12,
+      "codename": "change_comment"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 47,
+    "fields": {
+      "name": "Can delete comment",
+      "content_type": 12,
+      "codename": "delete_comment"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 48,
+    "fields": {
+      "name": "Can view comment",
+      "content_type": 12,
+      "codename": "view_comment"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 49,
+    "fields": {
+      "name": "Can add Following Relationship",
+      "content_type": 13,
+      "codename": "add_follow"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 50,
+    "fields": {
+      "name": "Can change Following Relationship",
+      "content_type": 13,
+      "codename": "change_follow"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 51,
+    "fields": {
+      "name": "Can delete Following Relationship",
+      "content_type": 13,
+      "codename": "delete_follow"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 52,
+    "fields": {
+      "name": "Can view Following Relationship",
+      "content_type": 13,
+      "codename": "view_follow"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 53,
+    "fields": {
+      "name": "Can add Friend",
+      "content_type": 14,
+      "codename": "add_friend"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 54,
+    "fields": {
+      "name": "Can change Friend",
+      "content_type": 14,
+      "codename": "change_friend"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 55,
+    "fields": {
+      "name": "Can delete Friend",
+      "content_type": 14,
+      "codename": "delete_friend"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 56,
+    "fields": {
+      "name": "Can view Friend",
+      "content_type": 14,
+      "codename": "view_friend"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 57,
+    "fields": {
+      "name": "Can add Friendship Request",
+      "content_type": 15,
+      "codename": "add_friendshiprequest"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 58,
+    "fields": {
+      "name": "Can change Friendship Request",
+      "content_type": 15,
+      "codename": "change_friendshiprequest"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 59,
+    "fields": {
+      "name": "Can delete Friendship Request",
+      "content_type": 15,
+      "codename": "delete_friendshiprequest"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 60,
+    "fields": {
+      "name": "Can view Friendship Request",
+      "content_type": 15,
+      "codename": "view_friendshiprequest"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 61,
+    "fields": {
+      "name": "Can add Blocked Relationship",
+      "content_type": 16,
+      "codename": "add_block"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 62,
+    "fields": {
+      "name": "Can change Blocked Relationship",
+      "content_type": 16,
+      "codename": "change_block"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 63,
+    "fields": {
+      "name": "Can delete Blocked Relationship",
+      "content_type": 16,
+      "codename": "delete_block"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 64,
+    "fields": {
+      "name": "Can view Blocked Relationship",
+      "content_type": 16,
+      "codename": "view_block"
+    }
+  },
+  {
+    "model": "gram.profile",
+    "pk": 1,
+    "fields": {
+      "last_login": "2020-01-26T20:09:46.206Z",
+      "is_superuser": true,
+      "email": "admin@admin.de",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2020-01-26T19:32:12.194Z",
+      "first_name": "Administrator",
+      "last_name": "Instagreen",
+      "username": "admin",
+      "password": "pbkdf2_sha256$150000$vjr11KacKfFN$TXzF8hFdZRwOgenfWwhxCjl75BEyOJHw4Zl/yUL/Fag=",
+      "bio": "",
+      "date_of_birth": "2020-01-26",
+      "greenscore": 0,
+      "groups": [],
+      "user_permissions": [],
+      "pictures": []
+    }
+  },
+  {
+    "model": "gram.profile",
+    "pk": 2,
+    "fields": {
+      "last_login": null,
+      "is_superuser": false,
+      "email": "mona@green.de",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-01-26T19:40:23.054Z",
+      "first_name": "Mona",
+      "last_name": "Schneider",
+      "username": "GreenGirl3000",
+      "password": "pbkdf2_sha256$150000$K8NQ2zbI0Mr0$YPYbBXeKQjq/Kh2HRDCXrFzqUv4ZcLyFmWQVFniSQKQ=",
+      "bio": "Hey, I'm new here...And I love the environment!",
+      "date_of_birth": "1992-06-08",
+      "greenscore": 15,
+      "groups": [],
+      "user_permissions": [],
+      "pictures": [
+        8
+      ]
+    }
+  },
+  {
+    "model": "gram.profile",
+    "pk": 3,
+    "fields": {
+      "last_login": null,
+      "is_superuser": false,
+      "email": "jim@jimmy.de",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-01-26T20:01:09.273Z",
+      "first_name": "Jim",
+      "last_name": "Taube",
+      "username": "ecoFriend",
+      "password": "pbkdf2_sha256$150000$wEHbDOA62Cxm$EMSjHHPx/dZnz1UD67WOWmctm994HUHC88hFK0PM3Tw=",
+      "bio": "Hey, I love this new page!!!",
+      "date_of_birth": "1986-08-14",
+      "greenscore": 80,
+      "groups": [],
+      "user_permissions": [],
+      "pictures": [
+        10
+      ]
+    }
+  },
+  {
+    "model": "gram.profile",
+    "pk": 4,
+    "fields": {
+      "last_login": null,
+      "is_superuser": false,
+      "email": "zoe@firma.at",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-01-26T20:03:07.880Z",
+      "first_name": "Zoe",
+      "last_name": "Kohl",
+      "username": "veganChick",
+      "password": "pbkdf2_sha256$150000$41cyTOdhVjOy$K7+um4BNzaXe2csd65mbiQAcU0nA0e/d2DpPrkalxxY=",
+      "bio": "I'm vegan and everybody has to it !",
+      "date_of_birth": "1989-01-16",
+      "greenscore": 110,
+      "groups": [],
+      "user_permissions": [],
+      "pictures": [
+        2
+      ]
+    }
+  },
+  {
+    "model": "gram.profile",
+    "pk": 5,
+    "fields": {
+      "last_login": null,
+      "is_superuser": false,
+      "email": "greta@fridays.eco",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-01-26T20:09:11.520Z",
+      "first_name": "Greta",
+      "last_name": "Thunberg",
+      "username": "forFuture",
+      "password": "pbkdf2_sha256$150000$9PKVVrt3yvn0$gJYcemOFpnefXowui8LH211VC5Cvu4B8lgDUBhDe3Q8=",
+      "bio": "A teenager working on her anger management problem. Currently chilling and watching a good old fashioned movie with a friend.",
+      "date_of_birth": "2000-10-19",
+      "greenscore": 375,
+      "groups": [],
+      "user_permissions": [],
+      "pictures": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "gram.profile",
+    "pk": 6,
+    "fields": {
+      "last_login": null,
+      "is_superuser": false,
+      "email": "john@greenpeace.de",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-01-26T21:22:27.849Z",
+      "first_name": "John",
+      "last_name": "Vert",
+      "username": "zeroWaster",
+      "password": "pbkdf2_sha256$150000$xaT2K5D3JwKC$cO4WjSA14dAzGXfZdqOALQBgjgxV/3D2jcLX/VzzsDc=",
+      "bio": "Hey, I'm new here...And I love the environment!",
+      "date_of_birth": "1986-10-22",
+      "greenscore": 80,
+      "groups": [],
+      "user_permissions": [],
+      "pictures": [
+        12
+      ]
+    }
+  },
+  {
+    "model": "gram.post",
+    "pk": 1,
+    "fields": {
+      "user_id": 4,
+      "content": "Such a fun evening! Invited some ppl over and made a VEGAN lunch. \n\nEverybody should be vegan!",
+      "likes": 0,
+      "activity": 2,
+      "date": "2020-01-26T20:42:55.819Z",
+      "pictures": [
+        3
+      ]
+    }
+  },
+  {
+    "model": "gram.post",
+    "pk": 2,
+    "fields": {
+      "user_id": 4,
+      "content": "Yummi! Tofu Salad for dinner... soooo delicious! <3",
+      "likes": 0,
+      "activity": 10,
+      "date": "2020-01-26T20:49:58.147Z",
+      "pictures": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "gram.post",
+    "pk": 3,
+    "fields": {
+      "user_id": 5,
+      "content": "Just sailed trough the North Atlantic ocean !!!! It was sooo fun ! No engine",
+      "likes": 0,
+      "activity": 1,
+      "date": "2020-01-26T20:52:26.044Z",
+      "pictures": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "gram.post",
+    "pk": 4,
+    "fields": {
+      "user_id": 5,
+      "content": "Such a fun demo today ! Loved the VIBE ...",
+      "likes": 0,
+      "activity": 9,
+      "date": "2020-01-26T21:09:26.656Z",
+      "pictures": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "gram.post",
+    "pk": 5,
+    "fields": {
+      "user_id": 5,
+      "content": "Traveling on overcrowded trains through Germany. And I\u2019m finally on my way home!",
+      "likes": 0,
+      "activity": 8,
+      "date": "2020-01-26T21:13:26.606Z",
+      "pictures": [
+        7
+      ]
+    }
+  },
+  {
+    "model": "gram.post",
+    "pk": 6,
+    "fields": {
+      "user_id": 2,
+      "content": "Love my new Cup ! It's reusable!",
+      "likes": 0,
+      "activity": 5,
+      "date": "2020-01-26T21:16:18.089Z",
+      "pictures": [
+        9
+      ]
+    }
+  },
+  {
+    "model": "gram.post",
+    "pk": 7,
+    "fields": {
+      "user_id": 3,
+      "content": "Repaired the waching machine of my GF today ... No waste! STOP CONSUMING SO MUCH !!!!",
+      "likes": 0,
+      "activity": 6,
+      "date": "2020-01-26T21:19:24.222Z",
+      "pictures": [
+        11
+      ]
+    }
+  },
+  {
+    "model": "gram.post",
+    "pk": 8,
+    "fields": {
+      "user_id": 6,
+      "content": "Zero waste shopping is the best !",
+      "likes": 0,
+      "activity": 3,
+      "date": "2020-01-26T21:24:20.658Z",
+      "pictures": [
+        13
+      ]
+    }
+  },
+  {
+    "model": "gram.post",
+    "pk": 9,
+    "fields": {
+      "user_id": 6,
+      "content": "Such a fun and productive day!",
+      "likes": 0,
+      "activity": 11,
+      "date": "2020-01-26T21:25:15.290Z",
+      "pictures": [
+        14
+      ]
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 1,
+    "fields": {
+      "follower": 5,
+      "followee": 1,
+      "created": "2020-01-26T20:11:43.257Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 2,
+    "fields": {
+      "follower": 5,
+      "followee": 2,
+      "created": "2020-01-26T20:11:44.304Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 3,
+    "fields": {
+      "follower": 5,
+      "followee": 3,
+      "created": "2020-01-26T20:11:45.318Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 4,
+    "fields": {
+      "follower": 1,
+      "followee": 5,
+      "created": "2020-01-26T20:39:57.070Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 5,
+    "fields": {
+      "follower": 1,
+      "followee": 4,
+      "created": "2020-01-26T20:39:58.060Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 6,
+    "fields": {
+      "follower": 1,
+      "followee": 3,
+      "created": "2020-01-26T20:39:58.955Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 7,
+    "fields": {
+      "follower": 1,
+      "followee": 2,
+      "created": "2020-01-26T20:39:59.736Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 8,
+    "fields": {
+      "follower": 2,
+      "followee": 1,
+      "created": "2020-01-26T21:14:21.646Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 9,
+    "fields": {
+      "follower": 2,
+      "followee": 3,
+      "created": "2020-01-26T21:14:23.471Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 10,
+    "fields": {
+      "follower": 2,
+      "followee": 4,
+      "created": "2020-01-26T21:14:24.316Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 11,
+    "fields": {
+      "follower": 2,
+      "followee": 5,
+      "created": "2020-01-26T21:14:26.079Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 12,
+    "fields": {
+      "follower": 3,
+      "followee": 5,
+      "created": "2020-01-26T21:20:11.577Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 13,
+    "fields": {
+      "follower": 3,
+      "followee": 4,
+      "created": "2020-01-26T21:20:12.943Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 14,
+    "fields": {
+      "follower": 3,
+      "followee": 1,
+      "created": "2020-01-26T21:20:25.481Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 15,
+    "fields": {
+      "follower": 6,
+      "followee": 1,
+      "created": "2020-01-26T21:23:36.126Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 16,
+    "fields": {
+      "follower": 6,
+      "followee": 2,
+      "created": "2020-01-26T21:23:37.222Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 17,
+    "fields": {
+      "follower": 6,
+      "followee": 3,
+      "created": "2020-01-26T21:23:38.471Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 18,
+    "fields": {
+      "follower": 6,
+      "followee": 4,
+      "created": "2020-01-26T21:23:41.428Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 19,
+    "fields": {
+      "follower": 6,
+      "followee": 5,
+      "created": "2020-01-26T21:23:42.374Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 20,
+    "fields": {
+      "follower": 4,
+      "followee": 1,
+      "created": "2020-01-26T21:30:01.259Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 21,
+    "fields": {
+      "follower": 4,
+      "followee": 2,
+      "created": "2020-01-26T21:30:02.108Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 22,
+    "fields": {
+      "follower": 4,
+      "followee": 3,
+      "created": "2020-01-26T21:30:03.156Z"
+    }
+  },
+  {
+    "model": "friendship.follow",
+    "pk": 23,
+    "fields": {
+      "follower": 4,
+      "followee": 6,
+      "created": "2020-01-26T21:30:04.948Z"
+    }
+  },
+  {
+    "model": "friendship.block",
+    "pk": 1,
+    "fields": {
+      "blocker": 5,
+      "blocked": 4,
+      "created": "2020-01-26T20:12:01.889Z"
+    }
+  },
+  {
+    "model": "friendship.block",
+    "pk": 2,
+    "fields": {
+      "blocker": 3,
+      "blocked": 2,
+      "created": "2020-01-26T21:20:23.342Z"
+    }
+  }
+]

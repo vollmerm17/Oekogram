@@ -1,0 +1,128 @@
+[
+  {
+    "model": "gram.post",
+    "pk": 1,
+    "fields": {
+      "user_id": 4,
+      "content": "Such a fun evening! Invited some ppl over and made a VEGAN lunch. \n\nEverybody should be vegan!",
+      "likes": 0,
+      "activity": 2,
+      "date": "2020-01-26T20:42:55.819Z",
+      "pictures": [
+        3
+      ]
+    }
+  },
+  {
+    "model": "gram.post",
+    "pk": 2,
+    "fields": {
+      "user_id": 4,
+      "content": "Yummi! Tofu Salad for dinner... soooo delicious! <3",
+      "likes": 0,
+      "activity": 10,
+      "date": "2020-01-26T20:49:58.147Z",
+      "pictures": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "gram.post",
+    "pk": 3,
+    "fields": {
+      "user_id": 5,
+      "content": "Just sailed trough the North Atlantic ocean !!!! It was sooo fun ! No engine",
+      "likes": 0,
+      "activity": 1,
+      "date": "2020-01-26T20:52:26.044Z",
+      "pictures": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "gram.post",
+    "pk": 4,
+    "fields": {
+      "user_id": 5,
+      "content": "Such a fun demo today ! Loved the VIBE ...",
+      "likes": 0,
+      "activity": 9,
+      "date": "2020-01-26T21:09:26.656Z",
+      "pictures": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "gram.post",
+    "pk": 5,
+    "fields": {
+      "user_id": 5,
+      "content": "Traveling on overcrowded trains through Germany. And I\u2019m finally on my way home!",
+      "likes": 0,
+      "activity": 8,
+      "date": "2020-01-26T21:13:26.606Z",
+      "pictures": [
+        7
+      ]
+    }
+  },
+  {
+    "model": "gram.post",
+    "pk": 6,
+    "fields": {
+      "user_id": 2,
+      "content": "Love my new Cup ! It's reusable!",
+      "likes": 0,
+      "activity": 5,
+      "date": "2020-01-26T21:16:18.089Z",
+      "pictures": [
+        9
+      ]
+    }
+  },
+  {
+    "model": "gram.post",
+    "pk": 7,
+    "fields": {
+      "user_id": 3,
+      "content": "Repaired the waching machine of my GF today ... No waste! STOP CONSUMING SO MUCH !!!!",
+      "likes": 0,
+      "activity": 6,
+      "date": "2020-01-26T21:19:24.222Z",
+      "pictures": [
+        11
+      ]
+    }
+  },
+  {
+    "model": "gram.post",
+    "pk": 8,
+    "fields": {
+      "user_id": 6,
+      "content": "Zero waste shopping is the best !",
+      "likes": 0,
+      "activity": 3,
+      "date": "2020-01-26T21:24:20.658Z",
+      "pictures": [
+        13
+      ]
+    }
+  },
+  {
+    "model": "gram.post",
+    "pk": 9,
+    "fields": {
+      "user_id": 6,
+      "content": "Such a fun and productive day!",
+      "likes": 0,
+      "activity": 11,
+      "date": "2020-01-26T21:25:15.290Z",
+      "pictures": [
+        14
+      ]
+    }
+  }
+]

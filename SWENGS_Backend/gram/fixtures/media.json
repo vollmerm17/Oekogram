@@ -1,0 +1,128 @@
+[
+  {
+    "model": "gram.media",
+    "pk": 1,
+    "fields": {
+      "original_file_name": "greta.jpeg",
+      "content_type": "image/jpeg",
+      "size": 4734
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 2,
+    "fields": {
+      "original_file_name": "zoe.jpg",
+      "content_type": "image/jpeg",
+      "size": 4958
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 3,
+    "fields": {
+      "original_file_name": "vegan_lunch.jpg",
+      "content_type": "image/jpeg",
+      "size": 108678
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 4,
+    "fields": {
+      "original_file_name": "LentilTofuSalad1.jpg",
+      "content_type": "image/jpeg",
+      "size": 110136
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 5,
+    "fields": {
+      "original_file_name": "sailing_englang_usa.jpg",
+      "content_type": "image/jpeg",
+      "size": 98664
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 6,
+    "fields": {
+      "original_file_name": "demostration2.jpg",
+      "content_type": "image/jpeg",
+      "size": 386212
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 7,
+    "fields": {
+      "original_file_name": "ice.jpg",
+      "content_type": "image/jpeg",
+      "size": 70167
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 8,
+    "fields": {
+      "original_file_name": "mona.jpg",
+      "content_type": "image/jpeg",
+      "size": 233046
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 9,
+    "fields": {
+      "original_file_name": "reusable_cup.jpg",
+      "content_type": "image/jpeg",
+      "size": 30991
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 10,
+    "fields": {
+      "original_file_name": "Jim.jpg",
+      "content_type": "image/jpeg",
+      "size": 24504
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 11,
+    "fields": {
+      "original_file_name": "washmachine-repairs.jpg",
+      "content_type": "image/jpeg",
+      "size": 78920
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 12,
+    "fields": {
+      "original_file_name": "john.jpg",
+      "content_type": "image/jpeg",
+      "size": 132905
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 13,
+    "fields": {
+      "original_file_name": "zerowaste-shop.png",
+      "content_type": "image/png",
+      "size": 527443
+    }
+  },
+  {
+    "model": "gram.media",
+    "pk": 14,
+    "fields": {
+      "original_file_name": "Recyclers.jpg",
+      "content_type": "image/jpeg",
+      "size": 60805
+    }
+  }
+]
