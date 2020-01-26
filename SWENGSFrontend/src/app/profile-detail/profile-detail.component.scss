@@ -22,11 +22,15 @@
   //border-style: solid;
 }
 
-.profileInfo img {
-  flex-basis: 250px;
-  flex-grow: 1;
+.avatar {
+  flex-basis: 100px;
   flex-shrink: 1;
-  max-height: 300px;
+  flex-grow: 1;
+}
+
+.profileInfo img {
+  max-width:100%;
+  max-height:100%;
   border-radius: 50%;
 }
 
@@ -89,6 +93,7 @@
 .profileBar {
   display:flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
   margin-top: 65px;
   //background-color: beige;
 }
