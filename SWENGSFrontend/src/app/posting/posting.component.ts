@@ -63,6 +63,7 @@ export class PostingComponent implements OnInit, OnDestroy {
   user;
 
   ngOnInit() {
+
     let getAllPosts = this.route.snapshot.paramMap.get('all');
 
     if (getAllPosts == null) {
@@ -86,6 +87,7 @@ export class PostingComponent implements OnInit, OnDestroy {
 
       });
     } else {
+      console.log('dummy');
       this.postService.getPostByUserID(this.postByUserID).subscribe((response: any) => this.posts = response);
     }
 

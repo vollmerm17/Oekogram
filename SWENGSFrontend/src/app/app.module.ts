@@ -35,7 +35,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {WebcamModule} from 'ngx-webcam';
 import { WriteMailComponent } from './write-mail/write-mail.component';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
-import {HttperrorInterceptor} from './httperror.interceptor';
 import { RegisterComponent } from './register/register.component';
 import { CommunityComponent } from './community/community.component';
 import {MatTableModule} from '@angular/material/table';
@@ -115,12 +114,6 @@ export function tokenGetter() {
     PasswordStrengthMeterModule,
     MatPaginatorModule,
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: HttperrorInterceptor,
-    multi: true,
-    deps: [MatSnackBar]
-  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
