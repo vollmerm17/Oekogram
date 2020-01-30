@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {CommentsService} from '../service/comments.service';
 import {FormBuilder} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
@@ -25,6 +25,7 @@ export class CommentComponent implements OnInit {
   comments: any[];
   commentslength: number;
   commentFormGroup;
+  commentContent = '';
 
   ngOnInit() {
     this.commentService.getCommentsByPostID(this.id).subscribe((response: any) => {
@@ -44,12 +45,21 @@ export class CommentComponent implements OnInit {
 
   }
 
+  /*ngOnChanges(changes: SimpleChanges): void {
+    console.info('user-view changed');
+  }*/
+
   writeComment() {
     const comment = this.commentFormGroup.value;
 
-    this.http.post('api/comment/create', comment).subscribe(() => {
-      window.location.reload();
+    this.http.post('api/comment/create', comment).subscribe((res) => {
+      this.comments.push(res);
+      this.commentContent = '';
+      // window.location.reload();
     });
   }
 
+  commentValid() {
+    return this.commentContent.length > 0;
+  }
 }

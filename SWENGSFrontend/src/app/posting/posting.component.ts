@@ -134,7 +134,6 @@ export class PostingComponent implements OnInit, OnDestroy {
     this.like = this.likeFormGroup.patchValue({user_id: this.userId, post_id: id, liked: true});
     this.like = this.likeFormGroup.value;
     this.http.post('api/like/create', this.like).subscribe(() => this.likes.push(this.like));
-
   }
 
   removeLikefromLikes(postid: number) {
