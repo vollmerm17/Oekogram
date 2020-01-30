@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {ProfileService} from '../service/profile.service';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
@@ -32,7 +32,8 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   profileLoaded = false;
 
   constructor(private http: HttpClient, private profileService: ProfileService, private route: ActivatedRoute,
-              public jwtHelper: JwtHelperService, private relService: RelationshipService, private router: Router) {
+              public jwtHelper: JwtHelperService, private relService: RelationshipService, private router: Router,
+              private changeDetector: ChangeDetectorRef) {
     const token = localStorage.getItem(this.accessTokenLocalStorageKey);
     this.myUserId = this.jwtHelper.decodeToken(token).user_id;
 
@@ -48,8 +49,6 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const data = this.route.snapshot.data;
     this.profile = data.profile;
-
-    this.profileLoaded = true;
 
     this.picture = this.profile.pictures[0];
     if (this.profile.id === this.myUserId) {
@@ -100,6 +99,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
       }
     );
 
+    this.reloadpostings();
   }
 
   ngOnDestroy() {
@@ -146,5 +146,14 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
         return true;
       }
     }
+  }
+
+  reloadpostings() {
+    this.profileLoaded = false;
+    // now notify angular to check for updates
+    this.changeDetector.detectChanges();
+    // change detection should remove the component now
+    // then we can enable it again to create a new instance
+    this.profileLoaded = true;
   }
 }
