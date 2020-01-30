@@ -31,7 +31,8 @@ const routes: Routes = [
   {
     path: 'posting',
     component: PostingComponent,
-    resolve: {activityOptions: ActivityOptionsResolver}
+    resolve: {activityOptions: ActivityOptionsResolver},
+    runGuardsAndResolvers: 'always',
   },
   {
     path: 'posting/write',

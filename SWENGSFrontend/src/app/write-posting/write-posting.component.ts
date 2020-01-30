@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {WebcamImage} from 'ngx-webcam';
 import {Observable, Subject} from 'rxjs';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {WritePostingService} from '../service/write-posting.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {ProfileService} from '../service/profile.service';
@@ -16,7 +16,7 @@ import {getLocaleDateTimeFormat} from '@angular/common';
   templateUrl: './write-posting.component.html',
   styleUrls: ['./write-posting.component.scss']
 })
-export class WritePostingComponent implements OnInit {
+export class WritePostingComponent implements OnInit, OnDestroy {
   readonly accessTokenLocalStorageKey = 'access_token';
   userId;
   writePostFormGroup: FormGroup;
@@ -26,6 +26,7 @@ export class WritePostingComponent implements OnInit {
   webcamImage: WebcamImage = null;
   userProfile;
   activityFormGroup: FormGroup;
+  navigationSubscription;
 
   private trigger: Subject<void> = new Subject<void>();
   showAddActivity = false;
@@ -38,6 +39,13 @@ export class WritePostingComponent implements OnInit {
               private userService: UserService) {
     const token = localStorage.getItem(this.accessTokenLocalStorageKey);
     this.userId = this.jwtHelper.decodeToken(token).user_id;
+
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.ngOnInit();
+      }
+    });
   }
 
   ngOnInit() {
@@ -65,6 +73,13 @@ export class WritePostingComponent implements OnInit {
     this.activityOptions = data.activityOptions;
   }
 
+  ngOnDestroy() {
+    // method on every navigationEnd event.
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
+  }
+
   takePicture() {
     this.trigger.next();
   }
@@ -86,7 +101,8 @@ export class WritePostingComponent implements OnInit {
     });
     this.writePostService.createPost(post).subscribe(() => {
       alert('created successfully');
-      window.location.reload();
+      this.contentValue = '';
+      this.router.navigate([this.router.url]);
     });
   }
 

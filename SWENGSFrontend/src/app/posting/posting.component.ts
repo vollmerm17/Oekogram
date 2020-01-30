@@ -156,5 +156,9 @@ export class PostingComponent implements OnInit, OnDestroy {
         });
     });
   }
+
+  /*navToProfile(userId: any){
+    this.router.navigate(['/profile', userId]);
+  }*/
 }
 
