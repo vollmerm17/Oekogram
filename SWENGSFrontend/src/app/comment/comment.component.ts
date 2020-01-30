@@ -52,4 +52,11 @@ export class CommentComponent implements OnInit {
     });
   }
 
+  removeComment(comment: any) {
+    this.commentService.deleteComment(comment.id).subscribe(() => {
+          alert('Post successfully deleted');
+          /*this.router.navigate([this.router.url]);*/
+    });
+  }
+
 }

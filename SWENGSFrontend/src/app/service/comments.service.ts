@@ -13,4 +13,8 @@ export class CommentsService {
   getCommentsByPostID(id: string) {
     return this.http.get('api/comment/' + id + '/get');
   }
+
+  deleteComment(id: string) {
+    return this.http.delete('/api/comment/' + id + '/delete');
+  }
 }

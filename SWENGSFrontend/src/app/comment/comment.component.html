@@ -5,12 +5,22 @@
     <img src="../../assets/default_avatar.png" class="profile-image" *ngIf="comment.picture.length==0">
     <img src="/api/media/{{comment.picture[0]}}" class="profile-image" *ngIf="comment.picture.length!=0"><a href="/profile/{{comment.user_id}}" >
     {{comment.name}}</a><br>{{comment.content}}<br>
-    <span style="color: gray;"><i>{{comment.date | date:'HH:mm MMM, dd yyyy'}}</i></span></p>
+    <span style="color: gray;"><i>{{comment.date | date:'HH:mm MMM, dd yyyy'}}</i></span>
+  <button class="deleteButton" mat-button *ngIf="comment.user_id === userId" (click)="removeComment(comment)">
+      <i class="material-icons">
+        clear
+      </i> Delete
+    </button></p>
 
   <p class="comment-odd" *ngIf="i%2==1">
     <img src="../../assets/default_avatar.png" class="profile-image" *ngIf="comment.picture.length==0">
     <img src="/api/media/{{comment.picture[0]}}" class="profile-image" *ngIf="comment.picture.length!=0"><a href="/profile/{{comment.user_id}}">{{comment.name}}</a><br>{{comment.content}}<br>
-    <span style="color: gray;"><i>{{comment.date | date:'HH:mm MMM, dd yyyy'}}</i></span></p>
+    <span style="color: gray;"><i>{{comment.date | date:'HH:mm MMM, dd yyyy'}}</i></span>
+  <button class="deleteButton" mat-button *ngIf="comment.user_id === userId" (click)="removeComment(comment)">
+      <i class="material-icons">
+        clear
+      </i> Delete
+    </button></p>
 </div>
 <p *ngIf="commentslength== 0">No comments</p>
 
