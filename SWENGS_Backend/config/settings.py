@@ -147,9 +147,9 @@ AUTH_USER_MODEL = 'gram.Profile'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = '...'
-EMAIL_PORT = '...'
-EMAIL_HOST_USER = '...'
-EMAIL_HOST_PASSWORD = '...'
+EMAIL_HOST = 'mail.ifb.co.at'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'FHJOANNEUM_IMA'
+EMAIL_HOST_PASSWORD = 'zNC0r^G3Ri2zp^2C*!s!'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False

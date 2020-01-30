@@ -20,7 +20,7 @@
       <mat-form-field class="activityOptions">
         <mat-select placeholder="Activity" formControlName="activity" required>
           <mat-option [value]="activityOption.id"
-                      *ngFor="let activityOption of activityOptions" >{{activityOption.name}}</mat-option>
+                      *ngFor="let activityOption of activityOptions" >{{activityOption.name}} <i class="material-icons">eco</i> {{activityOption.greenscore}}</mat-option>
         </mat-select>
         <mat-hint align="end">Type of your activity</mat-hint>
       </mat-form-field>

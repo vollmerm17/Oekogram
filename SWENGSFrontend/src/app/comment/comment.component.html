@@ -1,9 +1,15 @@
 
 <div *ngFor="let comment of comments; let i = index" >
 
-  <p class="comment-even"*ngIf="i%2==0"><img src="/api/media/{{comment.picture[0]}}" class="profile-image"><a href="/profile/{{comment.user_id}}">{{comment.name}}</a><br>{{comment.content}}<br>
+  <p class="comment-even"*ngIf="i%2==0">
+    <img src="../../assets/default_avatar.png" class="profile-image" *ngIf="comment.picture.length==0">
+    <img src="/api/media/{{comment.picture[0]}}" class="profile-image" *ngIf="comment.picture.length!=0"><a href="/profile/{{comment.user_id}}" >
+    {{comment.name}}</a><br>{{comment.content}}<br>
     <span style="color: gray;"><i>{{comment.date | date:'HH:mm MMM, dd yyyy'}}</i></span></p>
-  <p class="comment-odd" *ngIf="i%2==1"><img src="/api/media/{{comment.picture[0]}}" class="profile-image"><a href="/profile/{{comment.user_id}}">{{comment.name}}</a><br>{{comment.content}}<br>
+
+  <p class="comment-odd" *ngIf="i%2==1">
+    <img src="../../assets/default_avatar.png" class="profile-image" *ngIf="comment.picture.length==0">
+    <img src="/api/media/{{comment.picture[0]}}" class="profile-image" *ngIf="comment.picture.length!=0"><a href="/profile/{{comment.user_id}}">{{comment.name}}</a><br>{{comment.content}}<br>
     <span style="color: gray;"><i>{{comment.date | date:'HH:mm MMM, dd yyyy'}}</i></span></p>
 </div>
 <p *ngIf="commentslength== 0">No comments</p>
@@ -16,6 +22,5 @@
 
 
 </form>
-
 
 
