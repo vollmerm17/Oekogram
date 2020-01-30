@@ -61,9 +61,20 @@ export class CommentComponent implements OnInit {
 
   removeComment(comment: any) {
     this.commentService.deleteComment(comment.id).subscribe(() => {
-          alert('Comment successfully deleted');
-          /*this.router.navigate([this.router.url]);*/
+      this.removeCommentfromComments(comment.id);
+      alert('Comment successfully deleted');
+      /*this.router.navigate([this.router.url]);*/
     });
+  }
+
+  removeCommentfromComments(commentId: number) {
+    let i = 0;
+    for (const comment of this.comments) {
+      if (comment.id === commentId) {
+        this.comments.splice(i, 1);
+      }
+      i++;
+    }
   }
 
   commentValid() {

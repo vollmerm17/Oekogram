@@ -137,8 +137,8 @@ export class PostingComponent implements OnInit, OnDestroy {
   }
 
   removeLikefromLikes(postid: number) {
+    let i = 0;
     for (const like of this.likes) {
-      let i = 0;
       if (like.post_id === postid) {
         this.likes.splice(i, 1);
       }
@@ -156,6 +156,7 @@ export class PostingComponent implements OnInit, OnDestroy {
         });
     });
   }
+
   /*navToProfile(userId: any){
     this.router.navigate(['/profile', userId]);
   }*/
