@@ -32,11 +32,12 @@ export class RegisterComponent implements OnInit {
       last_name: [''],
       username: ['', Validators.required, this.usernameValidator()],
       email: ['', Validators.required, this.emailValidator()],
-      bio: ['Hey, I\'m new here...And I love the environment! '],
+      bio: ['Hey, I\'m new here...And I love the environment! ', Validators.required],
       date_of_birth: [null],
       password: ['', Validators.required]
     });
     this.registerFormGroup.valueChanges.subscribe(form => this.password = form.password);
+    this.registerFormGroup.controls.bio.setValue('Hey, I\'m new here...And I love the environment! ');
 
     this.registerFormGroup.controls.date_of_birth.valueChanges.subscribe(() => {
       const birthDate = this.registerFormGroup.controls.date_of_birth.value;
