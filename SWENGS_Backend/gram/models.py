@@ -54,7 +54,7 @@ class Comment(models.Model):
     content = models.TextField()
     posts_id = models.ForeignKey(Post, on_delete=models.CASCADE)
     user_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    date = models.DateTimeField(default=datetime.now, blank=True)
+    date = models.DateTimeField(default=timezone.now, blank=True)
 
 
 class LikedByUser(models.Model):
