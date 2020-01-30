@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProfileService} from '../service/profile.service';
 import {HttpClient} from '@angular/common/http';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {RelationshipService} from '../service/relationship.service';
 
@@ -10,7 +10,7 @@ import {RelationshipService} from '../service/relationship.service';
   templateUrl: './profile-detail.component.html',
   styleUrls: ['./profile-detail.component.scss']
 })
-export class ProfileDetailComponent implements OnInit {
+export class ProfileDetailComponent implements OnInit, OnDestroy {
 
   readonly accessTokenLocalStorageKey = 'access_token';
   profile;
@@ -28,22 +28,35 @@ export class ProfileDetailComponent implements OnInit {
   finishedLoadFollowers = false;
   blockingsAll: any[number] = [];
   finishedBlockings = false;
+  navigationSubscription;
+  profileLoaded = false;
 
   constructor(private http: HttpClient, private profileService: ProfileService, private route: ActivatedRoute,
-              public jwtHelper: JwtHelperService, private relService: RelationshipService) {
+              public jwtHelper: JwtHelperService, private relService: RelationshipService, private router: Router) {
     const token = localStorage.getItem(this.accessTokenLocalStorageKey);
     this.myUserId = this.jwtHelper.decodeToken(token).user_id;
+
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.profile = null;
+        this.ngOnInit();
+      }
+    });
   }
 
   ngOnInit() {
     const data = this.route.snapshot.data;
     this.profile = data.profile;
+
+    this.profileLoaded = true;
+
     this.picture = this.profile.pictures[0];
     if (this.profile.id === this.myUserId) {
       this.myProfile = true;
     }
 
-    // Get a list of everyone who the logged in user is following
+    // Get a list of everyone who the selected user is following
     this.relService.getFollowings().subscribe((res: any[]) => {
         for (const f of res) {
           this.followingsAll.push(f.pk);
@@ -55,7 +68,7 @@ export class ProfileDetailComponent implements OnInit {
       }
     );
 
-    // Get a list of everyone who the logged in user is blocking
+    // Get a list of everyone who the selected user is blocking
     this.relService.getBlockings().subscribe((res: any[]) => {
       for (const f of res) {
         this.blockingsAll.push(f.pk);
@@ -87,6 +100,14 @@ export class ProfileDetailComponent implements OnInit {
       }
     );
 
+  }
+
+  ngOnDestroy() {
+    // method on every navigationEnd event.
+    if (this.navigationSubscription) {
+      this.profileLoaded = false;
+      this.navigationSubscription.unsubscribe();
+    }
   }
 
   changeFollowingState() {

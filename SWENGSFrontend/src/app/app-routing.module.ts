@@ -26,7 +26,7 @@ const routes: Routes = [
     path: 'posting/:all',
     component: PostingComponent,
     resolve: {activityOptions: ActivityOptionsResolver},
-    runGuardsAndResolvers: 'paramsChange',
+    runGuardsAndResolvers: 'always',
   },
   {
     path: 'posting',
@@ -46,6 +46,7 @@ const routes: Routes = [
     resolve: {
       profile: ProfileResolver
     },
+    runGuardsAndResolvers: 'always',
   },
   {
     path: 'profile-form/:id',

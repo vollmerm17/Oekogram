@@ -20,6 +20,10 @@ import {ActivityService} from '../service/activity.service';
 
 export class PostingComponent implements OnInit, OnDestroy {
 
+  @Input()
+  postByUserID: string;
+
+  oldNumber: string;
   posts: any[];
   profile: any;
   userId: number;
@@ -41,17 +45,11 @@ export class PostingComponent implements OnInit, OnDestroy {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
       if (e instanceof NavigationEnd) {
+        this.posts = [];
         this.ngOnInit();
       }
     });
   }
-
-
-  // postid: number;
-
-  @Input()
-  postByUserID: string;
-
 
   like: any;
   likes: any[];
@@ -63,13 +61,15 @@ export class PostingComponent implements OnInit, OnDestroy {
   user;
 
   ngOnInit() {
-
+    this.oldNumber = this.postByUserID;
     let getAllPosts = this.route.snapshot.paramMap.get('all');
 
     if (getAllPosts == null) {
       getAllPosts = '1';
     }
 
+    // const source = interval(10000);
+    // source.subscribe(val => {
     this.profileService.getProfile(this.userId).subscribe((res: any) => {
       this.profile = res;
     });
@@ -101,6 +101,7 @@ export class PostingComponent implements OnInit, OnDestroy {
         liked: new FormControl(),
       }
     );
+    // });
   }
 
   ngOnDestroy() {

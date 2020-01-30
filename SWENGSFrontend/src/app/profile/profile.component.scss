@@ -3,25 +3,29 @@
  /* @media (max-width: 450px) {top: 198px;}
   @media (min-width: 451px) and (max-width: 650px) {top: 133px;}
   @media (min-width: 651px) {top: 68px;}*/
-  top: 68px;
+  top: 66px;
   justify-content: center;
-  //border-style: solid;
-  border-color: #2e6504;
+  border-style: solid;
+  border-color: #33A619;
   //box-shadow: 2px 2px grey;
   border-radius: 1px;
   max-width: 300px;
-  min-height: 420px;
-  max-height: 420px;
+  min-height: 440px;
+  max-height: 440px;
 }
 .actions {
-  background-color: #2e6504;
+  background-color: #33A619;
+  color: #2e6504;
   padding-right: 5%;
   text-align: right;
+  height: 40px;
 }
 .info {
   background: url("../../assets/background/background5.png");
   background-repeat: no-repeat;
   background-size: auto;
+  //border-style: solid;
+  min-height: 400px;
 }
 img {
   width: 60%;

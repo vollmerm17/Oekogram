@@ -46,7 +46,7 @@
     </div>
   </mat-card>
   <div class="posts">
-    <app-posting [postByUserID]="profile.id"></app-posting>
+    <app-posting *ngIf="profileLoaded" [postByUserID]="profile.id"></app-posting>
   </div>
 </div>
 
